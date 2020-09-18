@@ -1,0 +1,5 @@
+both
+either
+neither
+not only
+whether

@@ -1,0 +1,133 @@
+fl oz UK
+fl oz US
+gal UK
+gal US
+pt Imp
+pt US fl
+pt US dry
+cubic meter
+cubic decimeter
+cubic centimeter
+cubic metre
+cubic decimetre
+cubic centimetre
+fluid ounce UK
+fluid ounce US
+cubic inch
+cubic foot
+cubic yard
+gallon uk
+gallon us
+petroleum barrel
+pint UK
+fluid pint US
+dry pint US
+nautical mile
+nautical mile
+oz av
+lb av
+cwt UK
+cwt US
+ton UK
+ton US
+st UK
+ounce avoirdupois
+pound avoirdupois
+long hundredweight
+short hundredweight
+long ton
+short ton
+nautical mile²
+square kilometer
+square meter
+square decimeter
+square centimeter
+square millimeter
+square kilometre
+square metre
+square decimetre
+square centimetre
+square millimetre
+square mile
+square inch
+square yard
+square foot
+square nautical mile
+nautical mile/h
+kilometer per hour
+meter per second
+kilometre per hour
+metre per second
+mile per hour
+common year
+leap year
+average Gregorian calendar year
+average Julian calendar year
+tropical year
+pounds per square inch
+british thermal unit
+therm américain
+angular mil
+angular mil
+minute of arc
+second of arc
+
+cubic meters
+cubic decimeters
+cubic centimeters
+cubic metres
+cubic decimetres
+cubic centimetres
+fluid ounces UK
+fluid ounces US
+cubic inches
+cubic feet
+cubic yards
+gallons uk
+gallons us
+petroleum barrels
+pints UK
+fluid pints US
+dry pints US
+nautical miles
+long hundredweights
+short hundredweights
+long tons
+short tons
+nautical miles²
+square kilometers
+square meters
+square decimeters
+square centimeters
+square millimeters
+square kilometres
+square metres
+square decimetres
+square centimetres
+square millimetres
+square miles
+square inches
+square yards
+square feet
+square nautical miles
+nautical miles/h
+kilometers per hour
+meters per second
+kilometres per hour
+metres per second
+miles per hour
+common years
+leap years
+average Gregorian calendar years
+average Julian calendar years
+tropical years
+pounds per square inches
+british thermal units
+therm américains
+angular mils
+angular mils
+minutes of arc
+seconds of arc
+
+million floating point operations per second
+million instructions per second

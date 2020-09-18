@@ -1,0 +1,19 @@
+Word lists/multiword lists;
+Nouns - Wordnet
+Pronouns - Grammar Revolution, English Club
+Determiners - Wiktionary 
+Interjections - Grammar Revolution
+Conjunctions - Grammar Revolution, Marshall
+Prepositions - Wikipedia, English Club
+Adverbs - Wordnet
+Adjectives - Wordnet
+Verbs - Wordnet
+Units - Converticious
+Propernoun Family/First - Carnegie Mellon University
+Propernoun Place - Wiktionary
+
+Special word lists;
+Phrasal Verbs - Cambridge
+Irregular Verbs - Wikipedia
+Irregular Nouns - ESL Desk
+Not Fully Grammatized - Wikipedia

@@ -1,0 +1,12 @@
+adjective multiwordlistAdjective.txt
+adverb multiwordlistAdverb.txt
+conjunction multiwordlistConjunction.txt
+determiner multiwordlistDeterminer.txt
+interjection multiwordlistInterjection.txt
+noun multiwordlistNoun.txt
+preposition multiwordlistPreposition.txt
+verb multiwordlistVerb.txt
+pronounPersonal multiwordlistPronoun.txt
+unit multiwordlistUnit.txt
+propernounFamily multiwordlistPropernounFamily.txt
+propernounPlace multiwordlistPropernounPlace.txt

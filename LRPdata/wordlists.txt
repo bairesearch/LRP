@@ -1,0 +1,47 @@
+
+
+number wordlistNumber.txt
+determiner wordlistDeterminer.txt
+unknown wordlistUnknown.txt
+predeterminer wordlistPredeterminer.txt
+possessiveEnding wordlistPossessiveEnding.txt
+modalAuxiliary wordlistModalAuxiliary.txt
+preposition wordlistPreposition.txt
+adjective wordlistAdjective.txt
+noun wordlistNoun.txt
+adverb wordlistAdverb.txt
+
+
+
+interjection wordlistInterjection.txt
+verb wordlistVerb.txt
+wh wordlistWH.txt
+punctuationQuote wordlistPunctuationQuote.txt
+punctuationDivision wordlistPunctuationDivision.txt
+punctuationEndOfSentence wordlistPunctuationEndOfSentence.txt
+auxiliaryBeing wordlistAuxiliaryBeing.txt
+auxiliaryHaving wordlistAuxiliaryHaving.txt
+auxiliaryDoing wordlistAuxiliaryDoing.txt
+auxiliary wordlistAuxiliary.txt
+pronounDemonstrative wordlistPronounDemonstrative.txt
+pronounIndefinite wordlistPronounIndefinite.txt
+pronounInterrogative wordlistPronounInterrogative.txt
+pronounPersonalObject wordlistPronounPersonalObject.txt
+pronounPersonalSubject wordlistPronounPersonalSubject.txt
+pronounPossessiveAdjective wordlistPronounPossessiveAdjective.txt
+pronounPossessiveAlone wordlistPronounPossessiveAlone.txt
+pronounReflexive wordlistPronounReflexive.txt
+
+conjunctionCoordinating wordlistConjunctionCoordinating.txt
+conjunctionSubcoordinating wordlistConjunctionSubcoordinating.txt
+conjunctionCorrelativeFirst wordlistConjunctionCorrelativeFirst.txt
+conjunctionCorrelativeSecond wordlistConjunctionCorrelativeSecond.txt
+date wordlistDate.txt
+unit wordlistUnit.txt
+money wordlistMoney.txt
+title wordlistTitle.txt
+propernounFirstMale wordlistPropernounFirstMale.txt
+propernounFirstFemale wordlistPropernounFirstFemale.txt
+propernounFamily wordlistPropernounFamily.txt
+propernounPlace wordlistPropernounPlace.txt
+

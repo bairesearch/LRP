@@ -1,0 +1,525 @@
+°C
+°F
+K
+°Ré
+°N
+°Ra
+Celsius
+Fahrenheit
+Kelvin
+Reaumur
+Newton
+Rankine
+Celsius
+Fahrenheit
+Kelvin
+Reaumur
+Newton
+Rankine
+
+m³
+dm³
+cm³
+l
+dl
+cl
+ml
+fl oz UK
+fl oz US
+in³
+ft³
+yd³
+gal UK
+gal US
+bbl
+pt Imp
+pt US fl
+pt US dry
+cubic meter
+cubic decimeter
+cubic centimeter
+liter
+deciliter
+centiliter
+milliliter
+cubic metre
+cubic decimetre
+cubic centimetre
+litre
+decilitre
+centilitre
+millilitre
+fluid ounce UK
+fluid ounce US
+cubic inch
+cubic foot
+cubic yard
+gallon uk
+gallon us
+petroleum barrel
+pint UK
+fluid pint US
+dry pint US
+cubic meters
+cubic decimeters
+cubic centimeters
+liters
+deciliters
+centiliters
+milliliters
+cubic metres
+cubic decimetres
+cubic centimetres
+litres
+decilitres
+centilitres
+millilitres
+fluid ounces UK
+fluid ounces US
+cubic inches
+cubic feet
+cubic yards
+gallons uk
+gallons us
+petroleum barrels
+pints UK
+fluid pints US
+dry pints US
+
+km
+m
+dm
+cm
+mm
+mi
+in
+ft
+yd
+nautical mile
+kilometer
+meter
+decimeter
+centimeter
+millimeter
+kilometre
+metre
+decimetre
+centimetre
+millimetre
+mile
+inch
+foot
+yard
+nautical mile
+nautical miles
+kilometers
+meters
+decimeters
+centimeters
+millimeters
+kilometres
+metres
+decimetres
+centimetres
+millimetres
+miles
+inches
+feet
+yards
+nautical miles
+
+t
+kg
+hg
+g
+dg
+cg
+mg
+µg
+carat
+grain
+oz av
+lb av
+cwt UK
+cwt US
+ton UK
+ton US
+st UK
+tonne
+kilogram
+hectogram
+gram
+decigram
+centigram
+milligram
+microgram
+carat
+grain
+ounce avoirdupois
+pound avoirdupois
+long hundredweight
+short hundredweight
+long ton
+short ton
+stone
+tonnes
+kilograms
+hectograms
+grams
+decigrams
+centigrams
+milligrams
+micrograms
+carats
+grains
+ounces avoirdupois
+pounds avoirdupois
+long hundredweights
+short hundredweights
+long tons
+short tons
+stones
+
+km²
+m²
+dm²
+cm²
+mm²
+ha
+a
+ca
+mile²
+in²
+yd²
+ft²
+ro
+acre
+nautical mile²
+square kilometer
+square meter
+square decimeter
+square centimeter
+square millimeter
+square kilometre
+square metre
+square decimetre
+square centimetre
+square millimetre
+hectare
+are
+centiare
+square mile
+square inch
+square yard
+square foot
+rood
+acre
+square nautical mile
+square kilometers
+square meters
+square decimeters
+square centimeters
+square millimeters
+square kilometres
+square metres
+square decimetres
+square centimetres
+square millimetres
+hectares
+ares
+centiares
+square miles
+square inches
+square yards
+square feet
+roods
+acres
+square nautical miles
+
+kmph
+km/h
+mps
+m/s
+mph
+mi/h
+knot
+nautical mile/h
+ma
+kilometer per hour
+meter per second
+kilometre per hour
+metre per second
+mile per hour
+knot
+mac
+kilometers per hour
+meters per second
+kilometres per hour
+metres per second
+miles per hour
+knots
+macs
+
+b
+B
+KB
+MB
+GB
+TB
+PB
+EB
+ZB
+YB
+bit
+byte
+kilobyte
+megabyte
+gigabyte
+terabyte
+petabyte
+exabyte
+zettabyte
+yottabyte
+bits
+bytes
+kilobytes
+megabytes
+gigabytes
+terabytes
+petabytes
+exabytes
+zettabytes
+yottabytes
+
+year
+week
+day
+h
+min
+s
+ms
+µs
+nanosecond
+picosecond
+femtosecond
+attosecond 
+common year
+leap year
+average Gregorian calendar year
+average Julian calendar year
+tropical year
+week
+day
+hour
+minute
+second
+millisecond
+microsecond
+nanosecond
+picosecond
+femtosecond
+attosecond
+years
+common years
+leap years
+average Gregorian calendar years
+average Julian calendar years
+tropical years
+weeks
+days
+hours
+minutes
+seconds
+milliseconds
+microseconds
+nanoseconds
+picoseconds
+femtoseconds
+attoseconds
+
+Hz
+KHz
+MHz
+GHz
+hertz
+kilohertz
+megahertz
+gigahertz
+hertez
+kilohertez
+megahertez
+gigahertez
+
+atm
+bar
+mbar
+Pa
+hPa
+Psi
+Torr
+atmosphère
+bar
+millibar
+pascal
+hectopascal
+pounds per square inch
+torr
+atmosphères
+bars
+millibars
+pascals
+hectopascals
+pounds per square inches
+torrs
+
+J
+KJ
+cal
+kcal
+Wh
+kWh
+BTU
+thm
+ft-lb
+Joule
+kilojoule
+calorie
+kilocalorie
+watt-hour
+kilowatt-hour
+british thermal unit
+therm américain
+foot-Pound
+joules
+kilojoules
+calories
+kilocalories
+watt-hours
+kilowatt-hours
+british thermal units
+therm américains
+foot-Pounds
+
+°
+grad(gon)
+angular mil
+'
+rad
+''
+degree
+grad
+angular mil
+minute of arc
+radian
+second of arc
+degrees
+grads
+angular mils
+minutes of arc
+radians
+seconds of arc
+
+kilo
+kilobit
+kilocycle
+kilocycle per second
+kilogram
+kilogram-meter
+kilogram calorie
+kilohertz
+kiloliter
+kilolitre
+kilometer
+kilometer per hour
+kilometre
+kilometre per hour
+kiloton
+kilovolt
+kilovolt-ampere
+kilowatt
+kilowatt hour
+kilos
+kilobits
+kilocycles
+kilocycles per second
+kilograms
+kilogram-meters
+kilogram calories
+kilohertzes
+kiloliters
+kilolitres
+kilometers
+kilometers per hour
+kilometres
+kilometres per hour
+kilotons
+kilovolts
+kilovolt-amperes
+kilowatts
+kilowatt hours
+
+megaflop
+megawatt
+megaflops
+megawatts
+
+milliampere
+millicurie
+millidegree
+millifarad
+millihenry
+millikan
+millimicron
+milline
+million
+million floating point operations per second
+million instructions per second
+millionth
+milliradian
+millivolt
+millivoltmeter
+milliwatt
+
+microfarad
+microgauss
+micrometer
+micrometre
+micromicron
+micromillimeter
+micromillimetre
+micron
+microradian
+microfarads
+microgausses
+micrometers
+micrometres
+micromicrons
+micromillimeters
+micromillimetres
+microns
+microradians
+
+metric ton
+metric tons
+metric tonne
+metric tonnes
+electron volt
+electron volts
+volt
+volts
+volt-ampere
+volt-amperes
+watt
+watts
+watt-second
+watt-seconds
+
+decaliter
+decalitre
+decaliters
+decalitres
+decameter
+decametre
+decameters
+decametres
+

@@ -1,0 +1,13 @@
+all
+both
+double
+half
+quadruple
+quite
+rather
+such
+times
+treble
+twice
+quarter
+many
