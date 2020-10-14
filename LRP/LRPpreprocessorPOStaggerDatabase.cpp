@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStaggerDatabase.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3m7a 11-September-2020
+ * Project Version: 3n1a 15-October-2020
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger database
  * /
@@ -40,7 +40,7 @@
 
 
 
-static string GIAposTaggerDatabaseFolderName;
+static string LRPposTaggerDatabaseFolderName;
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_INTERNAL
 ANNneuron* firstInputNeuronInNetworkGIAposTagger;
 ANNneuron* firstOutputNeuronInNetworkGIAposTagger;
@@ -49,21 +49,21 @@ int64_t numberOfOutputNeuronsGIAposTagger;
 int64_t numberOfLayersGIAposTagger;	//static variable not currently utilised
 #endif
 //#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PERSISTENT
-void LRPpreprocessorPOStaggerDatabaseClass::initialisePOStaggerDatabase(const string newGIAposTaggerDatabaseFolderName)
+void LRPpreprocessorPOStaggerDatabaseClass::initialisePOStaggerDatabase(const string newLRPposTaggerDatabaseFolderName)
 {
-	GIAposTaggerDatabaseFolderName = newGIAposTaggerDatabaseFolderName;
-	if(!SHAREDvars.directoryExists(&GIAposTaggerDatabaseFolderName))
+	LRPposTaggerDatabaseFolderName = newLRPposTaggerDatabaseFolderName;
+	if(!SHAREDvars.directoryExists(&LRPposTaggerDatabaseFolderName))
 	{
-		cerr << "LRPpreprocessorPOStaggerDatabaseClass::initialisePOStaggerDatabase{} error: GIAposTaggerDatabaseFolderName does not exist: " << GIAposTaggerDatabaseFolderName << endl;
+		cerr << "LRPpreprocessorPOStaggerDatabaseClass::initialisePOStaggerDatabase{} error: LRPposTaggerDatabaseFolderName does not exist: " << LRPposTaggerDatabaseFolderName << endl;
 		exit(EXIT_ERROR);	
 	}
 		
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_INTERNAL
 	//read existing neural network
 	firstInputNeuronInNetworkGIAposTagger = new ANNneuron();
-	//string neuralNetworkXmlFileName = GIAposTaggerDatabaseFolderName + LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_DEFAULT_XML_FILE_NAME;	//alternate method
+	//string neuralNetworkXmlFileName = LRPposTaggerDatabaseFolderName + LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_DEFAULT_XML_FILE_NAME;	//alternate method
 	string neuralNetworkXmlFileName = LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_DEFAULT_XML_FILE_NAME;
-	SHAREDvars.setCurrentDirectory(&GIAposTaggerDatabaseFolderName);
+	SHAREDvars.setCurrentDirectory(&LRPposTaggerDatabaseFolderName);
 	if(SHAREDvars.fileExists(neuralNetworkXmlFileName))
 	{
 		firstOutputNeuronInNetworkGIAposTagger = ANNxmlConversion.readNetXMLfileAndRecordFormationVariables(neuralNetworkXmlFileName, firstInputNeuronInNetworkGIAposTagger, &numberOfInputNeuronsGIAposTagger, &numberOfOutputNeuronsGIAposTagger, &numberOfLayersGIAposTagger);
@@ -152,7 +152,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::writeDatabaseNeuralNetwork()
 {
 	bool result = true;
 	
-	SHAREDvars.setCurrentDirectory(GIAposTaggerDatabaseFolderName);
+	SHAREDvars.setCurrentDirectory(LRPposTaggerDatabaseFolderName);
 	string neuralNetworkXmlFileName = LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_DEFAULT_XML_FILE_NAME;
 	if(!ANNxmlConversion.writeNetXMLfile(neuralNetworkXmlFileName, firstInputNeuronInNetworkGIAposTagger))
 	{
@@ -209,7 +209,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchTrainData(AN
 
 string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchFileName(const string fileNamePrepend, const int batchIndex)
 {
-	SHAREDvars.setCurrentDirectory(GIAposTaggerDatabaseFolderName);	//save output files to output folder
+	SHAREDvars.setCurrentDirectory(LRPposTaggerDatabaseFolderName);	//save output files to output folder
 
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_TRAIN_SINGLE_BATCH_ONLY
 	string XtrainBatchFileName = fileNamePrepend + LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_BATCH_FILE_EXTENSION;
@@ -257,7 +257,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::externalANNpredict(ANNexperience* fi
 	
 	string batchExperiencesString = "";
 	
-	SHAREDvars.setCurrentDirectory(GIAposTaggerDatabaseFolderName);	//save output files to output folder
+	SHAREDvars.setCurrentDirectory(LRPposTaggerDatabaseFolderName);	//save output files to output folder
 
 	string XpredictBatchFileName = string(LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_X_PREDICT_BATCH_FILE_NAME_PREPEND) + (LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_BATCH_FILE_EXTENSION);
 	string YpredictBatchFileName = string(LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_Y_PREDICT_BATCH_FILE_NAME_PREPEND) + (LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_BATCH_FILE_EXTENSION);
@@ -376,7 +376,7 @@ string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchDataExperi
 
 bool LRPpreprocessorPOStaggerDatabaseClass::externalANNexecuteScript(string scriptName)
 {
-	SHAREDvars.setCurrentDirectory(GIAposTaggerDatabaseFolderName);
+	SHAREDvars.setCurrentDirectory(LRPposTaggerDatabaseFolderName);
 	scriptName = string("python ") + scriptName + string(LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_SCRIPT_EXTENSION);
 	//scriptName = string("./") + scriptName + string(LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_SCRIPT_EXTENSION);	//requires "#!/usr/bin/env python" to be added to top of each py file
 	cout << "scriptName = " << scriptName << endl;
@@ -389,9 +389,9 @@ bool LRPpreprocessorPOStaggerDatabaseClass::externalANNexecuteScript(string scri
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM
 string LRPpreprocessorPOStaggerDatabaseClass::DBgenerateFileName(vector<uint64_t>* POSambiguityInfoPermutation)
 {
-	//eg network/server/GIAPOStaggerDatabase/ffff/ffff/ffff/ffff/ffff/POSpermutationffffffffffffffffffffff.pos
-	//string serverName = GIAdatabase.DBgenerateServerDatabaseName(&(GIAconnectionistNetworkPOStypeNameAbbreviationArray[firstFeatureInList->GIAsemRelTranslatorPOStype]), fileType, LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM_DEFAULT_DATABASE_NAME, GIAposTaggerDatabaseFolderName);
-	string serverName = GIAposTaggerDatabaseFolderName;
+	//eg network/server/LRPPOStaggerDatabase/ffff/ffff/ffff/ffff/ffff/POSpermutationffffffffffffffffffffff.pos
+	//string serverName = GIAdatabase.DBgenerateServerDatabaseName(&(GIAconnectionistNetworkPOStypeNameAbbreviationArray[firstFeatureInList->GIAsemRelTranslatorPOStype]), fileType, LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM_DEFAULT_DATABASE_NAME, LRPposTaggerDatabaseFolderName);
+	string serverName = LRPposTaggerDatabaseFolderName;
 	string fileName = serverName;
 
 	SHAREDvars.setCurrentDirectory(&fileName);

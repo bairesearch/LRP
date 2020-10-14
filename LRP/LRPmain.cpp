@@ -26,8 +26,8 @@
  * File Name: LRPmain.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3m7a 11-September-2020
- * Requirements: 
+ * Project Version: 3n1a 15-October-2020
+ * Requirements: requires plain text file
  * Description: Main
  * /
  *******************************************************************************/
@@ -36,8 +36,8 @@
 #include "LRPmain.hpp"
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_GENERATE_DATABASE
-static char errmessage[] = "Usage:  GIAposTaggerGenerateDatabase.exe [options]\n\n\twhere options are any of the following\n"
-"\n\t-dbpostaggerfolder [string]   : pos tagger database base folder path (def: /home/systemusername/source/GIAPOStaggerDatabase)"
+static char errmessage[] = "Usage:  LRPgeneratePOStaggerDatabase.exe [options]\n\n\twhere options are any of the following\n"
+"\n\t-dbpostaggerfolder [string]   : pos tagger database base folder path (def: /home/systemusername/source/LRPPOStaggerDatabase)"
 "\n\t-lrp                          : language reduction preprocessor"
 "\n\t-lrpfolder [string]           : folder of LRP data files (list of multiword verbs, multiword prepositions etc) (def: same as exe)"
 "\n\t-wikiDumpFolder               : wiki dump folder (def: /home/systemusername/soft/wiki/output)"

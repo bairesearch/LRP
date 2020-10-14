@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStaggerDatabase.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3m7a 11-September-2020
+ * Project Version: 3n1a 15-October-2020
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger database
  * /
@@ -65,7 +65,7 @@
 #define LRP_PREPROCESSOR_POS_TAGGER_DATABASE_POS_NUMBER_OF_TYPES (LRP_PREPROCESSOR_POS_TYPE_ARRAY_NUMBER_OF_TYPES+1)
 #define LRP_PREPROCESSOR_POS_TAGGER_DATABASE_POS_INDEX_OUT_OF_SENTENCE_BOUNDS (LRP_PREPROCESSOR_POS_TAGGER_DATABASE_POS_NUMBER_OF_TYPES-1)
 	
-#define LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM_DEFAULT_DATABASE_NAME ((string)"GIAPOStaggerDatabase")
+#define LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM_DEFAULT_DATABASE_NAME ((string)"LRPPOStaggerDatabase")
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PERSISTENT
 	
@@ -124,7 +124,7 @@ class LRPpreprocessorPOStaggerDatabaseClass
 	public: bool checkIfFolderExistsAndIfNotMakeAndSetAsCurrent(const string* folderName);
 
 	//#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PERSISTENT
-	public: void initialisePOStaggerDatabase(const string newGIAposTaggerDatabaseFolderName);
+	public: void initialisePOStaggerDatabase(const string newLRPposTaggerDatabaseFolderName);
 	//#endif
 
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_MAP
