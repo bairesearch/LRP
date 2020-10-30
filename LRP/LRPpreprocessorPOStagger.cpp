@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStagger.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n1a 15-October-2020
+ * Project Version: 3n2a 19-October-2020
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger
  * /
@@ -1546,7 +1546,7 @@ bool LRPpreprocessorPOStaggerClass::determinePOSambiguityInfo(LRPpreprocessorPla
 		*identifiedEveryWordInDatabasePOSpermutation = false;
 		*contextWordPOSisAmbiguous = true;
 		
-		#ifdef GIA_POS_REL_TRANSLATOR_RULES_CODE_NUMBERS
+		#ifdef LRP_PREPROCESSOR_DETECT_NUMBERS
 		if(LRPpreprocessorWordClassObject.isStringNumber(contextWordMultiwordReductionPlainTextWord->tagName))
 		{
 			//cout << "isStringNumber" << endl;
