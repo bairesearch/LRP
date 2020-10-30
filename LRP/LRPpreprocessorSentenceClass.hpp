@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorSentenceClass.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n2a 19-October-2020
+ * Project Version: 3n3a 29-October-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Sentence Class
  * /
@@ -81,11 +81,11 @@ public:
 	#endif
 	#ifdef GIA_POS_REL_TRANSLATOR_HYBRID_EXECUTE_PRELIM_POS_TAGGER
 	GIAsentence* sentenceReferencePrelim;		//temporary GIA sentence data (POS tags) required for execution of GIA preprocessor
-	#endif	
+	#endif
 	#else
 	#ifdef LRP_PREPROCESSOR_RECORD_REFERENCES
 	GIAsentence* sentenceReference;
-	#endif	
+	#endif
 	#endif
 	#ifdef USE_SANI	//GIA_POS_REL_TRANSLATOR_RULES
 	SANIGroupParseTree* firstParseTreeGroup;
