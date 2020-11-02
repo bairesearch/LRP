@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorSentenceClass.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n3a 29-October-2020
+ * Project Version: 3n4a 31-October-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Sentence Class
  * /
@@ -172,6 +172,21 @@ void LRPpreprocessorSentenceClass::printSentence(vector<LRPpreprocessorPlainText
 	cout << endl;
 	*/
 }
+
+#ifdef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START
+//assumes LRPpreprocessorPOStaggerClass::setSentenceContentsWordsUnambiguousPOSindex has already been executed
+void LRPpreprocessorSentenceClass::printSentenceUnambiguousPOSindex(vector<LRPpreprocessorPlainTextWord*>* sentenceContents)
+{
+	cout << "sentencePOS = ";	
+	for(int w=0; w<sentenceContents->size(); w++)
+	{
+		LRPpreprocessorPlainTextWord* contextWord = sentenceContents->at(w);
+		unsigned char unambiguousPOSinfoIndex = contextWord->unambiguousPOSindex;
+		cout << LRPpreprocessorPOStypeCrossReferenceStanfordPos[unambiguousPOSinfoIndex] << " ";	//int(unambiguousPOSinfoIndex)
+	}
+	cout << endl;
+}
+#endif
 
 
 

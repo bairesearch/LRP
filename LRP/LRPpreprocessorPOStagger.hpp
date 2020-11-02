@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStagger.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n3a 29-October-2020
+ * Project Version: 3n4a 31-October-2020
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger
  * /

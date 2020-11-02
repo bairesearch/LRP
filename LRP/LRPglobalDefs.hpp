@@ -26,7 +26,7 @@
  * File Name: LRPglobalsDefs.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n3a 29-October-2020
+ * Project Version: 3n4a 31-October-2020
  * Requirements: requires plain text file
  * Description: LRP specific global definitions
  * /
@@ -200,14 +200,14 @@
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER
 		
 		#ifdef LRP_PREPROCESSOR_POS_TAGGER_SEQUENCE
-			//#define LRP_PREPROCESSOR_POS_TAGGER_DATABASE_DO_NOT_TRAIN_POS_INDEX_OUT_OF_SENTENCE_BOUNDS	//LRP3j6a	//optional: 1) can theoretically increase neural net training performance with !LRP_PREPROCESSOR_POS_TAGGER_DATABASE_TRAIN_AMBIGUOUS_PERMUTATIONS&&!LRP_PREPROCESSOR_POS_TAGGER_DATABASE_GENERATE_SET_OF_ARTIFICIAL_UNAMBIGUOUS_PERMUTATIONS_FOR_EVERY_AMBIGOUS_PERMUTATION as not overloading training set with sequences containing majority unambigious out of bounds POS). 2) can guarantee that the neural net is provided a min amount of data during training (however will prevent small sentence sequences from being entered into db) 
+			//#define LRP_PREPROCESSOR_POS_TAGGER_DATABASE_DO_NOT_TRAIN_POS_INDEX_OUT_OF_SENTENCE_BOUNDS	//LRP3j6a	//optional: 1) can theoretically increase neural net training performance with !LRP_PREPROCESSOR_POS_TAGGER_DATABASE_TRAIN_AMBIGUOUS_PERMUTATIONS&&!LRP_PREPROCESSOR_POS_TAGGER_DATABASE_GENERATE_SET_OF_ARTIFICIAL_UNAMBIGUOUS_PERMUTATIONS_FOR_EVERY_AMBIGUOUS_PERMUTATION as not overloading training set with sequences containing majority unambigious out of bounds POS). 2) can guarantee that the neural net is provided a min amount of data during training (however will prevent small sentence sequences from being entered into db) 
 			#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_TRAIN_AMBIGUOUS_PERMUTATIONS
 				//#define DEBUG_LRP_PREPROCESSOR_POS_TAGGER_DATABASE_CALCULATE_PERCENTAGE_POS_AMBIGUOUS_WORDS	//LRP3j6b	//temp
 			#else
 				#define LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FEED_ALL_PERMUTATIONS_INDIVIDUALLY	//LRP3e9b			//this is now mandatory for LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM and LRP_PREPROCESSOR_POS_TAGGER_DATABASE_MAP databases as POSambiguityInfo is no longer restricted to 8 bit (ie is now 64 bit int64_t) - to maintain database performance (>=GIA3e11a) 
 				#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FEED_ALL_PERMUTATIONS_INDIVIDUALLY
-					#define LRP_PREPROCESSOR_POS_TAGGER_DATABASE_GENERATE_SET_OF_ARTIFICIAL_UNAMBIGUOUS_PERMUTATIONS_FOR_EVERY_AMBIGOUS_PERMUTATION	//clarification def added LRP3j6a
-					#ifndef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_GENERATE_SET_OF_ARTIFICIAL_UNAMBIGUOUS_PERMUTATIONS_FOR_EVERY_AMBIGOUS_PERMUTATION
+					#define LRP_PREPROCESSOR_POS_TAGGER_DATABASE_GENERATE_SET_OF_ARTIFICIAL_UNAMBIGUOUS_PERMUTATIONS_FOR_EVERY_AMBIGUOUS_PERMUTATION	//clarification def added LRP3j6a
+					#ifndef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_GENERATE_SET_OF_ARTIFICIAL_UNAMBIGUOUS_PERMUTATIONS_FOR_EVERY_AMBIGUOUS_PERMUTATION
 						#define LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FEED_ALL_PERMUTATIONS_INDIVIDUALLY_ONLY_TRAIN_UNAMBIGUOUS_PERMUTATIONS		//With a classification net or file system DB can risk feeding it with bad hypothetical pos permutations (because will take the permutation predicted with the highest hits), but cannot with a neural net (as this would degrade neural net performance; there would be more than 1 bad permutation for every good permutation fed on average)?
 						#ifndef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FEED_ALL_PERMUTATIONS_INDIVIDUALLY_ONLY_TRAIN_UNAMBIGUOUS_PERMUTATIONS
 							//#define LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FEED_ALL_PERMUTATIONS_INDIVIDUALLY_ASSIGN_WEIGHTS_TO_TRAINED_POS_TYPES	//LRP3e11a - this is required to compensate for always ambiguous POStypes (e.g. auxiliary "have" [can be a verb also]); the more specialised POStype hypothesis (e.g. auxiliary) is assigned a higher weight than the less specialised POStype hypothesis (e.g. verb) - derived from wordlist size
