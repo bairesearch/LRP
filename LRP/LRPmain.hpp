@@ -26,7 +26,7 @@
  * File Name: LRPmain.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o2a 08-November-2020
+ * Project Version: 3o3a 16-November-2020
  * Requirements: requires plain text file
  * Description: Main
  * /
@@ -68,7 +68,7 @@
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_GENERATE_DATABASE
 
-int main(const int argc, const char** argv);
+int main(int argc, char** argv);
 
 #endif
 

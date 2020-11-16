@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessor.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o2a 08-November-2020
+ * Project Version: 3o3a 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor
  * /
@@ -81,16 +81,16 @@ class LRPpreprocessorClass
 	private: LRPpreprocessorPOStaggerDatabaseClass LRPpreprocessorPOStaggerDatabase;
 	#endif
 	#ifdef LRP_PREPROCESSOR
-	public: bool preprocessTextForGIAwrapper(const bool useLRP, string* inputTextPlainTXTfileName, const string outputLRPTextPlainTXTFileName, const bool isQuery, LRPtranslatorVariablesClass* translatorVariables, bool* useInputTextPlainTXTFile, const string inputTextNLPfeatureXMLfileName);
-		public: bool preprocessTextForGIA(string* inputTextPlainTXTfileName, const string outputLRPTextPlainTXTFileName, const bool isQuery, LRPtranslatorVariablesClass* translatorVariables, const string inputTextNLPfeatureXMLfileName);
+	public: bool preprocessTextForGIAwrapper(bool useLRP, string* inputTextPlainTXTfileName, string outputLRPTextPlainTXTFileName, bool isQuery, LRPtranslatorVariablesClass* translatorVariables, bool* useInputTextPlainTXTFile, string inputTextNLPfeatureXMLfileName);
+		public: bool preprocessTextForGIA(string* inputTextPlainTXTfileName, string outputLRPTextPlainTXTFileName, bool isQuery, LRPtranslatorVariablesClass* translatorVariables, string inputTextNLPfeatureXMLfileName);
 			#ifdef GIA_POS_REL_TRANSLATOR_HYBRID
-			bool preprocessSentencesForGIAwrapper(LRPtranslatorVariablesClass* translatorVariables, const string outputLRPTextPlainTXTFileName, const string inputTextNLPfeatureXMLfileName, const string outputFileName, const string outputFileNameLRPforNLP, const bool isQuery);
+			bool preprocessSentencesForGIAwrapper(LRPtranslatorVariablesClass* translatorVariables, string outputLRPTextPlainTXTFileName, string inputTextNLPfeatureXMLfileName, string outputFileName, string outputFileNameLRPforNLP, bool isQuery);
 			#endif
-		public: bool regenerateFileFromPreprocessedTextWithoutLRP(string* inputTextPlainTXTfileName, const string outputLRPTextPlainTXTFileName, LRPtranslatorVariablesClass* translatorVariables);
-			public: bool createPreprocessSentencesForGIA(const string inputFileName, LRPtranslatorVariablesClass* translatorVariables);
-				public: bool createPreprocessSentences(const string fileContents, LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, bool interpretNewLinesAsNewSentences, bool splitMultisentenceLines);
+		public: bool regenerateFileFromPreprocessedTextWithoutLRP(string* inputTextPlainTXTfileName, string outputLRPTextPlainTXTFileName, LRPtranslatorVariablesClass* translatorVariables);
+			public: bool createPreprocessSentencesForGIA(string inputFileName, LRPtranslatorVariablesClass* translatorVariables);
+				public: bool createPreprocessSentences(string fileContents, LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, bool interpretNewLinesAsNewSentences, bool splitMultisentenceLines);
 					#ifdef LRP_PREPROCESSOR_WORD_EXTRACT_INDENTATION
-					private: bool extractIndentationFromCurrentLine(const string* lineContents, int* indexOfCurrentToken, int* currentIndentation, string* indentationContents);
+					private: bool extractIndentationFromCurrentLine(string* lineContents, int* indexOfCurrentToken, int* currentIndentation, string* indentationContents);
 					public: string generateIndentationContents(int currentIndentation);
 					#endif
 				private: void copySentenceContentsPreprocessor(LRPpreprocessorMultiwordReductionPlainTextWord* sentenceContents1FirstWord, LRPpreprocessorMultiwordReductionPlainTextWord* sentenceContents2firstWord);	

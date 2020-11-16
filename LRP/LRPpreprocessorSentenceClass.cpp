@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorSentenceClass.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o2a 08-November-2020
+ * Project Version: 3o3a 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Sentence Class
  * /
@@ -153,7 +153,7 @@ bool LRPpreprocessorSentenceClass::calculateParseIsolatedSubreferenceSets2(LRPpr
 }
 #endif	
 
-void LRPpreprocessorSentenceClass::printSentence(vector<LRPpreprocessorPlainTextWord*>* sentenceContents, const bool error)
+void LRPpreprocessorSentenceClass::printSentence(vector<LRPpreprocessorPlainTextWord*>* sentenceContents, bool error)
 {
 	if(error)
 	{

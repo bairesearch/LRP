@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStaggerDatabase.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o2a 08-November-2020
+ * Project Version: 3o3a 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger database
  * /
@@ -49,7 +49,7 @@ int64_t numberOfOutputNeuronsGIAposTagger;
 int64_t numberOfLayersGIAposTagger;	//static variable not currently utilised
 #endif
 //#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PERSISTENT
-void LRPpreprocessorPOStaggerDatabaseClass::initialisePOStaggerDatabase(const string newLRPposTaggerDatabaseFolderName)
+void LRPpreprocessorPOStaggerDatabaseClass::initialisePOStaggerDatabase(string newLRPposTaggerDatabaseFolderName)
 {
 	LRPposTaggerDatabaseFolderName = newLRPposTaggerDatabaseFolderName;
 	if(!SHAREDvars.directoryExists(&LRPposTaggerDatabaseFolderName))
@@ -86,7 +86,7 @@ void LRPpreprocessorPOStaggerDatabaseClass::initialisePOStaggerDatabase(const st
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_MAP
 multimap<string, pair<uint64_t, int>> POStaggerMap;		//each key is ~10 64bit ints int64_t: word context POS (ambiguity info) permutation, and the value is 1 64 bit int int64_t: POS (ambiguity info) for central word
 	//as it currently stands POStaggerMap will be roughly the same size as the original wiki dump text (ie 12GB; too large)
-bool LRPpreprocessorPOStaggerDatabaseClass::findInstancePOStaggerMap(vector<uint64_t>* POSambiguityInfoPermutation, uint64_t centreWordPOSambiguityInfo, int* numberOfInstances, const bool incrementIfFound)
+bool LRPpreprocessorPOStaggerDatabaseClass::findInstancePOStaggerMap(vector<uint64_t>* POSambiguityInfoPermutation, uint64_t centreWordPOSambiguityInfo, int* numberOfInstances, bool incrementIfFound)
 {
 	bool result = false;
 
@@ -108,7 +108,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::findInstancePOStaggerMap(vector<uint
 	
 	return result;
 }	
-void LRPpreprocessorPOStaggerDatabaseClass::insertInstanceInPOStaggerMap(vector<uint64_t>* POSambiguityInfoPermutation, const uint64_t centreWordPOSambiguityInfo, const int numberOfInstances)
+void LRPpreprocessorPOStaggerDatabaseClass::insertInstanceInPOStaggerMap(vector<uint64_t>* POSambiguityInfoPermutation, uint64_t centreWordPOSambiguityInfo, int numberOfInstances)
 {
 	string POSambiguityInfoPermutationIndexString = convertPOSambiguityInfoPermutationToPOSambiguityInfoPermutationIndexString(POSambiguityInfoPermutation);
 	pair<uint64_t, int> value = make_pair(centreWordPOSambiguityInfo, numberOfInstances);
@@ -190,7 +190,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::calculateIdealClassTargetOfInputExpe
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_GENERATE_DATABASE
-bool LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchTrainData(ANNexperience* firstExperienceInList, const int batchIndex)
+bool LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchTrainData(ANNexperience* firstExperienceInList, int batchIndex)
 {
 	string XtrainBatchFileName = externalANNgenerateBatchFileName(LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_X_TRAIN_BATCH_FILE_NAME_PARTA, batchIndex);
 	string YtrainBatchFileName = externalANNgenerateBatchFileName(LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_Y_TRAIN_BATCH_FILE_NAME_PARTA, batchIndex);
@@ -207,7 +207,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchTrainData(AN
 	#endif
 }
 
-string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchFileName(const string fileNamePrepend, const int batchIndex)
+string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchFileName(string fileNamePrepend, int batchIndex)
 {
 	SHAREDvars.setCurrentDirectory(LRPposTaggerDatabaseFolderName);	//save output files to output folder
 
@@ -421,7 +421,7 @@ string LRPpreprocessorPOStaggerDatabaseClass::DBgenerateFileName(vector<uint64_t
 	return fileName;
 }
 
-string LRPpreprocessorPOStaggerDatabaseClass::DBgenerateSubFolderName(vector<uint64_t>* POSambiguityInfoPermutation, const int level, const int numberOfWordsPerLevel)
+string LRPpreprocessorPOStaggerDatabaseClass::DBgenerateSubFolderName(vector<uint64_t>* POSambiguityInfoPermutation, int level, int numberOfWordsPerLevel)
 {
 	string folderName = "";
 	for(int i=level*numberOfWordsPerLevel; i<(level*numberOfWordsPerLevel)+numberOfWordsPerLevel; i++)
@@ -486,7 +486,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::DBreadPOSpermutationEstimates(vector
 }
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_GENERATE_DATABASE
-bool LRPpreprocessorPOStaggerDatabaseClass::DBwritePOSpermutationEstimate(vector<uint64_t>* POSambiguityInfoPermutation, const uint64_t centreWordPOSambiguityInfo)
+bool LRPpreprocessorPOStaggerDatabaseClass::DBwritePOSpermutationEstimate(vector<uint64_t>* POSambiguityInfoPermutation, uint64_t centreWordPOSambiguityInfo)
 {
 	bool result = true;
 	
@@ -597,7 +597,7 @@ string LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToBinaryString(uint64
 }
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PREDICTION_VERIFICATION
-bool LRPpreprocessorPOStaggerDatabaseClass::verifyPOStaggerDatabasePredictionAgainstPOSambiguityInfo(const uchar centreWordPOSindexPrediction, const uint32_t centreWordPOSambiguityInfo, uchar* centreWordPOSvalueFirstAmbiguousPrediction)
+bool LRPpreprocessorPOStaggerDatabaseClass::verifyPOStaggerDatabasePredictionAgainstPOSambiguityInfo(uchar centreWordPOSindexPrediction, uint32_t centreWordPOSambiguityInfo, uchar* centreWordPOSvalueFirstAmbiguousPrediction)
 {
 	bool predictionMatchesPOSambiguityInfo = false;
 	if(centreWordPOSambiguityInfo == 0)
@@ -688,7 +688,7 @@ uchar LRPpreprocessorPOStaggerDatabaseClass::DBconvertBase64ToByte(char base64ch
 	return byte;
 }
 #else
-string LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToHex(const uchar byte)
+string LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToHex(uchar byte)
 {
 	/*
 	stringstream ss;
@@ -736,7 +736,7 @@ uchar LRPpreprocessorPOStaggerDatabaseClass::convertPOSambiguityInfoToIndex(uint
 	return POSambiguityInfoIndex;
 }
 
-bool LRPpreprocessorPOStaggerDatabaseClass::determinePOSambiguityInfoIsAmbiguous(const uint64_t POSambiguityInfo, uchar* unambiguousPOSinfoIndex, const bool treatWordAsAmbiguousIfNullPOSvalue)
+bool LRPpreprocessorPOStaggerDatabaseClass::determinePOSambiguityInfoIsAmbiguous(uint64_t POSambiguityInfo, uchar* unambiguousPOSinfoIndex, bool treatWordAsAmbiguousIfNullPOSvalue)
 {
 	bool ambiguous = false;
 	

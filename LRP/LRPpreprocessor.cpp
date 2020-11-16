@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessor.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o2a 08-November-2020
+ * Project Version: 3o3a 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor
  * /
@@ -43,7 +43,7 @@
 
 	
 	
-bool LRPpreprocessorClass::preprocessTextForGIAwrapper(const bool useLRP, string* inputTextPlainTXTfileName, const string outputLRPTextPlainTXTFileName, const bool isQuery, LRPtranslatorVariablesClass* translatorVariables, bool* useInputTextPlainTXTFile, const string inputTextNLPfeatureXMLfileName)
+bool LRPpreprocessorClass::preprocessTextForGIAwrapper(bool useLRP, string* inputTextPlainTXTfileName, string outputLRPTextPlainTXTFileName, bool isQuery, LRPtranslatorVariablesClass* translatorVariables, bool* useInputTextPlainTXTFile, string inputTextNLPfeatureXMLfileName)
 {
 	bool result = true;
 	
@@ -80,7 +80,7 @@ bool LRPpreprocessorClass::preprocessTextForGIAwrapper(const bool useLRP, string
 	return result;
 }
 
-bool LRPpreprocessorClass::preprocessTextForGIA(string* inputTextPlainTXTfileName, const string outputLRPTextPlainTXTFileName, const bool isQuery, LRPtranslatorVariablesClass* translatorVariables, const string inputTextNLPfeatureXMLfileName)
+bool LRPpreprocessorClass::preprocessTextForGIA(string* inputTextPlainTXTfileName, string outputLRPTextPlainTXTFileName, bool isQuery, LRPtranslatorVariablesClass* translatorVariables, string inputTextNLPfeatureXMLfileName)
 {
 	bool result = true;
 	
@@ -150,7 +150,7 @@ bool LRPpreprocessorClass::preprocessTextForGIA(string* inputTextPlainTXTfileNam
 }
 
 #ifdef GIA_POS_REL_TRANSLATOR_HYBRID
-bool LRPpreprocessorClass::preprocessSentencesForGIAwrapper(LRPtranslatorVariablesClass* translatorVariables, const string outputLRPTextPlainTXTFileName, const string inputTextNLPfeatureXMLfileName, const string outputFileName, const string outputFileNameLRPforNLP, const bool isQuery)
+bool LRPpreprocessorClass::preprocessSentencesForGIAwrapper(LRPtranslatorVariablesClass* translatorVariables, string outputLRPTextPlainTXTFileName, string inputTextNLPfeatureXMLfileName, string outputFileName, string outputFileNameLRPforNLP, bool isQuery)
 {
 	bool result = true;
 	
@@ -191,7 +191,7 @@ bool LRPpreprocessorClass::preprocessSentencesForGIAwrapper(LRPtranslatorVariabl
 #endif
 	
 			
-bool LRPpreprocessorClass::regenerateFileFromPreprocessedTextWithoutLRP(string* inputTextPlainTXTfileName, const string outputLRPTextPlainTXTFileName, LRPtranslatorVariablesClass* translatorVariables)
+bool LRPpreprocessorClass::regenerateFileFromPreprocessedTextWithoutLRP(string* inputTextPlainTXTfileName, string outputLRPTextPlainTXTFileName, LRPtranslatorVariablesClass* translatorVariables)
 {
 	bool result = true;
 	
@@ -218,7 +218,7 @@ bool LRPpreprocessorClass::regenerateFileFromPreprocessedTextWithoutLRP(string* 
 	return result;
 }
 
-bool LRPpreprocessorClass::createPreprocessSentencesForGIA(const string inputFileName, LRPtranslatorVariablesClass* translatorVariables)
+bool LRPpreprocessorClass::createPreprocessSentencesForGIA(string inputFileName, LRPtranslatorVariablesClass* translatorVariables)
 {
 	bool result = true;
 
@@ -259,7 +259,7 @@ bool LRPpreprocessorClass::createPreprocessSentencesForGIA(const string inputFil
 
 
 
-bool LRPpreprocessorClass::createPreprocessSentences(const string fileContents, LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, bool interpretNewLinesAsNewSentences, bool splitMultisentenceLines)
+bool LRPpreprocessorClass::createPreprocessSentences(string fileContents, LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, bool interpretNewLinesAsNewSentences, bool splitMultisentenceLines)
 {
 	bool result = true;
 	
@@ -550,7 +550,7 @@ bool LRPpreprocessorClass::createPreprocessSentences(const string fileContents, 
 }
 
 #ifdef LRP_PREPROCESSOR_WORD_EXTRACT_INDENTATION
-bool LRPpreprocessorClass::extractIndentationFromCurrentLine(const string* lineContents, int* indexOfCurrentToken, int* currentIndentation, string* indentationContents)
+bool LRPpreprocessorClass::extractIndentationFromCurrentLine(string* lineContents, int* indexOfCurrentToken, int* currentIndentation, string* indentationContents)
 {
 	bool result = false;
 	if(*indexOfCurrentToken+1 < lineContents->length())

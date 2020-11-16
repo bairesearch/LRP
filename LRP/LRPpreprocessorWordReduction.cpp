@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordReduction.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o2a 08-November-2020
+ * Project Version: 3o3a 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Word Reduction
  * /
@@ -118,7 +118,7 @@ generate all tenses variations of the verb based upon a) rules and b) irregular 
 */
 
 //NB current implementation cannot take into account 3 alternate tags (ie x/y/z)
-bool LRPpreprocessorWordReductionClass::loadPhrasalVerbDataAndGenerateAllTenseVariants(const string phrasalVerbDatabaseFileName, multimap<string, LRPpreprocessorMultiwordReductionPhrasalVerbSentence*>* phrasalVerbList, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList)
+bool LRPpreprocessorWordReductionClass::loadPhrasalVerbDataAndGenerateAllTenseVariants(string phrasalVerbDatabaseFileName, multimap<string, LRPpreprocessorMultiwordReductionPhrasalVerbSentence*>* phrasalVerbList, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList)
 {
 	bool result = true;
 
@@ -347,7 +347,7 @@ LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* LRPpreprocessorWordR
 {
 	return activeLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo;
 }
-void LRPpreprocessorWordReductionClass::setActiveLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo(const bool isQuery)
+void LRPpreprocessorWordReductionClass::setActiveLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo(bool isQuery)
 {
 	if(isQuery)
 	{
@@ -358,7 +358,7 @@ void LRPpreprocessorWordReductionClass::setActiveLRPpreprocessorMultiwordReducti
 		activeLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo = textLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo;
 	}
 }
-void LRPpreprocessorWordReductionClass::initialiseActiveLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo(const bool isQuery)
+void LRPpreprocessorWordReductionClass::initialiseActiveLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo(bool isQuery)
 {
 	if(isQuery)
 	{
@@ -369,7 +369,7 @@ void LRPpreprocessorWordReductionClass::initialiseActiveLRPpreprocessorMultiword
 		textLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo = new LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo();
 	}
 }
-void LRPpreprocessorWordReductionClass::deinitialiseActiveLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo(const bool isQuery)
+void LRPpreprocessorWordReductionClass::deinitialiseActiveLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo(bool isQuery)
 {
 	if(isQuery)
 	{
@@ -382,7 +382,7 @@ void LRPpreprocessorWordReductionClass::deinitialiseActiveLRPpreprocessorMultiwo
 }
 
 
-bool LRPpreprocessorWordReductionClass::parseTextFileAndReduceLanguage(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, const string plainTextLRPoutputFileName, const string plainTextLRPforNLPoutputFileName)
+bool LRPpreprocessorWordReductionClass::parseTextFileAndReduceLanguage(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, string plainTextLRPoutputFileName, string plainTextLRPforNLPoutputFileName)
 {
 	bool result = true;
 
@@ -795,7 +795,7 @@ bool LRPpreprocessorWordReductionClass::searchAndReplacePhrasalVerbs(LRPpreproce
 }
 
 	
-bool LRPpreprocessorWordReductionClass::loadMultiwordWordList(const string multiwordWordListFileName, multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>* multiwordWordList)
+bool LRPpreprocessorWordReductionClass::loadMultiwordWordList(string multiwordWordListFileName, multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>* multiwordWordList)
 {
 	bool result = true;
 
@@ -850,7 +850,7 @@ bool LRPpreprocessorWordReductionClass::loadMultiwordWordList(const string multi
 	return result;
 }
 
-bool LRPpreprocessorWordReductionClass::searchAndReplaceMultiwordWordList(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>* multiwordWordList, LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, const int wordListType)
+bool LRPpreprocessorWordReductionClass::searchAndReplaceMultiwordWordList(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>* multiwordWordList, LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, int wordListType)
 {
 	bool result = true;
 	
@@ -891,8 +891,8 @@ bool LRPpreprocessorWordReductionClass::searchAndReplaceMultiwordWordList(LRPpre
 				bool foundAtLeastOneMatch = false;
 				LRPpreprocessorMultiwordReductionPlainTextWord* currentTagInPlainTextSentenceTemp = currentTagInPlainTextSentence;
 				LRPpreprocessorMultiwordReductionPlainTextWord* firstTagInCollapsedMultiwordWord = new LRPpreprocessorMultiwordReductionPlainTextWord();
-				const LRPpreprocessorMultiwordReductionWord* firstTagInMultiwordWord = currentTagInMultiwordWordList->firstTagInSentence;
-				const LRPpreprocessorMultiwordReductionWord* currentTagInMultiwordWord = firstTagInMultiwordWord;
+				LRPpreprocessorMultiwordReductionWord* firstTagInMultiwordWord = currentTagInMultiwordWordList->firstTagInSentence;
+				LRPpreprocessorMultiwordReductionWord* currentTagInMultiwordWord = firstTagInMultiwordWord;
 				while((currentTagInMultiwordWord->nextTag != NULL) && (currentTagInPlainTextSentenceTemp->nextTag != NULL) && (stillFoundWordMatch))
 				{
 					if(currentTagInMultiwordWord->tagName != currentTagInPlainTextSentenceTemp->tagName)
@@ -975,7 +975,7 @@ bool LRPpreprocessorWordReductionClass::searchAndReplaceMultiwordWordList(LRPpre
 }
 
 #ifdef LRP_PREPROCESSOR_WORD_DYNAMIC
-bool LRPpreprocessorWordReductionClass::searchAndReplaceMultiwordWordListDynamic(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, const int wordListType)
+bool LRPpreprocessorWordReductionClass::searchAndReplaceMultiwordWordListDynamic(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, int wordListType)
 {
 	bool result = true;
 	
@@ -1112,7 +1112,7 @@ void LRPpreprocessorWordReductionClass::renumberEntityIndiciesInCorrespondenceIn
 	}
 }
 
-bool LRPpreprocessorWordReductionClass::writeTagListToFile(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, const string plainTextLRPoutputFileName, const string plainTextLRPforNLPoutputFileName, const bool performLRPoutput, const bool performLRPforNLPoutput)
+bool LRPpreprocessorWordReductionClass::writeTagListToFile(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, string plainTextLRPoutputFileName, string plainTextLRPforNLPoutputFileName, bool performLRPoutput, bool performLRPforNLPoutput)
 {
 	bool result = true;
 	
@@ -1249,7 +1249,7 @@ bool LRPpreprocessorWordReductionClass::writeTagListToFile(LRPpreprocessorSenten
 	return result;
 }
 
-string LRPpreprocessorWordReductionClass::generateWordWithLRPforNLPonly(const LRPpreprocessorMultiwordReductionPlainTextWord* currentTagInPlainTextSentence)
+string LRPpreprocessorWordReductionClass::generateWordWithLRPforNLPonly(LRPpreprocessorMultiwordReductionPlainTextWord* currentTagInPlainTextSentence)
 {
 	string wordWithLRPforNLPonly = currentTagInPlainTextSentence->tagName;
 	if(currentTagInPlainTextSentence->collapsedPhrasalVerbExactDefinedSection)
@@ -1273,7 +1273,7 @@ string LRPpreprocessorWordReductionClass::generateWordWithLRPforNLPonly(const LR
 #ifdef LRP_PREPROCESSOR_WORD_REPLACE_OUTPUT_FOR_NLP_TEMPORARILY
 
 //NB preposition reversion routine will not work for RelEx as RelEx defines dependency relations based on lemmas not words...
-void LRPpreprocessorWordReductionClass::revertNLPtagNameToOfficialLRPtagName(GIAfeature* feature, const GIAsentence* currentSentenceInList, const GIArelation* currentRelationInListForPrepositionsOnly, const bool isPreposition, bool* foundOfficialLRPreplacementString)
+void LRPpreprocessorWordReductionClass::revertNLPtagNameToOfficialLRPtagName(GIAfeature* feature, GIAsentence* currentSentenceInList, GIArelation* currentRelationInListForPrepositionsOnly, bool isPreposition, bool* foundOfficialLRPreplacementString)
 {
 	int entityIndexForNonPrepositionsOnly = feature->entityIndex;
 	
@@ -1300,8 +1300,8 @@ void LRPpreprocessorWordReductionClass::revertNLPtagNameToOfficialLRPtagName(GIA
 					//now search entire sentence->feature list and find entity/word that has same name, and has the governor/dependent closest to it...
 					string relationGovernor = currentRelationInListForPrepositionsOnly->relationGovernor;
 					string relationDependent = currentRelationInListForPrepositionsOnly->relationDependent;
-					const GIAfeature* firstFeatureInList = currentSentenceInList->firstFeatureInList;
-					const GIAfeature* currentFeatureInList = firstFeatureInList;
+					GIAfeature* firstFeatureInList = currentSentenceInList->firstFeatureInList;
+					GIAfeature* currentFeatureInList = firstFeatureInList;
 					int indexOfPrepositionWithMinimumProximityOfGovernorDependentWords = GIA_ENTITY_INDEX_UNDEFINED;
 					int minimumProximityOfGovernorDependentWords = MAXIMUM_NUMBER_WORDS_PER_SENTENCE;
 					int indexOfLastInstanceOfPreposition = GIA_ENTITY_INDEX_UNDEFINED;
@@ -1716,7 +1716,7 @@ bool LRPpreprocessorWordReductionClass::generateStandardTenseVariantsOfVerbBase(
 	return result;
 }
 
-bool LRPpreprocessorWordReductionClass::findSentenceInSentenceListIrregularVerb(unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* sentenceList, const string word, LRPpreprocessorMultiwordReductionIrregularVerbSentence** sentenceFound)
+bool LRPpreprocessorWordReductionClass::findSentenceInSentenceListIrregularVerb(unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* sentenceList, string word, LRPpreprocessorMultiwordReductionIrregularVerbSentence** sentenceFound)
 {	
 	bool result = false;
 	
@@ -1917,7 +1917,7 @@ int64_t LRPpreprocessorWordReductionClass::parseNumerals(vector<LRPpreprocessorP
 	return value;
 }
 
-int64_t LRPpreprocessorWordReductionClass::getValueOf(const string wordText) 
+int64_t LRPpreprocessorWordReductionClass::getValueOf(string wordText) 
 {
 	int index = 0;
 	if(!SHAREDvars.textInTextArray(wordText, translatorEnglishNumbersNumeralsTextArray, GIA_TRANSLATOR_ENGLISH_NUMBERS_NUMERALS_NUMBER_OF_TYPES, &index))

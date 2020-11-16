@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordClass.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o2a 08-November-2020
+ * Project Version: 3o3a 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Word Class
  * /
@@ -742,81 +742,81 @@ class LRPpreprocessorWordClassClass
 	private: SHAREDvarsClass SHAREDvars;
 
 	//#ifdef LRP_PREPROCESSOR_RECORD_REFERENCES
-	public: string generateTextFromPreprocessorSentenceWordList(const LRPpreprocessorPlainTextWord* firstWordInSentence);
-		public: string generateTextFromPreprocessorSentenceWordList(const LRPpreprocessorPlainTextWord* firstWordInSentence, const bool LRPforNLP);
-	public: string generateTextFromVectorWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList);
-		public: string generateTextFromVectorWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, const bool LRPforNLP);
-			public: string generateTextFromPreprocessorSentenceWord(const LRPpreprocessorPlainTextWord* word, const bool LRPforNLP, const bool isFirstWordInSentence);
+	public: string generateTextFromPreprocessorSentenceWordList(LRPpreprocessorPlainTextWord* firstWordInSentence);
+		public: string generateTextFromPreprocessorSentenceWordList(LRPpreprocessorPlainTextWord* firstWordInSentence, bool LRPforNLP);
+	public: string generateTextFromVectorWordList(vector<LRPpreprocessorPlainTextWord*>* wordList);
+		public: string generateTextFromVectorWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, bool LRPforNLP);
+			public: string generateTextFromPreprocessorSentenceWord(LRPpreprocessorPlainTextWord* word, bool LRPforNLP, bool isFirstWordInSentence);
 	public: int calculateLengthOfGeneratedVectorWordListText(vector<LRPpreprocessorPlainTextWord*>* wordList);
 	public: bool generateSentenceWordList(LRPpreprocessorPlainTextWord* sentenceContentsFirstWord, vector<LRPpreprocessorPlainTextWord*>* wordList);
 	public: bool generateSentenceWordList(LRPpreprocessorPlainTextWord* sentenceContentsFirstWord, vector<LRPpreprocessorPlainTextWord*>* wordList, int startIndex, int endIndex);
-	public: bool generateFlatSentenceWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, LRPpreprocessorMultiwordReductionPlainTextWord** sentenceContentsFirstWord);
+	public: bool generateFlatSentenceWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, LRPpreprocessorMultiwordReductionPlainTextWord** sentenceContentsFirstWord);
 	public: bool addWordListToWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, vector<LRPpreprocessorPlainTextWord*>* wordListToAdd);
-	public: bool addStringArrayToWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string* stringArrayToAdd, const int arraySize);
-	public: bool addStringToWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToAdd);
+	public: bool addStringArrayToWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string* stringArrayToAdd, int arraySize);
+	public: bool addStringToWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToAdd);
 	#ifdef LRP_PREPROCESSOR_WORD_NLP_PARSABLE_PHRASE_SUPPORT_INTRAWORD_PUNCTUATION_MARK
-	public: bool isIntrawordPunctuationMark(const int indexOfCurrentToken, const string* lineContents);
+	public: bool isIntrawordPunctuationMark(int indexOfCurrentToken, string* lineContents);
 	#endif
 	#ifdef LRP_PREPROCESSOR_WORD_NLP_PARSABLE_PHRASE_SUPPORT_APOSTROPHES_POSSESSION_AND_OMISSION
-	public: bool isApostrophePossessionOrOmission(const int indexOfCurrentToken, const string* lineContents);
-	public: bool isApostrophePossessionOrOmission(const LRPpreprocessorPlainTextWord* word);
+	public: bool isApostrophePossessionOrOmission(int indexOfCurrentToken, string* lineContents);
+	public: bool isApostrophePossessionOrOmission(LRPpreprocessorPlainTextWord* word);
 	#endif	
 	
 	#ifdef LRP_PREPROCESSOR_RECORD_REFERENCES
-	public: bool findAndReplaceAllOccurancesSimpleSubstringInWordListWithSimpleSubstring(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringSimpleToFind,  const string stringSimpleReplacement);
-		public: bool findAndReplaceAllOccurancesSimpleSubstringInWordListWithSimpleSubstring(vector<LRPpreprocessorPlainTextWord*>* wordList, const string* stringSimpleToFind,  const string* stringSimpleReplacement);
-			public: bool findAndReplaceSimpleSubstringInWordListAtIndexWithSimpleSubstring(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringSimpleToFind, const int indexToPerformFind, const string stringSimpleReplacement);
-				public: bool findAndReplaceWordListInWordListAtIndexWithWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, vector<LRPpreprocessorPlainTextWord*>* wordListToFind, const int indexToPerformFind, vector<LRPpreprocessorPlainTextWord*>* wordListReplacement);
-	public: bool findSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringSimpleToFind);
-		public: bool findSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringSimpleToFind, const int startIndexToPerformFind);
-			public: bool findSubWordListInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const vector<LRPpreprocessorPlainTextWord*>* wordListToFind, const int startIndexToPerformFind);	
-	public: bool findSimpleSubstringInWordListAtIndex(const vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringSimpleToFind, const int indexToPerformFind, const bool caseInsensitive);
-		public: bool findSubWordListInWordListAtIndex(const vector<LRPpreprocessorPlainTextWord*>* wordList, const vector<LRPpreprocessorPlainTextWord*>* wordListToFind, const int indexToPerformFind, const bool caseInsensitive);
-	public: bool generateSentenceWordListFromStringSimple(vector<LRPpreprocessorPlainTextWord*>* wordList, const string* stringSimple);
+	public: bool findAndReplaceAllOccurancesSimpleSubstringInWordListWithSimpleSubstring(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringSimpleToFind,  string stringSimpleReplacement);
+		public: bool findAndReplaceAllOccurancesSimpleSubstringInWordListWithSimpleSubstring(vector<LRPpreprocessorPlainTextWord*>* wordList, string* stringSimpleToFind,  string* stringSimpleReplacement);
+			public: bool findAndReplaceSimpleSubstringInWordListAtIndexWithSimpleSubstring(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringSimpleToFind, int indexToPerformFind, string stringSimpleReplacement);
+				public: bool findAndReplaceWordListInWordListAtIndexWithWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, vector<LRPpreprocessorPlainTextWord*>* wordListToFind, int indexToPerformFind, vector<LRPpreprocessorPlainTextWord*>* wordListReplacement);
+	public: bool findSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringSimpleToFind);
+		public: bool findSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringSimpleToFind, int startIndexToPerformFind);
+			public: bool findSubWordListInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, vector<LRPpreprocessorPlainTextWord*>* wordListToFind, int startIndexToPerformFind);	
+	public: bool findSimpleSubstringInWordListAtIndex(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringSimpleToFind, int indexToPerformFind, bool caseInsensitive);
+		public: bool findSubWordListInWordListAtIndex(vector<LRPpreprocessorPlainTextWord*>* wordList, vector<LRPpreprocessorPlainTextWord*>* wordListToFind, int indexToPerformFind, bool caseInsensitive);
+	public: bool generateSentenceWordListFromStringSimple(vector<LRPpreprocessorPlainTextWord*>* wordList, string* stringSimple);
 		
 	//these are similiar to C++ string library functions;
-	public: int findStringInWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToFind);
-		public: int findStringInWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToFind, const int startIndexToPerformFind);
-		public: int findStringInWordListReverse(const vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToFind, const int startIndexToPerformFind);
+	public: int findStringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToFind);
+		public: int findStringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToFind, int startIndexToPerformFind);
+		public: int findStringInWordListReverse(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToFind, int startIndexToPerformFind);
 	
 
-	public: bool findSubstringAtStartOfWordInWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, const string substringToFind);
-		public: bool findSubstringAtStartOfWordInWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, const string substringToFind, const int startIndexToPerformFind);
+	public: bool findSubstringAtStartOfWordInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string substringToFind);
+		public: bool findSubstringAtStartOfWordInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string substringToFind, int startIndexToPerformFind);
 	
-	public: vector<LRPpreprocessorPlainTextWord*> extractSubWordListInWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, const int startIndexToExtract);
-		public: vector<LRPpreprocessorPlainTextWord*> extractSubWordListInWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, const int startIndexToExtract, const int numberOfWordsToExtract);
+	public: vector<LRPpreprocessorPlainTextWord*> extractSubWordListInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, int startIndexToExtract);
+		public: vector<LRPpreprocessorPlainTextWord*> extractSubWordListInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, int startIndexToExtract, int numberOfWordsToExtract);
 	
-	public: bool insertWordListIntoWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const vector<LRPpreprocessorPlainTextWord*>* wordListToInsert, const int indexToInsert);
-	public: bool insertStringIntoWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToInsert, const int indexToInsert);
-		public: bool insertWordIntoWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, LRPpreprocessorPlainTextWord* wordToInsert, const int indexToInsert);
+	public: bool insertWordListIntoWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, vector<LRPpreprocessorPlainTextWord*>* wordListToInsert, int indexToInsert);
+	public: bool insertStringIntoWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToInsert, int indexToInsert);
+		public: bool insertWordIntoWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, LRPpreprocessorPlainTextWord* wordToInsert, int indexToInsert);
 	
-	public: bool wordListFindAndRemoveAllOccurancesSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToFind);
-		public: bool removeWordFromWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const int indexToRemove);
-			public: bool removeWordsFromWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const int indexToRemove, const int numberElementsToRemove);
+	public: bool wordListFindAndRemoveAllOccurancesSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToFind);
+		public: bool removeWordFromWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, int indexToRemove);
+			public: bool removeWordsFromWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, int indexToRemove, int numberElementsToRemove);
 			
-	public: bool replaceWordListAtIndexWithSimpleSubstring(vector<LRPpreprocessorPlainTextWord*>* wordList, const int indexToPerformReplacement, const string stringSimpleReplacement);
-		public: bool replaceWordListAtIndexWithSimpleSubstring(vector<LRPpreprocessorPlainTextWord*>* wordList, const int indexToPerformReplacement, vector<LRPpreprocessorPlainTextWord*>* wordListReplacement);
+	public: bool replaceWordListAtIndexWithSimpleSubstring(vector<LRPpreprocessorPlainTextWord*>* wordList, int indexToPerformReplacement, string stringSimpleReplacement);
+		public: bool replaceWordListAtIndexWithSimpleSubstring(vector<LRPpreprocessorPlainTextWord*>* wordList, int indexToPerformReplacement, vector<LRPpreprocessorPlainTextWord*>* wordListReplacement);
 	
 	public: bool copyWordListAndReplicateWordObjects(vector<LRPpreprocessorPlainTextWord*>* wordList1, vector<LRPpreprocessorPlainTextWord*>* wordList2);
 	public: bool clearWordListAndDeleteWordObjects(vector<LRPpreprocessorPlainTextWord*>* wordList);
 
 	#endif	
 
-	public: bool isWordInWordlist(const vector<LRPpreprocessorPlainTextWord*>* wordList, LRPpreprocessorPlainTextWord* word);
+	public: bool isWordInWordlist(vector<LRPpreprocessorPlainTextWord*>* wordList, LRPpreprocessorPlainTextWord* word);
 
-	public: bool printWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList);
-	public: string printWordListString(const vector<LRPpreprocessorPlainTextWord*>* wordList);
+	public: bool printWordList(vector<LRPpreprocessorPlainTextWord*>* wordList);
+	public: string printWordListString(vector<LRPpreprocessorPlainTextWord*>* wordList);
 		
 	public: void preprocessorFillCurrentWord(LRPpreprocessorMultiwordReductionPlainTextWord** currentWordInSentence, string* currentWord, int* entityIndex, int lastCharacterIndexOfWordInSentence);
-	public: int getPOStypeFromName(const string wordPOStypeName);
-	public: bool isStringNumber(const string phrase);
+	public: int getPOStypeFromName(string wordPOStypeName);
+	public: bool isStringNumber(string phrase);
 	#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES_MID_SENTENCE_CAPITALISED_WORDS_AS_PROPERNOUNS
 	public: bool isMidSentenceUppercaseWordLikelyProperNoun(LRPpreprocessorPlainTextWord* contextWord);
 	#endif
-	public: bool wordIsUpperCase(const string wordText);
+	public: bool wordIsUpperCase(string wordText);
 
-	public: int convertSentenceContentsIndexToEntityIndex(const int sentenceContentsIndex);
-	public: int convertEntityIndexToSentenceContentsIndex(const int entityIndex);
+	public: int convertSentenceContentsIndexToEntityIndex(int sentenceContentsIndex);
+	public: int convertEntityIndexToSentenceContentsIndex(int entityIndex);
 
 };
 

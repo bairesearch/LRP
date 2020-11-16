@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStagger.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o2a 08-November-2020
+ * Project Version: 3o3a 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger
  * /
@@ -65,7 +65,7 @@ OLD planned method: then for every triplet, find each word in index (ie get ID);
 
 
 #ifdef GIA_POS_REL_TRANSLATOR_HYBRID_EXECUTE_PRELIM_POS_TAGGER
-bool LRPpreprocessorPOStaggerClass::executePrelimFeatureProcessingOnSentences(const string outputLRPTextPlainTXTFileName, const string inputTextNLPfeatureXMLfileName, LRPtranslatorVariablesClass* translatorVariables)
+bool LRPpreprocessorPOStaggerClass::executePrelimFeatureProcessingOnSentences(string outputLRPTextPlainTXTFileName, string inputTextNLPfeatureXMLfileName, LRPtranslatorVariablesClass* translatorVariables)
 {
 	bool result = true;
 	
@@ -364,7 +364,7 @@ bool LRPpreprocessorPOStaggerClass::executePrelimFeatureProcessingOnSentences(co
 	#endif
 }
 
-bool LRPpreprocessorPOStaggerClass::predictPOStaggerDatabaseEntry(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, LRPpreprocessorPlainTextWord* centreWord, bool* foundMatchingCentreWordPOSambiguityInfo, uchar* centreWordPOSindexPrediction, bool* centreWordPOSisAmbiguous, double* experienceBackPropagationPassError, int* maximumNumberOfInstances)
+bool LRPpreprocessorPOStaggerClass::predictPOStaggerDatabaseEntry(uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, uchar centreWordUnambiguousPOSindex, LRPpreprocessorPlainTextWord* centreWord, bool* foundMatchingCentreWordPOSambiguityInfo, uchar* centreWordPOSindexPrediction, bool* centreWordPOSisAmbiguous, double* experienceBackPropagationPassError, int* maximumNumberOfInstances)
 {
 	bool result = true;
 	
@@ -523,7 +523,7 @@ bool LRPpreprocessorPOStaggerClass::createWordIndexListFromWikiDumpText(bool use
 
 #ifndef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_TRAIN_SINGLE_BATCH_ONLY
 //UNTESTED
-bool LRPpreprocessorPOStaggerClass::generatePOStaggerDatabaseFromWikiDumpText(const string wikiDumpFolderName, bool useLRP)
+bool LRPpreprocessorPOStaggerClass::generatePOStaggerDatabaseFromWikiDumpText(string wikiDumpFolderName, bool useLRP)
 {
 	bool result = true;
 
@@ -557,7 +557,7 @@ bool LRPpreprocessorPOStaggerClass::generatePOStaggerDatabaseFromWikiDumpText(co
 }
 #endif
 
-bool LRPpreprocessorPOStaggerClass::generatePOStaggerDatabaseFromWikiDumpText(const string wikiDumpFolderName, const int wikiDumpFileBatchIndex, bool useLRP)
+bool LRPpreprocessorPOStaggerClass::generatePOStaggerDatabaseFromWikiDumpText(string wikiDumpFolderName, int wikiDumpFileBatchIndex, bool useLRP)
 {
 	bool result = true;
 	
@@ -876,24 +876,24 @@ bool LRPpreprocessorPOStaggerClass::addPOStaggerDatabaseEntry1(vector<uint64_t>*
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_MEMORY_FREE_WRITE_EXPERIENCES_DIRECTLY_TO_FILE
-bool LRPpreprocessorPOStaggerClass::addPOStaggerDatabaseEntry2(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, ofstream* XtrainBatchFileObject, ofstream* YtrainBatchFileObject)
+bool LRPpreprocessorPOStaggerClass::addPOStaggerDatabaseEntry2(uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, uchar centreWordUnambiguousPOSindex, ofstream* XtrainBatchFileObject, ofstream* YtrainBatchFileObject)
 {
 	return addPOStaggerDatabaseEntry(centreWordPOSambiguityInfo, POSambiguityInfoPermutation, centreWordUnambiguousPOSindex, XtrainBatchFileObject, YtrainBatchFileObject, NULL, NULL);
 }
 #else
-bool LRPpreprocessorPOStaggerClass::addPOStaggerDatabaseEntry3(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, ANNexperience** currentExperienceInList)
+bool LRPpreprocessorPOStaggerClass::addPOStaggerDatabaseEntry3(uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, uchar centreWordUnambiguousPOSindex, ANNexperience** currentExperienceInList)
 {
 	return addPOStaggerDatabaseEntry(centreWordPOSambiguityInfo, POSambiguityInfoPermutation, centreWordUnambiguousPOSindex, NULL, NULL, currentExperienceInList, NULL);
 }
 #endif
 #else
-bool LRPpreprocessorPOStaggerClass::addPOStaggerDatabaseEntry4(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, int64_t* numberOfNeuralNetworkFeeds)
+bool LRPpreprocessorPOStaggerClass::addPOStaggerDatabaseEntry4(uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, uchar centreWordUnambiguousPOSindex, int64_t* numberOfNeuralNetworkFeeds)
 {
 	return addPOStaggerDatabaseEntry(centreWordPOSambiguityInfo, POSambiguityInfoPermutation, centreWordUnambiguousPOSindex, NULL, NULL, NULL, numberOfNeuralNetworkFeeds);
 }
 #endif
 
-bool LRPpreprocessorPOStaggerClass::addPOStaggerDatabaseEntry(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, ofstream* XtrainBatchFileObject, ofstream* YtrainBatchFileObject, ANNexperience** currentExperienceInList, int64_t* numberOfNeuralNetworkFeeds)
+bool LRPpreprocessorPOStaggerClass::addPOStaggerDatabaseEntry(uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, uchar centreWordUnambiguousPOSindex, ofstream* XtrainBatchFileObject, ofstream* YtrainBatchFileObject, ANNexperience** currentExperienceInList, int64_t* numberOfNeuralNetworkFeeds)
 {
 	bool result = true;	
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK
@@ -977,7 +977,7 @@ string LRPpreprocessorPOStaggerClass::generateWikiDumpTextInputFileName(int wiki
 }
 
 
-bool LRPpreprocessorPOStaggerClass::generatePreprocessorSentenceObjectsFromText(const string inputFileName, LRPpreprocessorSentence* firstLRPpreprocessorSentenceInText, bool useLRP)
+bool LRPpreprocessorPOStaggerClass::generatePreprocessorSentenceObjectsFromText(string inputFileName, LRPpreprocessorSentence* firstLRPpreprocessorSentenceInText, bool useLRP)
 {
 	bool result = true;
 	
@@ -1052,7 +1052,7 @@ bool LRPpreprocessorPOStaggerClass::generatePreprocessorSentenceObjectsFromText(
 	return result;
 }	
 
-bool LRPpreprocessorPOStaggerClass::createPreprocessSentencesBasic(const string fileContents, LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, bool interpretNewLinesAsNewSentences)
+bool LRPpreprocessorPOStaggerClass::createPreprocessSentencesBasic(string fileContents, LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, bool interpretNewLinesAsNewSentences)
 {	
 	bool result = true;
 	
@@ -1201,7 +1201,7 @@ bool LRPpreprocessorPOStaggerClass::createPreprocessSentencesBasic(const string 
 
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK
-bool LRPpreprocessorPOStaggerClass::generateANNexperienceFromPOSambiguityInfoPermutation(vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, ANNexperience* currentExperience)
+bool LRPpreprocessorPOStaggerClass::generateANNexperienceFromPOSambiguityInfoPermutation(vector<uint64_t>* POSambiguityInfoPermutation, uchar centreWordUnambiguousPOSindex, ANNexperience* currentExperience)
 {
 	return generateANNexperienceFromPOSambiguityInfoPermutationStandalone(POSambiguityInfoPermutation, centreWordUnambiguousPOSindex, currentExperience);
 }
@@ -1209,7 +1209,7 @@ bool LRPpreprocessorPOStaggerClass::generateANNexperienceFromPOSambiguityInfoPer
 #endif
 
 /*
-int LRPpreprocessorPOStaggerClass::convertGIAPOStaggerValueToGrammaticalWordType(const int POSvalue)
+int LRPpreprocessorPOStaggerClass::convertGIAPOStaggerValueToGrammaticalWordType(int POSvalue)
 {
 	int grammaticalWordType = GIAPOStaggerValueCrossReferenceGrammaticalWordTypeArray[POSvalue];
 	return grammaticalWordType;
@@ -1576,7 +1576,7 @@ bool LRPpreprocessorPOStaggerClass::determinePOSambiguityInfo(LRPpreprocessorPla
 }
 
 		
-bool LRPpreprocessorPOStaggerClass::findWordInWordListAllTypesWithPOSambiguityInfo(const string word, LRPpreprocessorMultiwordReductionWord** wordFound, uint64_t* POSambiguityInfoFound)
+bool LRPpreprocessorPOStaggerClass::findWordInWordListAllTypesWithPOSambiguityInfo(string word, LRPpreprocessorMultiwordReductionWord** wordFound, uint64_t* POSambiguityInfoFound)
 {	
 	bool result = false;
 		
@@ -1650,7 +1650,7 @@ bool LRPpreprocessorPOStaggerClass::printPOSambiguityInfoPermutationAssumeUnambi
 
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK
-bool LRPpreprocessorPOStaggerClass::generateANNexperienceFromPOSambiguityInfoPermutationStandalone(vector<uint64_t>* POSambiguityInfoPermutation, const uchar outputNeuronExperienceValue, ANNexperience* currentExperience)
+bool LRPpreprocessorPOStaggerClass::generateANNexperienceFromPOSambiguityInfoPermutationStandalone(vector<uint64_t>* POSambiguityInfoPermutation, uchar outputNeuronExperienceValue, ANNexperience* currentExperience)
 {
 	bool result = true;
 	
