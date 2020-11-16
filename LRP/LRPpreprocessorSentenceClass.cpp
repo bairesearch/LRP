@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorSentenceClass.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o3a 16-November-2020
+ * Project Version: 3o3b 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Sentence Class
  * /
@@ -126,7 +126,7 @@ vector<LRPpreprocessorPlainTextWord*>* LRPpreprocessorSentenceClass::getSentence
 }
 
 #ifdef GIA_POS_REL_TRANSLATOR_RULES_PARSE_ISOLATED_SUBREFERENCE_SETS_OPTIMISED
-bool LRPpreprocessorSentenceClass::calculateParseIsolatedSubreferenceSets1(LRPpreprocessorSentence* currentLRPpreprocessorSentenceInList, bool* parseIsolatedSubreferenceSets1)
+bool LRPpreprocessorSentenceClass::calculateParseIsolatedSubreferenceSets1(const LRPpreprocessorSentence* currentLRPpreprocessorSentenceInList, bool* parseIsolatedSubreferenceSets1)
 {
 	bool result = true;
 	if((currentLRPpreprocessorSentenceInList->parseIsolatedSubreferenceSets) && ((currentLRPpreprocessorSentenceInList->parseIsolatedSubreferenceSetsFirst) || (currentLRPpreprocessorSentenceInList->parseIsolatedSubreferenceSetsOnly)))
@@ -135,7 +135,7 @@ bool LRPpreprocessorSentenceClass::calculateParseIsolatedSubreferenceSets1(LRPpr
 	}
 	return result;
 }
-bool LRPpreprocessorSentenceClass::calculateParseIsolatedSubreferenceSets2(LRPpreprocessorSentence* currentLRPpreprocessorSentenceInList, bool* parseIsolatedSubreferenceSets2)
+bool LRPpreprocessorSentenceClass::calculateParseIsolatedSubreferenceSets2(const LRPpreprocessorSentence* currentLRPpreprocessorSentenceInList, bool* parseIsolatedSubreferenceSets2)
 {
 	bool result = false;
 	if(currentLRPpreprocessorSentenceInList->parseIsolatedSubreferenceSets)
@@ -153,7 +153,7 @@ bool LRPpreprocessorSentenceClass::calculateParseIsolatedSubreferenceSets2(LRPpr
 }
 #endif	
 
-void LRPpreprocessorSentenceClass::printSentence(vector<LRPpreprocessorPlainTextWord*>* sentenceContents, bool error)
+void LRPpreprocessorSentenceClass::printSentence(vector<LRPpreprocessorPlainTextWord*>* sentenceContents, const bool error)
 {
 	if(error)
 	{

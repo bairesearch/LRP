@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordClass.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o3a 16-November-2020
+ * Project Version: 3o3b 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Word Class
  * /
@@ -279,18 +279,18 @@ LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo::~LRPpreprocessorMult
 
 //#ifdef LRP_PREPROCESSOR_RECORD_REFERENCES
 
-string LRPpreprocessorWordClassClass::generateTextFromPreprocessorSentenceWordList(LRPpreprocessorPlainTextWord* firstWordInSentence)
+string LRPpreprocessorWordClassClass::generateTextFromPreprocessorSentenceWordList(constEffective LRPpreprocessorPlainTextWord* firstWordInSentence)
 {
 	return generateTextFromPreprocessorSentenceWordList(firstWordInSentence, false);
 }
-string LRPpreprocessorWordClassClass::generateTextFromPreprocessorSentenceWordList(LRPpreprocessorPlainTextWord* firstWordInSentence, bool LRPforNLP)
+string LRPpreprocessorWordClassClass::generateTextFromPreprocessorSentenceWordList(constEffective LRPpreprocessorPlainTextWord* firstWordInSentence, const bool LRPforNLP)
 {
 	string sentenceText = "";
 	LRPpreprocessorPlainTextWord* currentWordInSentence = firstWordInSentence;
 	bool isFirstWordInSentence = true;
 	while(currentWordInSentence->nextTag != NULL)
 	{
-		LRPpreprocessorPlainTextWord* word = currentWordInSentence;
+		constEffective LRPpreprocessorPlainTextWord* word = currentWordInSentence;
 		sentenceText = sentenceText + generateTextFromPreprocessorSentenceWord(word, LRPforNLP, isFirstWordInSentence);
 		isFirstWordInSentence = false;
 		
@@ -299,17 +299,17 @@ string LRPpreprocessorWordClassClass::generateTextFromPreprocessorSentenceWordLi
 	return sentenceText;
 }
 
-string LRPpreprocessorWordClassClass::generateTextFromVectorWordList(vector<LRPpreprocessorPlainTextWord*>* wordList)
+string LRPpreprocessorWordClassClass::generateTextFromVectorWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList)
 {
 	return generateTextFromVectorWordList(wordList, false);
 }
-string LRPpreprocessorWordClassClass::generateTextFromVectorWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, bool LRPforNLP)
+string LRPpreprocessorWordClassClass::generateTextFromVectorWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, const bool LRPforNLP)
 {
 	string sentenceText = "";
 	bool isFirstWordInSentence = true;
 	for(int wordIndex = 0; wordIndex<wordList->size(); wordIndex++)
 	{
-		LRPpreprocessorPlainTextWord* word = (*wordList)[wordIndex];
+		constEffective LRPpreprocessorPlainTextWord* word = (*wordList)[wordIndex];
 		#ifdef LRP_PREPROCESSOR_WORD_NLP_PARSABLE_PHRASE_SUPPORT_APOSTROPHES_POSSESSION_AND_OMISSION	
 		if(isApostrophePossessionOrOmission(word))
 		{
@@ -322,7 +322,7 @@ string LRPpreprocessorWordClassClass::generateTextFromVectorWordList(vector<LRPp
 	return sentenceText;
 }
 
-string LRPpreprocessorWordClassClass::generateTextFromPreprocessorSentenceWord(LRPpreprocessorPlainTextWord* word, bool LRPforNLP, bool isFirstWordInSentence)
+string LRPpreprocessorWordClassClass::generateTextFromPreprocessorSentenceWord(constEffective LRPpreprocessorPlainTextWord* word, const bool LRPforNLP, const bool isFirstWordInSentence)
 {
 	string wordText = word->tagName;
 	if(LRPforNLP)
@@ -356,7 +356,7 @@ string LRPpreprocessorWordClassClass::generateTextFromPreprocessorSentenceWord(L
 	return wordText;
 }
 
-int LRPpreprocessorWordClassClass::calculateLengthOfGeneratedVectorWordListText(vector<LRPpreprocessorPlainTextWord*>* wordList)
+int LRPpreprocessorWordClassClass::calculateLengthOfGeneratedVectorWordListText(const vector<LRPpreprocessorPlainTextWord*>* wordList)
 {
 	string sentenceText = generateTextFromVectorWordList(wordList);
 	return sentenceText.length();
@@ -366,7 +366,7 @@ bool LRPpreprocessorWordClassClass::generateSentenceWordList(LRPpreprocessorPlai
 {
 	return generateSentenceWordList(sentenceContentsFirstWord, wordList, LRP_PREPROCESSOR_WORD_LIST_INDEX_NO_REQUIREMENT, LRP_PREPROCESSOR_WORD_LIST_INDEX_NO_REQUIREMENT);
 }
-bool LRPpreprocessorWordClassClass::generateSentenceWordList(LRPpreprocessorPlainTextWord* sentenceContentsFirstWord, vector<LRPpreprocessorPlainTextWord*>* wordList, int startIndex, int endIndex)
+bool LRPpreprocessorWordClassClass::generateSentenceWordList(LRPpreprocessorPlainTextWord* sentenceContentsFirstWord, vector<LRPpreprocessorPlainTextWord*>* wordList, const int startIndex, const int endIndex)
 {
 	bool result = true;
 	
@@ -440,7 +440,7 @@ bool LRPpreprocessorWordClassClass::addWordListToWordList(vector<LRPpreprocessor
 	}
 	return result;
 }
-bool LRPpreprocessorWordClassClass::addStringArrayToWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string* stringArrayToAdd, int arraySize)
+bool LRPpreprocessorWordClassClass::addStringArrayToWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string* stringArrayToAdd, const int arraySize)
 {
 	bool result = true;
 	for(int i=0; i<arraySize; i++)
@@ -450,7 +450,7 @@ bool LRPpreprocessorWordClassClass::addStringArrayToWordList(vector<LRPpreproces
 	}
 	return result;
 }
-bool LRPpreprocessorWordClassClass::addStringToWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToAdd)
+bool LRPpreprocessorWordClassClass::addStringToWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToAdd)
 {
 	bool result = true;
 	LRPpreprocessorPlainTextWord* newWord = new LRPpreprocessorMultiwordReductionPlainTextWord(stringToAdd);
@@ -544,7 +544,7 @@ bool LRPpreprocessorWordClassClass::isApostrophePossessionOrOmission(int indexOf
 	
 	return apostrophePossessionOrOmissionFound;	
 }
-bool LRPpreprocessorWordClassClass::isApostrophePossessionOrOmission(LRPpreprocessorPlainTextWord* word)
+bool LRPpreprocessorWordClassClass::isApostrophePossessionOrOmission(const LRPpreprocessorPlainTextWord* word)
 {
 	bool apostrophePossessionOrOmissionFound = false;
 	
@@ -629,12 +629,12 @@ bool LRPpreprocessorWordClassClass::findAndReplaceWordListInWordListAtIndexWithW
 }
 
 
-bool LRPpreprocessorWordClassClass::findSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringSimpleToFind)
+bool LRPpreprocessorWordClassClass::findSimpleSubstringInWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, string stringSimpleToFind)
 {
 	int startIndexToPerformFind = 0;
 	return findSimpleSubstringInWordList(wordList, stringSimpleToFind, startIndexToPerformFind);
 }
-bool LRPpreprocessorWordClassClass::findSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringSimpleToFind, int startIndexToPerformFind)
+bool LRPpreprocessorWordClassClass::findSimpleSubstringInWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, string stringSimpleToFind, const int startIndexToPerformFind)
 {
 	bool result = false;
 	
@@ -648,7 +648,7 @@ bool LRPpreprocessorWordClassClass::findSimpleSubstringInWordList(vector<LRPprep
 		
 	return result;
 }
-bool LRPpreprocessorWordClassClass::findSubWordListInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, vector<LRPpreprocessorPlainTextWord*>* wordListToFind, int startIndexToPerformFind)
+bool LRPpreprocessorWordClassClass::findSubWordListInWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList, vector<LRPpreprocessorPlainTextWord*>* wordListToFind, const int startIndexToPerformFind)
 {
 	bool result = false;
 	
@@ -663,7 +663,7 @@ bool LRPpreprocessorWordClassClass::findSubWordListInWordList(vector<LRPpreproce
 		
 	return result;
 }
-bool LRPpreprocessorWordClassClass::findSimpleSubstringInWordListAtIndex(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringSimpleToFind, int indexToPerformFind, bool caseInsensitive)
+bool LRPpreprocessorWordClassClass::findSimpleSubstringInWordListAtIndex(const vector<LRPpreprocessorPlainTextWord*>* wordList, string stringSimpleToFind, int indexToPerformFind, const bool caseInsensitive)
 {
 	bool result = false;
 	
@@ -677,7 +677,7 @@ bool LRPpreprocessorWordClassClass::findSimpleSubstringInWordListAtIndex(vector<
 		
 	return result;
 }
-bool LRPpreprocessorWordClassClass::findSubWordListInWordListAtIndex(vector<LRPpreprocessorPlainTextWord*>* wordList, vector<LRPpreprocessorPlainTextWord*>* wordListToFind, int indexToPerformFind, bool caseInsensitive)
+bool LRPpreprocessorWordClassClass::findSubWordListInWordListAtIndex(const vector<LRPpreprocessorPlainTextWord*>* wordList, vector<LRPpreprocessorPlainTextWord*>* wordListToFind, int indexToPerformFind, const bool caseInsensitive)
 {
 	bool result = false;
 	
@@ -744,12 +744,12 @@ bool LRPpreprocessorWordClassClass::generateSentenceWordListFromStringSimple(vec
 }
 
 
-int LRPpreprocessorWordClassClass::findStringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToFind)
+int LRPpreprocessorWordClassClass::findStringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToFind)
 {
 	int startIndexToPerformFind = 0;
 	return findStringInWordList(wordList, stringToFind, startIndexToPerformFind);
 }
-int LRPpreprocessorWordClassClass::findStringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToFind, int startIndexToPerformFind)
+int LRPpreprocessorWordClassClass::findStringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToFind, int startIndexToPerformFind)
 {
 	bool result  = false;
 	int indexOfWordFound = CPP_STRING_FIND_RESULT_FAIL_VALUE;
@@ -779,7 +779,7 @@ int LRPpreprocessorWordClassClass::findStringInWordList(vector<LRPpreprocessorPl
 			
 	return indexOfWordFound;
 }
-int LRPpreprocessorWordClassClass::findStringInWordListReverse(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToFind, int startIndexToPerformFind)
+int LRPpreprocessorWordClassClass::findStringInWordListReverse(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToFind, int startIndexToPerformFind)
 {
 	bool result  = false;
 	int indexOfWordFound = CPP_STRING_FIND_RESULT_FAIL_VALUE;
@@ -803,12 +803,12 @@ int LRPpreprocessorWordClassClass::findStringInWordListReverse(vector<LRPpreproc
 	return indexOfWordFound;
 }
 
-bool LRPpreprocessorWordClassClass::findSubstringAtStartOfWordInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string substringToFind)
+bool LRPpreprocessorWordClassClass::findSubstringAtStartOfWordInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string substringToFind)
 {
 	int startIndexToPerformFind = 0;
 	return findSubstringAtStartOfWordInWordList(wordList, substringToFind, startIndexToPerformFind);
 }
-bool LRPpreprocessorWordClassClass::findSubstringAtStartOfWordInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string substringToFind, int startIndexToPerformFind)
+bool LRPpreprocessorWordClassClass::findSubstringAtStartOfWordInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string substringToFind, int startIndexToPerformFind)
 {
 	bool result  = false;
 	//int indexOfWordFound = CPP_STRING_FIND_RESULT_FAIL_VALUE;
@@ -891,7 +891,7 @@ bool LRPpreprocessorWordClassClass::insertWordListIntoWordList(vector<LRPpreproc
 		
 	return result;
 }
-bool LRPpreprocessorWordClassClass::insertStringIntoWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToInsert, int indexToInsert)
+bool LRPpreprocessorWordClassClass::insertStringIntoWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToInsert, int indexToInsert)
 {
 	bool result = true;
 	LRPpreprocessorPlainTextWord* wordToInsert = new LRPpreprocessorMultiwordReductionPlainTextWord(stringToInsert);
@@ -924,7 +924,7 @@ bool LRPpreprocessorWordClassClass::insertWordIntoWordList(vector<LRPpreprocesso
 	return result;
 }
 
-bool LRPpreprocessorWordClassClass::wordListFindAndRemoveAllOccurancesSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, string stringToFind)
+bool LRPpreprocessorWordClassClass::wordListFindAndRemoveAllOccurancesSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToFind)
 {
 	bool result = false;
 	
@@ -1003,7 +1003,7 @@ bool LRPpreprocessorWordClassClass::replaceWordListAtIndexWithSimpleSubstring(ve
 	return result;
 }
 
-bool LRPpreprocessorWordClassClass::copyWordListAndReplicateWordObjects(vector<LRPpreprocessorPlainTextWord*>* wordList1, vector<LRPpreprocessorPlainTextWord*>* wordList2)
+bool LRPpreprocessorWordClassClass::copyWordListAndReplicateWordObjects(const vector<LRPpreprocessorPlainTextWord*>* wordList1, vector<LRPpreprocessorPlainTextWord*>* wordList2)
 {
 	clearWordListAndDeleteWordObjects(wordList2);
 	
@@ -1038,11 +1038,11 @@ bool LRPpreprocessorWordClassClass::isWordInWordlist(vector<LRPpreprocessorPlain
 	return result;
 }
 
-bool LRPpreprocessorWordClassClass::printWordList(vector<LRPpreprocessorPlainTextWord*>* wordList)
+bool LRPpreprocessorWordClassClass::printWordList(const vector<LRPpreprocessorPlainTextWord*>* wordList)
 {
 	cerr << printWordListString(wordList) << endl;
 }
-string LRPpreprocessorWordClassClass::printWordListString(vector<LRPpreprocessorPlainTextWord*>* wordList)
+string LRPpreprocessorWordClassClass::printWordListString(const vector<LRPpreprocessorPlainTextWord*>* wordList)
 {
 	string output = "";
 	for(int i=0; i<wordList->size(); i++)
@@ -1053,7 +1053,7 @@ string LRPpreprocessorWordClassClass::printWordListString(vector<LRPpreprocessor
 }
 
 
-void LRPpreprocessorWordClassClass::preprocessorFillCurrentWord(LRPpreprocessorMultiwordReductionPlainTextWord** currentWordInSentence, string* currentWord, int* entityIndex, int lastCharacterIndexOfWordInSentence)
+void LRPpreprocessorWordClassClass::preprocessorFillCurrentWord(LRPpreprocessorMultiwordReductionPlainTextWord** currentWordInSentence, string* currentWord, int* entityIndex, const int lastCharacterIndexOfWordInSentence)
 {
 	(*currentWordInSentence)->tagName = *currentWord;
 	(*currentWordInSentence)->entityIndex = *entityIndex;
@@ -1066,7 +1066,7 @@ void LRPpreprocessorWordClassClass::preprocessorFillCurrentWord(LRPpreprocessorM
 	*currentWord = "";
 }
 
-int LRPpreprocessorWordClassClass::getPOStypeFromName(string wordPOStypeName)
+int LRPpreprocessorWordClassClass::getPOStypeFromName(const string wordPOStypeName)
 {	
 	int wordPOStype = LRP_PREPROCESSOR_POS_TYPE_UNDEFINED;
 	if(!SHAREDvars.textInTextArray(wordPOStypeName, LRPpreprocessorPOStypeNameArray, LRP_PREPROCESSOR_POS_TYPE_ARRAY_NUMBER_OF_TYPES, &wordPOStype))
@@ -1078,7 +1078,7 @@ int LRPpreprocessorWordClassClass::getPOStypeFromName(string wordPOStypeName)
 }
 
 //based on NLCpreprocessorSentenceClassClass::isStringNumberPreprocessorMath(string phrase)
-bool LRPpreprocessorWordClassClass::isStringNumber(string phrase)
+bool LRPpreprocessorWordClassClass::isStringNumber(const string phrase)
 {
 	bool stringIsNumber = false;
 	if(phrase == STRING_FULLSTOP)
@@ -1103,7 +1103,7 @@ bool LRPpreprocessorWordClassClass::isStringNumber(string phrase)
 }
 
 #ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES_MID_SENTENCE_CAPITALISED_WORDS_AS_PROPERNOUNS
-bool LRPpreprocessorWordClassClass::isMidSentenceUppercaseWordLikelyProperNoun(LRPpreprocessorPlainTextWord* contextWord)
+bool LRPpreprocessorWordClassClass::isMidSentenceUppercaseWordLikelyProperNoun(constEffective LRPpreprocessorPlainTextWord* contextWord)
 {
 	string wordText = contextWord->tagName;
 	int entityIndex = (static_cast<LRPpreprocessorMultiwordReductionPlainTextWord*>(contextWord))->entityIndex;
@@ -1134,12 +1134,12 @@ bool LRPpreprocessorWordClassClass::wordIsUpperCase(string wordText)
 	return result;
 }
 
-int LRPpreprocessorWordClassClass::convertSentenceContentsIndexToEntityIndex(int sentenceContentsIndex)
+int LRPpreprocessorWordClassClass::convertSentenceContentsIndexToEntityIndex(const int sentenceContentsIndex)
 {
 	int entityIndex = sentenceContentsIndex+LRP_NLP_START_ENTITY_INDEX;
 	return entityIndex;
 }
-int LRPpreprocessorWordClassClass::convertEntityIndexToSentenceContentsIndex(int entityIndex)
+int LRPpreprocessorWordClassClass::convertEntityIndexToSentenceContentsIndex(const int entityIndex)
 {
 	int sentenceContentsIndex = entityIndex-LRP_NLP_START_ENTITY_INDEX;
 	return sentenceContentsIndex;

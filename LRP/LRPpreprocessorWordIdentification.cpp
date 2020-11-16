@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordIdentification.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o3a 16-November-2020
+ * Project Version: 3o3b 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Word Identification
  * /
@@ -75,7 +75,7 @@ unordered_map<string,LRPpreprocessorMultiwordReductionWord*> nounListWithVariant
 #endif
 
 
-unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* LRPpreprocessorWordIdentificationClass::getWordList(int GIAposType)
+unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* LRPpreprocessorWordIdentificationClass::getWordList(const int GIAposType)
 {
 	bool result = false;
 	unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList = getWordListIfExistent(GIAposType, &result);
@@ -94,7 +94,7 @@ unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* LRPpreprocessorWor
 	}
 	return wordList;
 }
-unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* LRPpreprocessorWordIdentificationClass::getWordListIfExistent(int GIAposType, bool* result)
+unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* LRPpreprocessorWordIdentificationClass::getWordListIfExistent(const int GIAposType, bool* result)
 {
 	unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList;
 	string GIAposTypeName = LRPpreprocessorPOStypeNameArray[GIAposType];
@@ -110,13 +110,13 @@ unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* LRPpreprocessorWor
 	}
 	return wordList;
 }
-bool LRPpreprocessorWordIdentificationClass::wordListExistent(int GIAposType)
+bool LRPpreprocessorWordIdentificationClass::wordListExistent(const int GIAposType)
 {
 	bool result = false;
 	unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList = getWordListIfExistent(GIAposType, &result);
 	return result;
 }
-bool LRPpreprocessorWordIdentificationClass::transferWordList(int GIAposType1, int GIAposType2, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>** wordList1record)
+bool LRPpreprocessorWordIdentificationClass::transferWordList(const int GIAposType1, const int GIAposType2, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>** wordList1record)
 {
 	bool result = true;
 	unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList1 = getWordList(GIAposType1);
@@ -145,7 +145,7 @@ unordered_map<string,pair<LRPpreprocessorMultiwordReductionWord*,uint64_t>>* LRP
 }
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FEED_ALL_PERMUTATIONS_INDIVIDUALLY_ASSIGN_WEIGHTS_TO_TRAINED_POS_TYPES
 vector<double> LRPpreprocessorPOStypeWeights;
-double LRPpreprocessorWordIdentificationClass::getLRPpreprocessorPOStypeWeight(int GIAposType)
+double LRPpreprocessorWordIdentificationClass::getLRPpreprocessorPOStypeWeight(const int GIAposType)
 {
 	return LRPpreprocessorPOStypeWeights[GIAposType];
 }
@@ -167,7 +167,7 @@ bool LRPpreprocessorWordIdentificationClass::findInstanceInMapWordListAllTypesWi
 	return result;
 }
 */
-void LRPpreprocessorWordIdentificationClass::insertInstanceInMapWordListAllTypesWithPOSambiguityInfo(unordered_map<string,pair<LRPpreprocessorMultiwordReductionWord*, uint64_t>>* mapWordListAllTypesWithPOSambiguityInfo, string wordIndex, LRPpreprocessorMultiwordReductionWord* word, uint64_t POSambiguityInfo)
+void LRPpreprocessorWordIdentificationClass::insertInstanceInMapWordListAllTypesWithPOSambiguityInfo(unordered_map<string,pair<LRPpreprocessorMultiwordReductionWord*, uint64_t>>* mapWordListAllTypesWithPOSambiguityInfo, string wordIndex, constEffective LRPpreprocessorMultiwordReductionWord* word, constEffective uint64_t POSambiguityInfo)
 {
 	pair<LRPpreprocessorMultiwordReductionWord*, uint64_t> value = make_pair(word, POSambiguityInfo);
 	mapWordListAllTypesWithPOSambiguityInfo->insert(pair<string, pair<LRPpreprocessorMultiwordReductionWord*, uint64_t>>(wordIndex, value));
@@ -183,7 +183,7 @@ void LRPpreprocessorWordIdentificationClass::insertInstanceInMapWordListAllTypes
 
 
 
-bool LRPpreprocessorWordIdentificationClass::initialiseLRP(string newLRPDataFolderName, bool newUseLRP)
+bool LRPpreprocessorWordIdentificationClass::initialiseLRP(const string newLRPDataFolderName, const bool newUseLRP)
 {
 	bool result = true;
 	
@@ -321,7 +321,7 @@ bool LRPpreprocessorWordIdentificationClass::getUseLRP()
 	return useLRP;
 }
 
-bool LRPpreprocessorWordIdentificationClass::loadWordListWrapper(bool* wordListLoaded, string wordListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList)
+bool LRPpreprocessorWordIdentificationClass::loadWordListWrapper(bool* wordListLoaded, const string wordListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList)
 {
 	bool result = true;
 	
@@ -338,7 +338,7 @@ bool LRPpreprocessorWordIdentificationClass::loadWordListWrapper(bool* wordListL
 	return result;
 }
 
-bool LRPpreprocessorWordIdentificationClass::loadWordList(string wordListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList)
+bool LRPpreprocessorWordIdentificationClass::loadWordList(const string wordListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList)
 {
 	bool result = true;
 
@@ -394,7 +394,7 @@ bool LRPpreprocessorWordIdentificationClass::loadWordList(string wordListFileNam
 }
 
 //note this function is a replica of loadStructuredDataList;
-bool LRPpreprocessorWordIdentificationClass::loadStructuredDataListIrregularVerb(string irregularVerbListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList)
+bool LRPpreprocessorWordIdentificationClass::loadStructuredDataListIrregularVerb(const string irregularVerbListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList)
 {
 	bool result = true;
 
@@ -679,7 +679,7 @@ bool LRPpreprocessorWordIdentificationClass::generateVerbCaseStandardAndAddition
 #ifdef LRP_PREPROCESSOR_WORD_LOAD_WORD_LISTS
 
 //grammaticallyStrict is by default set to false: this function was developed for special verb cases e.g. continuous (these verb cases are formally nouns; but are interpreted semantically as actions)
-bool LRPpreprocessorWordIdentificationClass::generateAdditionalTenseVariantsOfVerbBase(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* verbCaseAdditionalList, LRPpreprocessorMultiwordReductionWord* baseTag, bool irregularVerbFound, bool grammaticallyStrict)
+bool LRPpreprocessorWordIdentificationClass::generateAdditionalTenseVariantsOfVerbBase(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* verbCaseAdditionalList, const LRPpreprocessorMultiwordReductionWord* baseTag, const bool irregularVerbFound, const bool grammaticallyStrict)
 {
 	bool result = true;
 		
@@ -701,7 +701,7 @@ bool LRPpreprocessorWordIdentificationClass::generateAdditionalTenseVariantsOfVe
 	This code uses a subset of code from generateStandardTenseVariantsOfVerbBase (note generateStandardTenseVariantsOfVerbBase is not used itself as this code is designed to be liberal/robust and detect all possible verbs without being subject to theoretical grammar rules)
 	*/
 
-	LRPpreprocessorMultiwordReductionWord* currentTagInVerbList = baseTag;
+	const LRPpreprocessorMultiwordReductionWord* currentTagInVerbList = baseTag;
 
 	string base = SHAREDvars.convertStringToLowerCase(&(currentTagInVerbList->tagName));	//OLD: currentTagInVerbList->tagName
 
@@ -865,7 +865,7 @@ bool LRPpreprocessorWordIdentificationClass::generateAdditionalTenseVariantsOfVe
 	return result;
 }
 
-void LRPpreprocessorWordIdentificationClass::addVerbCaseAdditional(LRPpreprocessorMultiwordReductionWord* currentTagInVerbList, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* verbCaseAdditionalList, string baseTenseFormStart, string baseTenseFormAppend, int grammaticalTenseFormNew)
+void LRPpreprocessorWordIdentificationClass::addVerbCaseAdditional(const LRPpreprocessorMultiwordReductionWord* currentTagInVerbList, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* verbCaseAdditionalList, const string baseTenseFormStart, const string baseTenseFormAppend, const int grammaticalTenseFormNew)
 {
 	string hypotheticalVerbVariantCase = baseTenseFormStart + baseTenseFormAppend;
 
@@ -880,7 +880,7 @@ void LRPpreprocessorWordIdentificationClass::addVerbCaseAdditional(LRPpreprocess
 #ifdef GIA_TRANSLATOR_CORRECT_IRREGULAR_VERB_LEMMAS
 #ifdef GIA_TRANSLATOR_CORRECT_IRREGULAR_VERB_LEMMAS_LIBERAL
 //warning: this function is only currently developed for infinitive and continuous case
-bool LRPpreprocessorWordIdentificationClass::determineVerbCaseAdditionalWrapper(string word, string* baseNameFound, int* grammaticalBaseTenseForm)
+bool LRPpreprocessorWordIdentificationClass::determineVerbCaseAdditionalWrapper(const string word, string* baseNameFound, int* grammaticalBaseTenseForm)
 {
 	bool result = true;
 	bool foundVerbCase = false;
@@ -904,7 +904,7 @@ bool LRPpreprocessorWordIdentificationClass::determineVerbCaseAdditionalWrapper(
 
 #ifdef GIA_TRANSLATOR_CORRECT_IRREGULAR_VERB_LEMMAS_CONSERVATIVE
 //NB determineIfWordIsIrregularVerbContinuousCaseWrapper() can be used instead of determineVerbCaseAdditionalWrapper(), as Stanford only has a problem identifying verbs (pos tag "VBG") when they are irregular varbs
-bool LRPpreprocessorWordIdentificationClass::determineIfWordIsIrregularVerbContinuousCaseWrapper(string word, string* baseNameFound)
+bool LRPpreprocessorWordIdentificationClass::determineIfWordIsIrregularVerbContinuousCaseWrapper(const string word, string* baseNameFound)
 {
 	bool result = true;
 	bool foundIrregularVerbContinuousCase = false;
@@ -923,7 +923,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIfWordIsIrregularVerbConti
 
 
 //determineIfWordIsIrregularVerbContinuousCase requires updating for new vector list implementation:
-bool LRPpreprocessorWordIdentificationClass::determineIfWordIsIrregularVerbContinuousCase(string word, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList, string* baseNameFound)
+bool LRPpreprocessorWordIdentificationClass::determineIfWordIsIrregularVerbContinuousCase(const string word, const unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList, string* baseNameFound)
 {
 	bool foundIrregularVerbContinuousCase = false;
 
@@ -981,7 +981,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIfWordIsIrregularVerbConti
 
 
 #ifdef LRP_PREPROCESSOR_WORD_LOAD_INVERSE_PREPOSITIONS_LIST
-bool LRPpreprocessorWordIdentificationClass::loadStructuredDataList(string structuredDataListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionBasicSentence*>* structuredDataList)
+bool LRPpreprocessorWordIdentificationClass::loadStructuredDataList(const string structuredDataListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionBasicSentence*>* structuredDataList)
 {
 	bool result = true;
 
@@ -1064,7 +1064,7 @@ bool LRPpreprocessorWordIdentificationClass::loadStructuredDataList(string struc
 #endif
 
 #ifdef LRP_PREPROCESSOR_WORD_NORMALISE_PREPOSITIONS
-void LRPpreprocessorWordIdentificationClass::detectIfInverseOrTwoWayConditionRequired(string conditionName, bool* inverseConditionRequired, bool* twoWayConditionRequired, string* inverseConditionName)
+void LRPpreprocessorWordIdentificationClass::detectIfInverseOrTwoWayConditionRequired(const string conditionName, bool* inverseConditionRequired, bool* twoWayConditionRequired, string* inverseConditionName)
 {
 	unordered_map<string,LRPpreprocessorMultiwordReductionBasicSentence*>* prepositionInverseList = &prepositionInverseListGlobal;
 
@@ -1150,7 +1150,7 @@ bool LRPpreprocessorWordIdentificationClass::identifyConditionType(GIAentityNode
 #endif
 
 #ifdef GIA_POS_REL_TRANSLATOR_HYBRID_PREFERENCE_NLP_PRELIM_POS_TAGS_OVER_LRP_WORD_TYPE_LISTS
-bool LRPpreprocessorWordIdentificationClass::checkGrammaticalWordTypeFeaturePrelim(LRPpreprocessorPlainTextWord* wordTag, int GIAposType)
+bool LRPpreprocessorWordIdentificationClass::checkGrammaticalWordTypeFeaturePrelim(const LRPpreprocessorPlainTextWord* wordTag, const int GIAposType)
 {
 	bool result = false;
 	
@@ -1172,24 +1172,24 @@ bool LRPpreprocessorWordIdentificationClass::checkGrammaticalWordTypeFeaturePrel
 }
 #endif
 
-bool LRPpreprocessorWordIdentificationClass::determineIsWordType(LRPpreprocessorPlainTextWord* wordTag, bool grammaticallyStrict, int GIAposType)
+bool LRPpreprocessorWordIdentificationClass::determineIsWordType(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool grammaticallyStrict, const int GIAposType)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsWordType(wordTag, usePOSprelim, grammaticallyStrict, GIAposType);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsWordType(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim, bool grammaticallyStrict, int GIAposType)
+bool LRPpreprocessorWordIdentificationClass::determineIsWordType(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim, const bool grammaticallyStrict, const int GIAposType)
 {
 	string baseNameFound = "";
 	int grammaticalBaseTenseForm = INT_DEFAULT_VALUE;
 	return determineIsWordType(wordTag, usePOSprelim, grammaticallyStrict, GIAposType, &baseNameFound, &grammaticalBaseTenseForm);
 }
 //preconditions: if usePOSprelim, then grammaticallyStrict is assumed true
-bool LRPpreprocessorWordIdentificationClass::determineIsWordType(LRPpreprocessorPlainTextWord* wordTag, bool grammaticallyStrict, int GIAposType, string* baseNameFound, int* grammaticalBaseTenseForm)
+bool LRPpreprocessorWordIdentificationClass::determineIsWordType(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool grammaticallyStrict, const int GIAposType, string* baseNameFound, int* grammaticalBaseTenseForm)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsWordType(wordTag, usePOSprelim, grammaticallyStrict, GIAposType, baseNameFound, grammaticalBaseTenseForm);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsWordType(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim, bool grammaticallyStrict, int GIAposType, string* baseNameFound, int* grammaticalBaseTenseForm)
+bool LRPpreprocessorWordIdentificationClass::determineIsWordType(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim, const bool grammaticallyStrict, const int GIAposType, string* baseNameFound, int* grammaticalBaseTenseForm)
 {
 	bool wordTypeDetected = false;
 	
@@ -1286,35 +1286,35 @@ bool LRPpreprocessorWordIdentificationClass::determineIsWordType(LRPpreprocessor
 
 	return wordTypeDetected;
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsWordType(string word, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordTypeList)
+bool LRPpreprocessorWordIdentificationClass::determineIsWordType(const string word, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordTypeList)
 {
 	return findWordInWordList(wordTypeList, word);
 }
 
 
 
-bool LRPpreprocessorWordIdentificationClass::determineIsVerb(LRPpreprocessorPlainTextWord* wordTag, bool grammaticallyStrict)
+bool LRPpreprocessorWordIdentificationClass::determineIsVerb(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool grammaticallyStrict)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsVerb(wordTag, usePOSprelim, grammaticallyStrict);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsVerb(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim, bool grammaticallyStrict)
+bool LRPpreprocessorWordIdentificationClass::determineIsVerb(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim, const bool grammaticallyStrict)
 {
 	string baseNameFound = "";
 	int grammaticalBaseTenseForm = INT_DEFAULT_VALUE;
 	return determineIsVerb(wordTag, usePOSprelim, grammaticallyStrict, &baseNameFound, &grammaticalBaseTenseForm);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsVerb(LRPpreprocessorPlainTextWord* wordTag, bool grammaticallyStrict, string* baseNameFound, int* grammaticalBaseTenseForm)
+bool LRPpreprocessorWordIdentificationClass::determineIsVerb(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool grammaticallyStrict, string* baseNameFound, int* grammaticalBaseTenseForm)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsVerb(wordTag, usePOSprelim, grammaticallyStrict, baseNameFound, grammaticalBaseTenseForm);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsVerb(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim, bool grammaticallyStrict, string* baseNameFound, int* grammaticalBaseTenseForm)
+bool LRPpreprocessorWordIdentificationClass::determineIsVerb(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim, const bool grammaticallyStrict, string* baseNameFound, int* grammaticalBaseTenseForm)
 {
 	bool wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, grammaticallyStrict, LRP_PREPROCESSOR_POS_TYPE_VERB, baseNameFound, grammaticalBaseTenseForm);
 	return wordTypeDetected;	
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsVerbString(string word)
+bool LRPpreprocessorWordIdentificationClass::determineIsVerbString(const string word)
 {
 	bool wordTypeDetected = false;
 	int grammaticalBaseTenseForm = INT_DEFAULT_VALUE;
@@ -1326,7 +1326,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIsVerbString(string word)
 	return wordTypeDetected;
 }
 
-bool LRPpreprocessorWordIdentificationClass::determineVerbCaseStandardWithAdditional(string word, string* baseNameFound, int* grammaticalBaseTenseForm)
+bool LRPpreprocessorWordIdentificationClass::determineVerbCaseStandardWithAdditional(const string word, string* baseNameFound, int* grammaticalBaseTenseForm)
 {
 	bool foundVerbCaseStandardOrAdditional = false;
 	
@@ -1386,7 +1386,7 @@ bool LRPpreprocessorWordIdentificationClass::convertVerbCaseGrammaticalTenseForm
 	return result;
 }
 */
-bool LRPpreprocessorWordIdentificationClass::verbCaseDetectGrammaticallyStrictVariant(int grammaticalTenseForm)
+bool LRPpreprocessorWordIdentificationClass::verbCaseDetectGrammaticallyStrictVariant(const int grammaticalTenseForm)
 {
 	bool result = false;
 	if(LRPpreprocessorMultiwordReductionVerbDatabaseTagBaseTenseFormGrammaticallyStrictArray[grammaticalTenseForm])
@@ -1395,7 +1395,7 @@ bool LRPpreprocessorWordIdentificationClass::verbCaseDetectGrammaticallyStrictVa
 	}
 	return result;
 }
-bool LRPpreprocessorWordIdentificationClass::determineVerbCaseStandard(string word, string* baseNameFound, int* grammaticalBaseTenseForm)
+bool LRPpreprocessorWordIdentificationClass::determineVerbCaseStandard(const string word, string* baseNameFound, int* grammaticalBaseTenseForm)
 {
 	bool foundVerbCase = false;
 	
@@ -1410,7 +1410,7 @@ bool LRPpreprocessorWordIdentificationClass::determineVerbCaseStandard(string wo
 	
 	return foundVerbCase;	
 }
-bool LRPpreprocessorWordIdentificationClass::determineVerbCaseAdditional(string word, string* baseNameFound, int* grammaticalBaseTenseForm)
+bool LRPpreprocessorWordIdentificationClass::determineVerbCaseAdditional(const string word, string* baseNameFound, int* grammaticalBaseTenseForm)
 {
 	bool foundVerbCase = false;
 	
@@ -1427,17 +1427,17 @@ bool LRPpreprocessorWordIdentificationClass::determineVerbCaseAdditional(string 
 }
 
 
-bool LRPpreprocessorWordIdentificationClass::determineIsPreposition(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::determineIsPreposition(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsPreposition(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsPreposition(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::determineIsPreposition(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	bool wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_PREPOSITION);
 	return wordTypeDetected;
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsPrepositionString(string word)
+bool LRPpreprocessorWordIdentificationClass::determineIsPrepositionString(const string word)
 {
 	unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* prepositionsList = getWordList(LRP_PREPROCESSOR_POS_TYPE_PREPOSITION);
 	bool wordTypeDetected = findWordInWordList(prepositionsList, word);
@@ -1445,17 +1445,17 @@ bool LRPpreprocessorWordIdentificationClass::determineIsPrepositionString(string
 }
 
 
-bool LRPpreprocessorWordIdentificationClass::determineIsAdverb(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::determineIsAdverb(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsAdverb(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsAdverb(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::determineIsAdverb(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	bool wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_ADVERB);
 	return wordTypeDetected;
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsAdverbString(string word)
+bool LRPpreprocessorWordIdentificationClass::determineIsAdverbString(const string word)
 {
 	unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* adverbList = getWordList(LRP_PREPROCESSOR_POS_TYPE_ADVERB);
 	bool wordTypeDetected = findWordInWordList(adverbList, word);
@@ -1463,17 +1463,17 @@ bool LRPpreprocessorWordIdentificationClass::determineIsAdverbString(string word
 }
 
 
-bool LRPpreprocessorWordIdentificationClass::determineIsAdjective(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::determineIsAdjective(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsAdjective(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsAdjective(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::determineIsAdjective(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	bool wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_ADJECTIVE);
 	return wordTypeDetected;
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsAdjectiveString(string word)
+bool LRPpreprocessorWordIdentificationClass::determineIsAdjectiveString(const string word)
 {
 	unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* adjectiveList = getWordList(LRP_PREPROCESSOR_POS_TYPE_ADJECTIVE);
 	bool wordTypeDetected = findWordInWordList(adjectiveList, word);
@@ -1481,28 +1481,28 @@ bool LRPpreprocessorWordIdentificationClass::determineIsAdjectiveString(string w
 }
 
 
-bool LRPpreprocessorWordIdentificationClass::determineIsNoun(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::determineIsNoun(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsNoun(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsNoun(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::determineIsNoun(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	string baseNameFound = "";
 	int grammaticalBaseForm = INT_DEFAULT_VALUE;
 	return determineIsNoun(wordTag, usePOSprelim, &baseNameFound, &grammaticalBaseForm);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsNoun(LRPpreprocessorPlainTextWord* wordTag, string* baseNameFound, int* grammaticalBaseForm)
+bool LRPpreprocessorWordIdentificationClass::determineIsNoun(constEffective LRPpreprocessorPlainTextWord* wordTag, string* baseNameFound, int* grammaticalBaseForm)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsNoun(wordTag, usePOSprelim, baseNameFound, grammaticalBaseForm);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsNoun(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim, string* baseNameFound, int* grammaticalBaseForm)
+bool LRPpreprocessorWordIdentificationClass::determineIsNoun(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim, string* baseNameFound, int* grammaticalBaseForm)
 {
 	bool wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_NOUN, baseNameFound, grammaticalBaseForm);
 	return wordTypeDetected;
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsNounString(string word)
+bool LRPpreprocessorWordIdentificationClass::determineIsNounString(const string word)
 {
 	unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* nounList = getWordList(LRP_PREPROCESSOR_POS_TYPE_NOUN);
 	bool wordTypeDetected = findWordInWordList(nounList, word);
@@ -1516,7 +1516,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIsNounString(string word)
 	
 	return wordTypeDetected;
 }
-bool LRPpreprocessorWordIdentificationClass::determineNounPluralVariant(string word, LRPpreprocessorMultiwordReductionWord** nounBaseFound, int* grammaticalBaseTenseForm)
+bool LRPpreprocessorWordIdentificationClass::determineNounPluralVariant(const string word, constEffective LRPpreprocessorMultiwordReductionWord** nounBaseFound, int* grammaticalBaseTenseForm)
 {
 	bool foundNounPluralVariant = false;
 	
@@ -1541,12 +1541,12 @@ bool LRPpreprocessorWordIdentificationClass::determineNounPluralVariant(string w
 	return foundNounPluralVariant;	
 }
 
-bool LRPpreprocessorWordIdentificationClass::determineIsConjunction(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::determineIsConjunction(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsConjunction(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsConjunction(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::determineIsConjunction(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	bool wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_CONJUNCTION_COORDINATING);	//OLD: LRP_PREPROCESSOR_POS_TYPE_CONJUNCTION
 	return wordTypeDetected;
@@ -1560,12 +1560,12 @@ bool LRPpreprocessorWordIdentificationClass::determineIsConjunctionString(string
 */
 
 
-bool LRPpreprocessorWordIdentificationClass::determineIsDeterminer(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::determineIsDeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsDeterminer(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsDeterminer(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::determineIsDeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	bool wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_DETERMINER);
 	return wordTypeDetected;
@@ -1579,12 +1579,12 @@ bool LRPpreprocessorWordIdentificationClass::determineIsDeterminerString(string 
 */
 
 
-bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryBeing(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryBeing(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsAuxiliaryBeing(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryBeing(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryBeing(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	bool wordTypeDetected = false;
 	#ifndef LRP_PREPROCESSOR_WORD_COLLAPSE_AUXILIARY_LISTS_TO_VERB_LISTS
@@ -1600,12 +1600,12 @@ bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryBeing(LRPprepro
 	#endif
 	return wordTypeDetected;
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryHaving(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryHaving(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsAuxiliaryHaving(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryHaving(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryHaving(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	bool wordTypeDetected = false;
 	#ifndef LRP_PREPROCESSOR_WORD_COLLAPSE_AUXILIARY_LISTS_TO_VERB_LISTS
@@ -1621,12 +1621,12 @@ bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryHaving(LRPprepr
 	#endif
 	return wordTypeDetected;
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryDoing(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryDoing(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return determineIsAuxiliaryDoing(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryDoing(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryDoing(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	bool wordTypeDetected = false;
 	#ifndef LRP_PREPROCESSOR_WORD_COLLAPSE_AUXILIARY_LISTS_TO_VERB_LISTS
@@ -1643,12 +1643,12 @@ bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryDoing(LRPprepro
 	return wordTypeDetected;
 }
 
-bool LRPpreprocessorWordIdentificationClass::detectAuxiliary(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::detectAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return detectAuxiliary(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::detectAuxiliary(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::detectAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	bool wordTypeDetected = false;
 	#ifndef LRP_PREPROCESSOR_WORD_COLLAPSE_AUXILIARY_LISTS_TO_VERB_LISTS
@@ -1684,12 +1684,12 @@ bool LRPpreprocessorWordIdentificationClass::detectAuxiliary(LRPpreprocessorPlai
 	return wordTypeDetected;
 }
 
-bool LRPpreprocessorWordIdentificationClass::detectModalAuxiliary(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::detectModalAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return detectModalAuxiliary(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::detectModalAuxiliary(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::detectModalAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	bool wordTypeDetected = false;
 	wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_MODALAUXILIARY);
@@ -1702,12 +1702,12 @@ bool LRPpreprocessorWordIdentificationClass::detectModalAuxiliary(LRPpreprocesso
 	return wordTypeDetected;
 }
 
-bool LRPpreprocessorWordIdentificationClass::detectRcmodSameReferenceSetDelimiter(LRPpreprocessorPlainTextWord* wordTag)
+bool LRPpreprocessorWordIdentificationClass::detectRcmodSameReferenceSetDelimiter(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
 	return detectRcmodSameReferenceSetDelimiter(wordTag, usePOSprelim);
 }
-bool LRPpreprocessorWordIdentificationClass::detectRcmodSameReferenceSetDelimiter(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim)
+bool LRPpreprocessorWordIdentificationClass::detectRcmodSameReferenceSetDelimiter(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
 	bool wordTypeDetected = false;
 	wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_RCMOD);
@@ -1721,7 +1721,7 @@ bool LRPpreprocessorWordIdentificationClass::detectRcmodSameReferenceSetDelimite
 }
 
 #ifdef SANI_PARSE_SIMULTANEOUS_SET_WORD_POSTYPE_INFERRED_DYNAMIC_OLD
-bool LRPpreprocessorWordIdentificationClass::determineIsWordTypeStringBasic(string word, int GIAposType)
+bool LRPpreprocessorWordIdentificationClass::determineIsWordTypeStringBasic(const string word, const int GIAposType)
 {
 	unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordTypeList = getWordList(GIAposType);
 	bool wordTypeDetected = findWordInWordList(wordTypeList, word);
@@ -1730,7 +1730,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIsWordTypeStringBasic(stri
 #endif
 
 
-bool LRPpreprocessorWordIdentificationClass::findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, string word)
+bool LRPpreprocessorWordIdentificationClass::findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, const string word)
 {	
 	bool result = false;
 	
@@ -1742,7 +1742,7 @@ bool LRPpreprocessorWordIdentificationClass::findWordInWordList(unordered_map<st
 	
 	return result;
 }	
-bool LRPpreprocessorWordIdentificationClass::findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, string word, LRPpreprocessorMultiwordReductionWord** wordFound)
+bool LRPpreprocessorWordIdentificationClass::findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, const string word, LRPpreprocessorMultiwordReductionWord** wordFound)
 {	
 	bool result = false;
 		
@@ -1758,7 +1758,7 @@ bool LRPpreprocessorWordIdentificationClass::findWordInWordList(unordered_map<st
 }	
 
 
-bool LRPpreprocessorWordIdentificationClass::findSentenceInSentenceListBasic(unordered_map<string,LRPpreprocessorMultiwordReductionBasicSentence*>* sentenceList, string word, LRPpreprocessorMultiwordReductionBasicSentence** sentenceFound)
+bool LRPpreprocessorWordIdentificationClass::findSentenceInSentenceListBasic(unordered_map<string,LRPpreprocessorMultiwordReductionBasicSentence*>* sentenceList, const string word, LRPpreprocessorMultiwordReductionBasicSentence** sentenceFound)
 {	
 	bool result = false;
 	

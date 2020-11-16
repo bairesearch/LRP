@@ -26,7 +26,7 @@
  * File Name: LRPmain.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o3a 16-November-2020
+ * Project Version: 3o3b 16-November-2020
  * Requirements: requires plain text file
  * Description: Main
  * /
@@ -52,7 +52,7 @@ static char errmessage[] = "Usage:  LRPgeneratePOStaggerDatabase.exe [options]\n
 #endif
 "\n\n\tThis program generates the POS tagger database for a wiki dump batch.\n\n";
 
-int main(int argc, char** argv)
+int main(const int argc, const char** argv)
 {
 	bool result = true;
 	

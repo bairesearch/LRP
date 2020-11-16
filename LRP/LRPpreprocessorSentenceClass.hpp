@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorSentenceClass.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o3a 16-November-2020
+ * Project Version: 3o3b 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Sentence Class
  * /
@@ -121,11 +121,11 @@ class LRPpreprocessorSentenceClass
 	public: void copyPreprocessorSentence(LRPpreprocessorSentence* sentenceToCopy, LRPpreprocessorSentence* newSentence);
 	public: vector<LRPpreprocessorPlainTextWord*>* getSentenceContents(LRPpreprocessorSentence* currentLRPpreprocessorSentenceInList);
 	#ifdef GIA_POS_REL_TRANSLATOR_RULES_PARSE_ISOLATED_SUBREFERENCE_SETS_OPTIMISED
-	public: bool calculateParseIsolatedSubreferenceSets1(LRPpreprocessorSentence* currentLRPpreprocessorSentenceInList, bool* parseIsolatedSubreferenceSets1);
-	public: bool calculateParseIsolatedSubreferenceSets2(LRPpreprocessorSentence* currentLRPpreprocessorSentenceInList, bool* parseIsolatedSubreferenceSets2);
+	public: bool calculateParseIsolatedSubreferenceSets1(const LRPpreprocessorSentence* currentLRPpreprocessorSentenceInList, bool* parseIsolatedSubreferenceSets1);
+	public: bool calculateParseIsolatedSubreferenceSets2(const LRPpreprocessorSentence* currentLRPpreprocessorSentenceInList, bool* parseIsolatedSubreferenceSets2);
 	#endif
 	
-	public: void printSentence(vector<LRPpreprocessorPlainTextWord*>* sentenceContents, bool error);
+	public: void printSentence(vector<LRPpreprocessorPlainTextWord*>* sentenceContents, const bool error);
 	#ifdef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START
 	public: void printSentenceUnambiguousPOSindex(vector<LRPpreprocessorPlainTextWord*>* sentenceContents);
 	#endif

@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordIdentification.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o3a 16-November-2020
+ * Project Version: 3o3b 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Word Identification
  * /
@@ -72,25 +72,25 @@ class LRPpreprocessorWordIdentificationClass
 	private: LRPpreprocessorWordReductionClass LRPpreprocessorWordReduction;
 	#endif
 
-	private: unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* getWordList(int GIAposType);
-		private: unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* getWordListIfExistent(int GIAposType, bool* result);
-	private: bool wordListExistent(int GIAposType);
-	private: bool transferWordList(int GIAposType1, int GIAposType2, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>** wordList1record);
+	private: unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* getWordList(const int GIAposType);
+		private: unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* getWordListIfExistent(const int GIAposType, bool* result);
+	private: bool wordListExistent(const int GIAposType);
+	private: bool transferWordList(const int GIAposType1, const int GIAposType2, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>** wordList1record);
 	
 	#ifdef LRP_PREPROCESSOR_INITIALISE_WORD_INDEX_LIST_FROM_LRP_FILES
 	public: unordered_map<string,pair<LRPpreprocessorMultiwordReductionWord*,uint64_t>>* getWordListAllTypesWithPOSambiguityInfo();
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FEED_ALL_PERMUTATIONS_INDIVIDUALLY_ASSIGN_WEIGHTS_TO_TRAINED_POS_TYPES
-	public: double getLRPpreprocessorPOStypeWeight(int GIAposType);
+	public: double getLRPpreprocessorPOStypeWeight(const int GIAposType);
 	#endif
 	//private: bool findInstanceInMapWordListAllTypesWithPOSambiguityInfo(unordered_map<string,pair<LRPpreprocessorMultiwordReductionWord*, uchar>>* mapWordListAllTypesWithPOSambiguityInfo, string wordIndex, LRPpreprocessorMultiwordReductionWord* word, uchar* POSambiguityInfo);
-	private: void insertInstanceInMapWordListAllTypesWithPOSambiguityInfo(unordered_map<string,pair<LRPpreprocessorMultiwordReductionWord*, uint64_t>>* mapWordListAllTypesWithPOSambiguityInfo, string wordIndex, LRPpreprocessorMultiwordReductionWord* word, uint64_t POSambiguityInfo);
+	private: void insertInstanceInMapWordListAllTypesWithPOSambiguityInfo(unordered_map<string,pair<LRPpreprocessorMultiwordReductionWord*, uint64_t>>* mapWordListAllTypesWithPOSambiguityInfo, string wordIndex, constEffective LRPpreprocessorMultiwordReductionWord* word, constEffective uint64_t POSambiguityInfo);
 	#endif
 	
-	public: bool initialiseLRP(string newLRPDataFolderName, bool newUseLRP);
+	public: bool initialiseLRP(const string newLRPDataFolderName, const bool newUseLRP);
 	public: bool getUseLRP();
-		private: bool loadWordListWrapper(bool* wordListLoaded, string wordListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList);
-			private: bool loadWordList(string wordListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList);
-		private: bool loadStructuredDataListIrregularVerb(string irregularVerbListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList);
+		private: bool loadWordListWrapper(bool* wordListLoaded, const string wordListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList);
+			private: bool loadWordList(const string wordListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList);
+		private: bool loadStructuredDataListIrregularVerb(const string irregularVerbListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList);
 
 	#ifdef LRP_PREPROCESSOR_DERIVE_NOUN_VARIANTS
 	private: bool generateNounPluralVariantsList(unordered_map<string,LRPpreprocessorMultiwordReductionBasicSentence*>* irregularNounList);
@@ -101,87 +101,87 @@ class LRPpreprocessorWordIdentificationClass
 	public: bool generateVerbCaseStandardAndAdditionalList(bool grammaticallyStrict);
 	#endif	
 		#ifdef LRP_PREPROCESSOR_WORD_LOAD_WORD_LISTS
-		private: bool generateAdditionalTenseVariantsOfVerbBase(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* verbCaseAdditionalList, LRPpreprocessorMultiwordReductionWord* baseTag, bool irregularVerbFound, bool grammaticallyStrict);
-			private: void addVerbCaseAdditional(LRPpreprocessorMultiwordReductionWord* currentTagInVerbList, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* verbCaseAdditionalList, string baseTenseFormStart, string baseTenseFormAppend, int grammaticalTenseFormNew);
+		private: bool generateAdditionalTenseVariantsOfVerbBase(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* verbCaseAdditionalList, const LRPpreprocessorMultiwordReductionWord* baseTag, const bool irregularVerbFound, const bool grammaticallyStrict);
+			private: void addVerbCaseAdditional(const LRPpreprocessorMultiwordReductionWord* currentTagInVerbList, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* verbCaseAdditionalList, const string baseTenseFormStart, const string baseTenseFormAppend, const int grammaticalTenseFormNew);
 		#endif
 		
 	#ifdef GIA_TRANSLATOR_CORRECT_IRREGULAR_VERB_LEMMAS
 	#ifdef GIA_TRANSLATOR_CORRECT_IRREGULAR_VERB_LEMMAS_LIBERAL
-	public: bool determineVerbCaseAdditionalWrapper(string word, string* baseNameFound, int* grammaticalBaseTenseForm);
+	public: bool determineVerbCaseAdditionalWrapper(const string word, string* baseNameFound, int* grammaticalBaseTenseForm);
 	#endif
 	#ifdef GIA_TRANSLATOR_CORRECT_IRREGULAR_VERB_LEMMAS_CONSERVATIVE
-	public: bool determineIfWordIsIrregularVerbContinuousCaseWrapper(string word, string* baseNameFound);
-		private: bool determineIfWordIsIrregularVerbContinuousCase(string word, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList, string* baseNameFound);
+	public: bool determineIfWordIsIrregularVerbContinuousCaseWrapper(const string word, string* baseNameFound);
+		private: bool determineIfWordIsIrregularVerbContinuousCase(const string word, const unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList, string* baseNameFound);
 	#endif
 	#endif
 
 	#ifdef LRP_PREPROCESSOR_WORD_LOAD_INVERSE_PREPOSITIONS_LIST
-	private: bool loadStructuredDataList(string structuredDataListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionBasicSentence*>* structuredDataList);
+	private: bool loadStructuredDataList(const string structuredDataListFileName, unordered_map<string,LRPpreprocessorMultiwordReductionBasicSentence*>* structuredDataList);
 	#endif
 	#ifdef LRP_PREPROCESSOR_WORD_NORMALISE_PREPOSITIONS
-	public: void detectIfInverseOrTwoWayConditionRequired(string conditionName, bool* inverseConditionRequired, bool* twoWayConditionRequired, string* inverseConditionName);
+	public: void detectIfInverseOrTwoWayConditionRequired(const string conditionName, bool* inverseConditionRequired, bool* twoWayConditionRequired, string* inverseConditionName);
 	#ifdef LRP_PREPROCESSOR_WORD_DETECT_PREPOSITION_TYPE
 	public: bool identifyConditionType(GIAentityNode* conditionRelationshipEntity);
 	#endif
 	#endif
 
-	public: bool checkGrammaticalWordTypeFeaturePrelim(LRPpreprocessorPlainTextWord* wordTag, int GIAposType);
+	public: bool checkGrammaticalWordTypeFeaturePrelim(const LRPpreprocessorPlainTextWord* wordTag, const int GIAposType);
 
-	public: bool determineIsWordType(LRPpreprocessorPlainTextWord* wordTag, bool grammaticallyStrict, int GIAposType);
-		public: bool determineIsWordType(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim, bool grammaticallyStrict, int GIAposType);
-			public: bool determineIsWordType(LRPpreprocessorPlainTextWord* wordTag, bool grammaticallyStrict, int GIAposType, string* baseNameFound, int* grammaticalBaseTenseForm);
-				public: bool determineIsWordType(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim, bool grammaticallyStrict, int GIAposType, string* baseNameFound, int* grammaticalBaseTenseForm);
-					public: bool determineIsWordType(string word, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordTypeList);
-	public: bool determineIsVerb(LRPpreprocessorPlainTextWord* wordTag, bool grammaticallyStrict);
-		public: bool determineIsVerb(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim, bool grammaticallyStrict);	
-			public: bool determineIsVerb(LRPpreprocessorPlainTextWord* wordTag, bool grammaticallyStrict, string* baseNameFound, int* grammaticalBaseTenseForm);
-				public: bool determineIsVerb(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim, bool grammaticallyStrict, string* baseNameFound, int* grammaticalBaseTenseForm);
-				public: bool determineIsVerbString(string word);
-					public: bool determineVerbCaseStandardWithAdditional(string word, string* baseNameFound, int* grammaticalBaseTenseForm);
-						public: bool determineVerbCaseStandard(string word, string* baseNameFound, int* grammaticalBaseTenseForm);
-						public: bool determineVerbCaseAdditional(string word, string* baseNameFound, int* grammaticalBaseTenseForm);
+	public: bool determineIsWordType(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool grammaticallyStrict, const int GIAposType);
+		public: bool determineIsWordType(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim, const bool grammaticallyStrict, const int GIAposType);
+			public: bool determineIsWordType(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool grammaticallyStrict, const int GIAposType, string* baseNameFound, int* grammaticalBaseTenseForm);
+				public: bool determineIsWordType(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim, const bool grammaticallyStrict, const int GIAposType, string* baseNameFound, int* grammaticalBaseTenseForm);
+					public: bool determineIsWordType(const string word, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordTypeList);
+	public: bool determineIsVerb(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool grammaticallyStrict);
+		public: bool determineIsVerb(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim, const bool grammaticallyStrict);	
+			public: bool determineIsVerb(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool grammaticallyStrict, string* baseNameFound, int* grammaticalBaseTenseForm);
+				public: bool determineIsVerb(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim, const bool grammaticallyStrict, string* baseNameFound, int* grammaticalBaseTenseForm);
+				public: bool determineIsVerbString(const string word);
+					public: bool determineVerbCaseStandardWithAdditional(const string word, string* baseNameFound, int* grammaticalBaseTenseForm);
+						public: bool determineVerbCaseStandard(const string word, string* baseNameFound, int* grammaticalBaseTenseForm);
+						public: bool determineVerbCaseAdditional(const string word, string* baseNameFound, int* grammaticalBaseTenseForm);
 						//public: bool convertVerbCaseGrammaticalTenseFormToTenseModifier(int grammaticalTenseForm, int* grammaticalTenseModifier);
-						public: bool verbCaseDetectGrammaticallyStrictVariant(int grammaticalTenseForm);
-	public: bool determineIsPreposition(LRPpreprocessorPlainTextWord* wordTag);
-		public: bool determineIsPreposition(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
-			public: bool determineIsPrepositionString(string word);
-	public: bool determineIsAdverb(LRPpreprocessorPlainTextWord* wordTag);
-		public: bool determineIsAdverb(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
-			public: bool determineIsAdverbString(string word);
-	public: bool determineIsAdjective(LRPpreprocessorPlainTextWord* wordTag);
-		public: bool determineIsAdjective(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
-			public: bool determineIsAdjectiveString(string word);
-	public: bool determineIsNoun(LRPpreprocessorPlainTextWord* wordTag);
-		public: bool determineIsNoun(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
-			public: bool determineIsNoun(LRPpreprocessorPlainTextWord* wordTag, string* baseNameFound, int* grammaticalBaseForm);
-				public: bool determineIsNoun(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim, string* baseNameFound, int* grammaticalBaseForm);
-					public: bool determineIsNounString(string word);
-					public: bool determineNounPluralVariant(string word, LRPpreprocessorMultiwordReductionWord** nounBaseFound, int* grammaticalBaseTenseForm);
-	public: bool determineIsConjunction(LRPpreprocessorPlainTextWord* wordTag);
-		public: bool determineIsConjunction(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
+						public: bool verbCaseDetectGrammaticallyStrictVariant(const int grammaticalTenseForm);
+	public: bool determineIsPreposition(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool determineIsPreposition(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+			public: bool determineIsPrepositionString(const string word);
+	public: bool determineIsAdverb(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool determineIsAdverb(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+			public: bool determineIsAdverbString(const string word);
+	public: bool determineIsAdjective(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool determineIsAdjective(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+			public: bool determineIsAdjectiveString(const string word);
+	public: bool determineIsNoun(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool determineIsNoun(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+			public: bool determineIsNoun(constEffective LRPpreprocessorPlainTextWord* wordTag, string* baseNameFound, int* grammaticalBaseForm);
+				public: bool determineIsNoun(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim, string* baseNameFound, int* grammaticalBaseForm);
+					public: bool determineIsNounString(const string word);
+					public: bool determineNounPluralVariant(const string word, constEffective LRPpreprocessorMultiwordReductionWord** nounBaseFound, int* grammaticalBaseTenseForm);
+	public: bool determineIsConjunction(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool determineIsConjunction(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
 			//public: bool determineIsConjunctionString(string word);
-	public: bool determineIsDeterminer(LRPpreprocessorPlainTextWord* wordTag);
-		public: bool determineIsDeterminer(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
+	public: bool determineIsDeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool determineIsDeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
 			//public: bool determineIsDeterminerString(string word);
-	public: bool determineIsAuxiliaryBeing(LRPpreprocessorPlainTextWord* wordTag);
-		public: bool determineIsAuxiliaryBeing(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
-	public: bool determineIsAuxiliaryHaving(LRPpreprocessorPlainTextWord* wordTag);
-		public: bool determineIsAuxiliaryHaving(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
-	public: bool determineIsAuxiliaryDoing(LRPpreprocessorPlainTextWord* wordTag);		
-		public: bool determineIsAuxiliaryDoing(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
-	public: bool detectAuxiliary(LRPpreprocessorPlainTextWord* wordTag);
-		public: bool detectAuxiliary(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
-	public: bool detectModalAuxiliary(LRPpreprocessorPlainTextWord* wordTag);
-		public: bool detectModalAuxiliary(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
-	public: bool detectRcmodSameReferenceSetDelimiter(LRPpreprocessorPlainTextWord* wordTag);
-		public: bool detectRcmodSameReferenceSetDelimiter(LRPpreprocessorPlainTextWord* wordTag, bool usePOSprelim);
+	public: bool determineIsAuxiliaryBeing(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool determineIsAuxiliaryBeing(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+	public: bool determineIsAuxiliaryHaving(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool determineIsAuxiliaryHaving(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+	public: bool determineIsAuxiliaryDoing(constEffective LRPpreprocessorPlainTextWord* wordTag);		
+		public: bool determineIsAuxiliaryDoing(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+	public: bool detectAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool detectAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+	public: bool detectModalAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool detectModalAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+	public: bool detectRcmodSameReferenceSetDelimiter(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool detectRcmodSameReferenceSetDelimiter(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
 		#ifdef SANI_PARSE_SIMULTANEOUS_SET_WORD_POSTYPE_INFERRED_DYNAMIC_OLD
-		public: bool determineIsWordTypeStringBasic(string word, int GIAposType);
+		public: bool determineIsWordTypeStringBasic(const string word, const int GIAposType);
 		#endif
 	
-	public: bool findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, string word);
-		public: bool findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, string word, LRPpreprocessorMultiwordReductionWord** wordFound);
-	public: bool findSentenceInSentenceListBasic(unordered_map<string,LRPpreprocessorMultiwordReductionBasicSentence*>* sentenceList, string word, LRPpreprocessorMultiwordReductionBasicSentence** sentenceFound);
+	public: bool findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, const string word);
+		public: bool findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, const string word, LRPpreprocessorMultiwordReductionWord** wordFound);
+	public: bool findSentenceInSentenceListBasic(unordered_map<string,LRPpreprocessorMultiwordReductionBasicSentence*>* sentenceList, const string word, LRPpreprocessorMultiwordReductionBasicSentence** sentenceFound);
 	#ifdef LRP_PREPROCESSOR_INITIALISE_WORD_INDEX_LIST_FROM_LRP_FILES
 	public: bool createWordIndexListFromLRPfiles();
 	#endif

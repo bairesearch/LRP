@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStaggerDatabase.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o3a 16-November-2020
+ * Project Version: 3o3b 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger database
  * /
@@ -123,15 +123,15 @@ class LRPpreprocessorPOStaggerDatabaseClass
 	#endif
 		
 	//#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PERSISTENT
-	public: void initialisePOStaggerDatabase(string newLRPposTaggerDatabaseFolderName);
+	public: void initialisePOStaggerDatabase(const string newLRPposTaggerDatabaseFolderName);
 	//#endif
 
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_MAP
-	private: bool findInstancePOStaggerMap(vector<uint64_t>* POSambiguityInfoPermutation, uint64_t centreWordPOSambiguityInfo, int* numberOfInstances, bool incrementIfFound);
-	private: void insertInstanceInPOStaggerMap(vector<uint64_t>* POSambiguityInfoPermutation, uint64_t centreWordPOSambiguityInfo, int numberOfInstances);
+	private: bool findInstancePOStaggerMap(const vector<uint64_t>* POSambiguityInfoPermutation, const uint64_t centreWordPOSambiguityInfo, int* numberOfInstances, const bool incrementIfFound);
+	private: void insertInstanceInPOStaggerMap(const vector<uint64_t>* POSambiguityInfoPermutation, const uint64_t centreWordPOSambiguityInfo, const int numberOfInstances);
 	private: multimap<string,pair<uint64_t,int>>* getPOStaggerMap();
 	#endif
-	public: string convertPOSambiguityInfoPermutationToPOSambiguityInfoPermutationIndexString(vector<uint64_t>* POSambiguityInfoPermutation);
+	public: string convertPOSambiguityInfoPermutationToPOSambiguityInfoPermutationIndexString(const vector<uint64_t>* POSambiguityInfoPermutation);
 	
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_INTERNAL
@@ -139,12 +139,12 @@ class LRPpreprocessorPOStaggerDatabaseClass
 	public: void feedNeuralNetworkWithExperience(ANNexperience* currentExperience);
 	public: bool writeDatabaseNeuralNetwork();
 	#endif
-	public: bool calculateIdealClassTargetOfInputExperience(ANNexperience* experience, int* idealClassTarget, double* experienceBackPropagationPassError);
+	public: bool calculateIdealClassTargetOfInputExperience(const ANNexperience* experience, const int* idealClassTarget, const double* experienceBackPropagationPassError);
 	#endif
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_GENERATE_DATABASE
-	public: bool externalANNgenerateBatchTrainData(ANNexperience* firstExperienceInList, int batchIndex);
-		public: string externalANNgenerateBatchFileName(string fileNamePrepend, int batchIndex);
+	public: bool externalANNgenerateBatchTrainData(const ANNexperience* firstExperienceInList, const int batchIndex);
+		public: string externalANNgenerateBatchFileName(const string fileNamePrepend, const int batchIndex);
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_TRAIN_EXECUTE_FEED
 		public: bool externalANNgenerateBatchTrainDataExecuteFeed();
 	public: bool externalANNform();
@@ -155,42 +155,42 @@ class LRPpreprocessorPOStaggerDatabaseClass
 	#endif
 	#endif
 	public: bool externalANNpredict(ANNexperience* firstExperienceInList);
-		private: bool externalANNgenerateBatchDataExperiences(ANNexperience* firstExperienceInList, vector<string>* batchDataInput, vector<string>* batchDataOutput);
-			public: string externalANNgenerateBatchDataExperienceInput(ANNexperience* currentExperienceInList);
-			public: string externalANNgenerateBatchDataExperienceOutput(ANNexperience* currentExperienceInList);
+		private: bool externalANNgenerateBatchDataExperiences(const ANNexperience* firstExperienceInList, vector<string>* batchDataInput, vector<string>* batchDataOutput);
+			public: string externalANNgenerateBatchDataExperienceInput(const ANNexperience* currentExperienceInList);
+			public: string externalANNgenerateBatchDataExperienceOutput(const ANNexperience* currentExperienceInList);
 		private: bool externalANNexecuteScript(string scriptName);
 	#endif
 	#endif
 
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM
-	private: string DBgenerateFileName(vector<uint64_t>* POSambiguityInfoPermutation);
-		private: string DBgenerateSubFolderName(vector<uint64_t>* POSambiguityInfoPermutation, int level, int numberOfWordsPerLevel);
-	public: bool DBreadPOSpermutationEstimates(vector<uint64_t>* POSambiguityInfoPermutation, vector<string>* centreWordPOSambiguityInfoList);
+	private: string DBgenerateFileName(const vector<uint64_t>* POSambiguityInfoPermutation);
+		private: string DBgenerateSubFolderName(const vector<uint64_t>* POSambiguityInfoPermutation, const int level, const int numberOfWordsPerLevel);
+	public: bool DBreadPOSpermutationEstimates(const vector<uint64_t>* POSambiguityInfoPermutation, vector<string>* centreWordPOSambiguityInfoList);
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_GENERATE_DATABASE
-	public: bool DBwritePOSpermutationEstimate(vector<uint64_t>* POSambiguityInfoPermutation, uint64_t centreWordPOSambiguityInfo);
+	public: bool DBwritePOSpermutationEstimate(const vector<uint64_t>* POSambiguityInfoPermutation, const uint64_t centreWordPOSambiguityInfo);
 	#endif
 	#endif
 	
-	public: string generateIntFormatString(int numberOfCharacters);
-	public: string DBconvertByteToBinaryString(uint64_t integer);
+	public: string generateIntFormatString(const int numberOfCharacters);
+	public: string DBconvertByteToBinaryString(const uint64_t integer);
 	
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PREDICTION_VERIFICATION
-	public: bool verifyPOStaggerDatabasePredictionAgainstPOSambiguityInfo(uchar centreWordPOSindexPrediction, uint32_t centreWordPOSambiguityInfo, uchar* centreWordPOSvalueFirstAmbiguousPrediction);
+	public: bool verifyPOStaggerDatabasePredictionAgainstPOSambiguityInfo(const uchar centreWordPOSindexPrediction, const uint32_t centreWordPOSambiguityInfo, uchar* centreWordPOSvalueFirstAmbiguousPrediction);
 	#endif
 	
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM_AND_MAP_USE_6BIT_INDICES
-	private: char DBconvertByteToBase64(uchar byte);
-	public: uchar DBconvertBase64ToByte(char base64char);
+	private: char DBconvertByteToBase64(const uchar byte);
+	public: uchar DBconvertBase64ToByte(const char base64char);
 	#else
-	private: string DBconvertByteToHex(uchar byte);
-	public: uchar DBconvertHexToByte(string hexString);
+	private: string DBconvertByteToHex(const uchar byte);
+	public: uchar DBconvertHexToByte(const string hexString);
 	#endif
 	
-	public: uchar convertPOSambiguityInfoToIndex(uint64_t POSambiguityInfo);
-		public: bool determinePOSambiguityInfoIsAmbiguous(uint64_t POSambiguityInfo, uchar* unambiguousPOSinfoIndex, bool treatWordAsAmbiguousIfNullPOSvalue);
+	public: uchar convertPOSambiguityInfoToIndex(const uint64_t POSambiguityInfo);
+		public: bool determinePOSambiguityInfoIsAmbiguous(const uint64_t POSambiguityInfo, uchar* unambiguousPOSinfoIndex, const bool treatWordAsAmbiguousIfNullPOSvalue);
 
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL
-	public: string externalANNgenerateExperienceInputStandalone(ANNexperience* currentExperienceInList);
+	public: string externalANNgenerateExperienceInputStandalone(const ANNexperience* currentExperienceInList);
 	#endif
 };
 

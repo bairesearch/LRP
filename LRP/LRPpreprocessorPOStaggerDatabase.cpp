@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStaggerDatabase.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o3a 16-November-2020
+ * Project Version: 3o3b 16-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger database
  * /
@@ -49,7 +49,7 @@ int64_t numberOfOutputNeuronsGIAposTagger;
 int64_t numberOfLayersGIAposTagger;	//static variable not currently utilised
 #endif
 //#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PERSISTENT
-void LRPpreprocessorPOStaggerDatabaseClass::initialisePOStaggerDatabase(string newLRPposTaggerDatabaseFolderName)
+void LRPpreprocessorPOStaggerDatabaseClass::initialisePOStaggerDatabase(const string newLRPposTaggerDatabaseFolderName)
 {
 	LRPposTaggerDatabaseFolderName = newLRPposTaggerDatabaseFolderName;
 	if(!SHAREDvars.directoryExists(&LRPposTaggerDatabaseFolderName))
@@ -86,7 +86,7 @@ void LRPpreprocessorPOStaggerDatabaseClass::initialisePOStaggerDatabase(string n
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_MAP
 multimap<string, pair<uint64_t, int>> POStaggerMap;		//each key is ~10 64bit ints int64_t: word context POS (ambiguity info) permutation, and the value is 1 64 bit int int64_t: POS (ambiguity info) for central word
 	//as it currently stands POStaggerMap will be roughly the same size as the original wiki dump text (ie 12GB; too large)
-bool LRPpreprocessorPOStaggerDatabaseClass::findInstancePOStaggerMap(vector<uint64_t>* POSambiguityInfoPermutation, uint64_t centreWordPOSambiguityInfo, int* numberOfInstances, bool incrementIfFound)
+bool LRPpreprocessorPOStaggerDatabaseClass::findInstancePOStaggerMap(const vector<uint64_t>* POSambiguityInfoPermutation, const uint64_t centreWordPOSambiguityInfo, int* numberOfInstances, const bool incrementIfFound)
 {
 	bool result = false;
 
@@ -108,7 +108,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::findInstancePOStaggerMap(vector<uint
 	
 	return result;
 }	
-void LRPpreprocessorPOStaggerDatabaseClass::insertInstanceInPOStaggerMap(vector<uint64_t>* POSambiguityInfoPermutation, uint64_t centreWordPOSambiguityInfo, int numberOfInstances)
+void LRPpreprocessorPOStaggerDatabaseClass::insertInstanceInPOStaggerMap(const vector<uint64_t>* POSambiguityInfoPermutation, const uint64_t centreWordPOSambiguityInfo, const int numberOfInstances)
 {
 	string POSambiguityInfoPermutationIndexString = convertPOSambiguityInfoPermutationToPOSambiguityInfoPermutationIndexString(POSambiguityInfoPermutation);
 	pair<uint64_t, int> value = make_pair(centreWordPOSambiguityInfo, numberOfInstances);
@@ -119,7 +119,7 @@ multimap<string,pair<uint64_t,int>>* LRPpreprocessorPOStaggerDatabaseClass::getP
 	return &POStaggerMap;
 }
 #endif
-string LRPpreprocessorPOStaggerDatabaseClass::convertPOSambiguityInfoPermutationToPOSambiguityInfoPermutationIndexString(vector<uint64_t>* POSambiguityInfoPermutation)
+string LRPpreprocessorPOStaggerDatabaseClass::convertPOSambiguityInfoPermutationToPOSambiguityInfoPermutationIndexString(const vector<uint64_t>* POSambiguityInfoPermutation)
 {
 	string POSambiguityInfoPermutationIndexString = "";
 	for(int i=0; i<POSambiguityInfoPermutation->size(); i++)
@@ -162,7 +162,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::writeDatabaseNeuralNetwork()
 	return result;
 }
 #endif
-bool LRPpreprocessorPOStaggerDatabaseClass::calculateIdealClassTargetOfInputExperience(ANNexperience* experience, int* idealClassTarget, double* experienceBackPropagationPassError)
+bool LRPpreprocessorPOStaggerDatabaseClass::calculateIdealClassTargetOfInputExperience(const ANNexperience* experience, const int* idealClassTarget, const double* experienceBackPropagationPassError)
 {
 	bool result = false;
 	
@@ -190,7 +190,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::calculateIdealClassTargetOfInputExpe
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_GENERATE_DATABASE
-bool LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchTrainData(ANNexperience* firstExperienceInList, int batchIndex)
+bool LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchTrainData(const ANNexperience* firstExperienceInList, const int batchIndex)
 {
 	string XtrainBatchFileName = externalANNgenerateBatchFileName(LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_X_TRAIN_BATCH_FILE_NAME_PARTA, batchIndex);
 	string YtrainBatchFileName = externalANNgenerateBatchFileName(LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_Y_TRAIN_BATCH_FILE_NAME_PARTA, batchIndex);
@@ -207,7 +207,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchTrainData(AN
 	#endif
 }
 
-string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchFileName(string fileNamePrepend, int batchIndex)
+string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchFileName(const string fileNamePrepend, const int batchIndex)
 {
 	SHAREDvars.setCurrentDirectory(LRPposTaggerDatabaseFolderName);	//save output files to output folder
 
@@ -328,12 +328,12 @@ bool LRPpreprocessorPOStaggerDatabaseClass::externalANNpredict(ANNexperience* fi
 
 	return result;
 }
-bool LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchDataExperiences(ANNexperience* firstExperienceInList, vector<string>* batchDataInput, vector<string>* batchDataOutput)
+bool LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchDataExperiences(const ANNexperience* firstExperienceInList, vector<string>* batchDataInput, vector<string>* batchDataOutput)
 {
 	bool result = true;
 	
 	//generate predictions batch file
-	ANNexperience* currentExperienceInList = firstExperienceInList;
+	const ANNexperience* currentExperienceInList = firstExperienceInList;
 	while(currentExperienceInList->next != NULL)
 	{
 		string experienceInputString = externalANNgenerateBatchDataExperienceInput(currentExperienceInList);
@@ -345,12 +345,12 @@ bool LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchDataExperien
 	}
 }
 
-string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchDataExperienceInput(ANNexperience* currentExperienceInList)
+string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchDataExperienceInput(const ANNexperience* currentExperienceInList)
 {	
 	return externalANNgenerateExperienceInputStandalone(currentExperienceInList);
 }
 
-string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchDataExperienceOutput(ANNexperience* currentExperienceInList)
+string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateBatchDataExperienceOutput(const ANNexperience* currentExperienceInList)
 {	
 	string experienceOutputString = "";
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_Y_TRAIN_HOT_ENCODED
@@ -387,7 +387,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::externalANNexecuteScript(string scri
 
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM
-string LRPpreprocessorPOStaggerDatabaseClass::DBgenerateFileName(vector<uint64_t>* POSambiguityInfoPermutation)
+string LRPpreprocessorPOStaggerDatabaseClass::DBgenerateFileName(const vector<uint64_t>* POSambiguityInfoPermutation)
 {
 	//eg network/server/LRPPOStaggerDatabase/ffff/ffff/ffff/ffff/ffff/POSpermutationffffffffffffffffffffff.pos
 	//string serverName = GIAdatabase.DBgenerateServerDatabaseName(&(GIAconnectionistNetworkPOStypeNameAbbreviationArray[firstFeatureInList->GIAsemRelTranslatorPOStype]), fileType, LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM_DEFAULT_DATABASE_NAME, LRPposTaggerDatabaseFolderName);
@@ -421,7 +421,7 @@ string LRPpreprocessorPOStaggerDatabaseClass::DBgenerateFileName(vector<uint64_t
 	return fileName;
 }
 
-string LRPpreprocessorPOStaggerDatabaseClass::DBgenerateSubFolderName(vector<uint64_t>* POSambiguityInfoPermutation, int level, int numberOfWordsPerLevel)
+string LRPpreprocessorPOStaggerDatabaseClass::DBgenerateSubFolderName(const vector<uint64_t>* POSambiguityInfoPermutation, const int level, const int numberOfWordsPerLevel)
 {
 	string folderName = "";
 	for(int i=level*numberOfWordsPerLevel; i<(level*numberOfWordsPerLevel)+numberOfWordsPerLevel; i++)
@@ -449,7 +449,7 @@ string LRPpreprocessorPOStaggerDatabaseClass::DBgenerateSubFolderName(vector<uin
 
 
 
-bool LRPpreprocessorPOStaggerDatabaseClass::DBreadPOSpermutationEstimates(vector<uint64_t>* POSambiguityInfoPermutation, vector<string>* centreWordPOSambiguityInfoList)
+bool LRPpreprocessorPOStaggerDatabaseClass::DBreadPOSpermutationEstimates(const vector<uint64_t>* POSambiguityInfoPermutation, vector<string>* centreWordPOSambiguityInfoList)
 {
 	bool POSpermutationEntryExistent = false;
 	
@@ -486,7 +486,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::DBreadPOSpermutationEstimates(vector
 }
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_GENERATE_DATABASE
-bool LRPpreprocessorPOStaggerDatabaseClass::DBwritePOSpermutationEstimate(vector<uint64_t>* POSambiguityInfoPermutation, uint64_t centreWordPOSambiguityInfo)
+bool LRPpreprocessorPOStaggerDatabaseClass::DBwritePOSpermutationEstimate(const vector<uint64_t>* POSambiguityInfoPermutation, const uint64_t centreWordPOSambiguityInfo)
 {
 	bool result = true;
 	
@@ -578,14 +578,14 @@ bool LRPpreprocessorPOStaggerDatabaseClass::DBwritePOSpermutationEstimate(vector
 
 #endif
 
-string LRPpreprocessorPOStaggerDatabaseClass::generateIntFormatString(int numberOfCharacters)
+string LRPpreprocessorPOStaggerDatabaseClass::generateIntFormatString(const int numberOfCharacters)
 {
 	string formatString = string("%0") + SHAREDvars.convertIntToString(numberOfCharacters) + "d";
 	return formatString;
 }
 
 
-string LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToBinaryString(uint64_t integer)
+string LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToBinaryString(const uint64_t integer)
 {
 	string binaryString = ""; 
 	for(int i=0; i<64; i++)
@@ -597,7 +597,7 @@ string LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToBinaryString(uint64
 }
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PREDICTION_VERIFICATION
-bool LRPpreprocessorPOStaggerDatabaseClass::verifyPOStaggerDatabasePredictionAgainstPOSambiguityInfo(uchar centreWordPOSindexPrediction, uint32_t centreWordPOSambiguityInfo, uchar* centreWordPOSvalueFirstAmbiguousPrediction)
+bool LRPpreprocessorPOStaggerDatabaseClass::verifyPOStaggerDatabasePredictionAgainstPOSambiguityInfo(const uchar centreWordPOSindexPrediction, const uint32_t centreWordPOSambiguityInfo, uchar* centreWordPOSvalueFirstAmbiguousPrediction)
 {
 	bool predictionMatchesPOSambiguityInfo = false;
 	if(centreWordPOSambiguityInfo == 0)
@@ -627,7 +627,7 @@ bool LRPpreprocessorPOStaggerDatabaseClass::verifyPOStaggerDatabasePredictionAga
 
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM_AND_MAP_USE_6BIT_INDICES
-char LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToBase64(uchar byte)
+char LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToBase64(const uchar byte)
 {
 	char base64char;
 	if((int(byte) >= LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM_POS_PERMUTATION_ENTRY_CENTRE_WORD_POS_AMBIGUITY_BYTE_CODED_BASE_INDEX_0) && (int(byte) <= LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM_POS_PERMUTATION_ENTRY_CENTRE_WORD_POS_AMBIGUITY_BYTE_CODED_BASE_INDEX_9))
@@ -657,7 +657,7 @@ char LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToBase64(uchar byte)
 	}
 	return base64char;
 }
-uchar LRPpreprocessorPOStaggerDatabaseClass::DBconvertBase64ToByte(char base64char)
+uchar LRPpreprocessorPOStaggerDatabaseClass::DBconvertBase64ToByte(const char base64char)
 {
 	uchar byte;
 	if((int(base64char) >= int('0')) && (int(base64char) <= int('9')))
@@ -688,7 +688,7 @@ uchar LRPpreprocessorPOStaggerDatabaseClass::DBconvertBase64ToByte(char base64ch
 	return byte;
 }
 #else
-string LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToHex(uchar byte)
+string LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToHex(const uchar byte)
 {
 	/*
 	stringstream ss;
@@ -705,7 +705,7 @@ string LRPpreprocessorPOStaggerDatabaseClass::DBconvertByteToHex(uchar byte)
 	*/
 	return hexString;
 }
-uchar LRPpreprocessorPOStaggerDatabaseClass::DBconvertHexToByte(string hexString)
+uchar LRPpreprocessorPOStaggerDatabaseClass::DBconvertHexToByte(const string hexString)
 {
 	uchar byte = (uchar)strtol(hexString.c_str(), NULL, 16);
 	/*
@@ -719,7 +719,7 @@ uchar LRPpreprocessorPOStaggerDatabaseClass::DBconvertHexToByte(string hexString
 
 
 
-uchar LRPpreprocessorPOStaggerDatabaseClass::convertPOSambiguityInfoToIndex(uint64_t POSambiguityInfo)
+uchar LRPpreprocessorPOStaggerDatabaseClass::convertPOSambiguityInfoToIndex(const uint64_t POSambiguityInfo)
 {
 	uchar POSambiguityInfoIndex = LRP_PREPROCESSOR_POS_TYPE_UNDEFINED;
 	if(!determinePOSambiguityInfoIsAmbiguous(POSambiguityInfo, &POSambiguityInfoIndex, true))
@@ -736,7 +736,7 @@ uchar LRPpreprocessorPOStaggerDatabaseClass::convertPOSambiguityInfoToIndex(uint
 	return POSambiguityInfoIndex;
 }
 
-bool LRPpreprocessorPOStaggerDatabaseClass::determinePOSambiguityInfoIsAmbiguous(uint64_t POSambiguityInfo, uchar* unambiguousPOSinfoIndex, bool treatWordAsAmbiguousIfNullPOSvalue)
+bool LRPpreprocessorPOStaggerDatabaseClass::determinePOSambiguityInfoIsAmbiguous(const uint64_t POSambiguityInfo, uchar* unambiguousPOSinfoIndex, const bool treatWordAsAmbiguousIfNullPOSvalue)
 {
 	bool ambiguous = false;
 	
@@ -790,10 +790,10 @@ bool LRPpreprocessorPOStaggerDatabaseClass::determinePOSambiguityInfoIsAmbiguous
 }
 
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL
-string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateExperienceInputStandalone(ANNexperience* currentExperienceInList)
+string LRPpreprocessorPOStaggerDatabaseClass::externalANNgenerateExperienceInputStandalone(const ANNexperience* currentExperienceInList)
 {	
 	string experienceInputString = "";
-	ANNexperienceInput* currentExperienceInput = currentExperienceInList->firstExperienceInput;
+	const ANNexperienceInput* currentExperienceInput = currentExperienceInList->firstExperienceInput;
 	while(currentExperienceInput->next != NULL)
 	{
 		string format = "%g";	//"%0.0f";
