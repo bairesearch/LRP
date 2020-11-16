@@ -26,7 +26,7 @@
  * File Name: LRPmain.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n4a 31-October-2020
+ * Project Version: 3o2a 08-November-2020
  * Requirements: requires plain text file
  * Description: Main
  * /
@@ -70,23 +70,6 @@
 
 int main(const int argc, const char** argv);
 
-class LRPmainClass
-{
-	private: SHAREDvarsClass SHAREDvars;
-	private: LRPpreprocessorClass LRPpreprocessor;
-	private: LRPpreprocessorWordIdentificationClass LRPpreprocessorWordIdentification;
-	#ifdef LRP_PREPROCESSOR_WORD_MULTIWORD_REDUCTION
-	private: LRPpreprocessorWordReductionClass LRPpreprocessorWordReduction;
-	#endif
-	//private: XMLrulesClassClass XMLrulesClass;
-	#ifdef SANI_NEURAL_NETWORK
-	private: ANNneuronClassClass ANNneuronClassClassObject;
-	private: ANNdisplayClass ANNdisplay;
-	private: ANNdrawClass ANNdraw;
-	private: SANIneuralNetworkOperationsClass SANIneuralNetworkOperations;
-	#endif
-
-};
 #endif
 
 

@@ -26,7 +26,7 @@
  * File Name: LRPglobalsDefs.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n4a 31-October-2020
+ * Project Version: 3o2a 08-November-2020
  * Requirements: requires plain text file
  * Description: LRP specific global definitions
  * /

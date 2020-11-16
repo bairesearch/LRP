@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordClass.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n4a 31-October-2020
+ * Project Version: 3o2a 08-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Word Class
  * /
@@ -607,14 +607,14 @@ public:
 	ANNexperience* POStaggerExperience;
 	#endif
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PREDICTION_VERIFICATION
-	unsigned int centreWordPOSambiguityInfo;
+	uint32_t centreWordPOSambiguityInfo;
 	#endif
 	#endif
 
 	bool alreadyFoundMatch;
 	#ifdef SANI_NODES
 	#ifdef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START
-	unsigned char unambiguousPOSindex;
+	uchar unambiguousPOSindex;
 	#else
 	uint64_t POSambiguityInfo;
 	#endif
@@ -790,7 +790,7 @@ class LRPpreprocessorWordClassClass
 	public: bool insertStringIntoWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToInsert, const int indexToInsert);
 		public: bool insertWordIntoWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, LRPpreprocessorPlainTextWord* wordToInsert, const int indexToInsert);
 	
-	public: bool wordListFindAndRemoveAllOccurancesSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringSimpleToFind);
+	public: bool wordListFindAndRemoveAllOccurancesSimpleSubstringInWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const string stringToFind);
 		public: bool removeWordFromWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const int indexToRemove);
 			public: bool removeWordsFromWordList(vector<LRPpreprocessorPlainTextWord*>* wordList, const int indexToRemove, const int numberElementsToRemove);
 			

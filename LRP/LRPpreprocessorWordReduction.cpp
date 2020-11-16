@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordReduction.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n4a 31-October-2020
+ * Project Version: 3o2a 08-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Word Reduction
  * /
@@ -46,20 +46,20 @@ LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* queryLRPpreprocessor
 LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* activeLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo;
 
 multimap<string, LRPpreprocessorMultiwordReductionPhrasalVerbSentence*> phrasalVerbListGlobal;
-unordered_map<string, multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>*> multiwordListsGlobal;	//string: preprocessorPOStype
+unordered_map<string,multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>*> multiwordListsGlobal;	//string: preprocessorPOStype
 
 /*
 multimap<string, LRPpreprocessorMultiwordReductionPhrasalVerbSentence*>* LRPpreprocessorWordReductionClass::getPhrasalVerbListGlobal()
 {
 	return phrasalVerbListGlobal;
 }
-unordered_map<string, multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>*>* LRPpreprocessorWordReductionClass::getMultiwordListsGlobal()
+unordered_map<string,multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>*>* LRPpreprocessorWordReductionClass::getMultiwordListsGlobal()
 {
 	return multiwordListsGlobal;
 }
 */
 
-bool LRPpreprocessorWordReductionClass::initialiseLRPreduction(unordered_map<string, LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList)
+bool LRPpreprocessorWordReductionClass::initialiseLRPreduction(unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList)
 {
 	bool result = true;
 	
@@ -118,7 +118,7 @@ generate all tenses variations of the verb based upon a) rules and b) irregular 
 */
 
 //NB current implementation cannot take into account 3 alternate tags (ie x/y/z)
-bool LRPpreprocessorWordReductionClass::loadPhrasalVerbDataAndGenerateAllTenseVariants(const string phrasalVerbDatabaseFileName, multimap<string, LRPpreprocessorMultiwordReductionPhrasalVerbSentence*>* phrasalVerbList, unordered_map<string, LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList)
+bool LRPpreprocessorWordReductionClass::loadPhrasalVerbDataAndGenerateAllTenseVariants(const string phrasalVerbDatabaseFileName, multimap<string, LRPpreprocessorMultiwordReductionPhrasalVerbSentence*>* phrasalVerbList, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList)
 {
 	bool result = true;
 
@@ -403,7 +403,7 @@ bool LRPpreprocessorWordReductionClass::parseTextFileAndReduceLanguage(LRPprepro
 	}
 
 	#ifdef LRP_PREPROCESSOR_WORD_ORIGINAL
-	for(unordered_map<string, multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>*>::iterator multiwordListsIter = multiwordListsGlobal.begin(); multiwordListsIter != multiwordListsGlobal.end(); multiwordListsIter++)
+	for(unordered_map<string,multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>*>::iterator multiwordListsIter = multiwordListsGlobal.begin(); multiwordListsIter != multiwordListsGlobal.end(); multiwordListsIter++)
 	{
 		string multiwordListName = multiwordListsIter->first;
 		multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>* multiwordList = multiwordListsIter->second;
@@ -416,10 +416,10 @@ bool LRPpreprocessorWordReductionClass::parseTextFileAndReduceLanguage(LRPprepro
 	#endif		
 
 	#ifdef LRP_PREPROCESSOR_WORD_DYNAMIC
-	for(unordered_map<string, unordered_map<string, LRPpreprocessorMultiwordReductionWord*>*>::iterator wordListsIter = wordListsGlobal.begin(); wordListsIter != wordListsGlobal.end(); wordListsIter++)
+	for(unordered_map<string,unordered_map<string,LRPpreprocessorMultiwordReductionWord*>*>::iterator wordListsIter = wordListsGlobal.begin(); wordListsIter != wordListsGlobal.end(); wordListsIter++)
 	{
 		string wordListName = wordListsIter->first;
-		unordered_map<string, LRPpreprocessorMultiwordReductionWord*>* wordList = wordListsIter->second;
+		unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList = wordListsIter->second;
 		int wordListType = LRPpreprocessorWordClassObject.getPOStypeFromName(wordListName);
 		if(!searchAndReplaceMultiwordWordListDynamic(firstLRPpreprocessorSentenceInList, wordList, firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, wordListType))
 		{
@@ -975,7 +975,7 @@ bool LRPpreprocessorWordReductionClass::searchAndReplaceMultiwordWordList(LRPpre
 }
 
 #ifdef LRP_PREPROCESSOR_WORD_DYNAMIC
-bool LRPpreprocessorWordReductionClass::searchAndReplaceMultiwordWordListDynamic(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, unordered_map<string, LRPpreprocessorMultiwordReductionWord*>* wordList, LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, const int wordListType)
+bool LRPpreprocessorWordReductionClass::searchAndReplaceMultiwordWordListDynamic(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, const int wordListType)
 {
 	bool result = true;
 	
@@ -1005,10 +1005,10 @@ bool LRPpreprocessorWordReductionClass::searchAndReplaceMultiwordWordListDynamic
 				bool foundConsecutiveWordsOfSameListType = false;
 				int numberWordsInMultiwordMatched = 0;
 
-				unordered_map<string, LRPpreprocessorMultiwordReductionWord*>::iterator wordListIter = wordList->find(currentTagInPlainTextSentence->tagName);
+				unordered_map<string,LRPpreprocessorMultiwordReductionWord*>::iterator wordListIter = wordList->find(currentTagInPlainTextSentence->tagName);
 				if(wordListIter != wordList->end())
 				{
-					unordered_map<string, LRPpreprocessorMultiwordReductionWord*>::iterator wordListIter2 = wordList->find(currentTagInPlainTextSentence->nextTag->tagName);
+					unordered_map<string,LRPpreprocessorMultiwordReductionWord*>::iterator wordListIter2 = wordList->find(currentTagInPlainTextSentence->nextTag->tagName);
 					if(wordListIter2 != wordList->end())
 					{
 						foundConsecutiveWordsOfSameListType = true;
@@ -1389,7 +1389,7 @@ void LRPpreprocessorWordReductionClass::revertNLPtagNameToOfficialLRPtagName(GIA
 #endif
 
 
-bool LRPpreprocessorWordReductionClass::generateIrregularTenseVariantsOfVerbBase(LRPpreprocessorMultiwordReductionWord* baseTag, unordered_map<string, LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList, bool grammaticallyStrict)
+bool LRPpreprocessorWordReductionClass::generateIrregularTenseVariantsOfVerbBase(LRPpreprocessorMultiwordReductionWord* baseTag, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList, bool grammaticallyStrict)
 {
 	bool irregularVerbFound = false;
 	
@@ -1716,11 +1716,11 @@ bool LRPpreprocessorWordReductionClass::generateStandardTenseVariantsOfVerbBase(
 	return result;
 }
 
-bool LRPpreprocessorWordReductionClass::findSentenceInSentenceListIrregularVerb(unordered_map<string, LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* sentenceList, const string word, LRPpreprocessorMultiwordReductionIrregularVerbSentence** sentenceFound)
+bool LRPpreprocessorWordReductionClass::findSentenceInSentenceListIrregularVerb(unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* sentenceList, const string word, LRPpreprocessorMultiwordReductionIrregularVerbSentence** sentenceFound)
 {	
 	bool result = false;
 	
-	unordered_map<string, LRPpreprocessorMultiwordReductionIrregularVerbSentence*>::iterator it;
+	unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>::iterator it;
 	it = sentenceList->find(word);
 	if(it != sentenceList->end())
 	{

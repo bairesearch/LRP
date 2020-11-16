@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStagger.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n4a 31-October-2020
+ * Project Version: 3o2a 08-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger
  * /
@@ -86,7 +86,7 @@ class LRPpreprocessorPOStaggerClass
 	
 	#ifdef GIA_POS_REL_TRANSLATOR_HYBRID_EXECUTE_PRELIM_POS_TAGGER
 	public: bool executePrelimFeatureProcessingOnSentences(const string outputLRPTextPlainTXTFileName, const string inputTextNLPfeatureXMLfileName, LRPtranslatorVariablesClass* translatorVariables);
-		private: bool predictPOStaggerDatabaseEntry(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const unsigned char centreWordUnambiguousPOSindex, LRPpreprocessorPlainTextWord* centreWord, bool* foundMatchingCentreWordPOSambiguityInfo, unsigned char* centreWordPOSindexPrediction, bool* centreWordPOSisAmbiguous, double* experienceBackPropagationPassError, int* maximumNumberOfInstances);
+		private: bool predictPOStaggerDatabaseEntry(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, LRPpreprocessorPlainTextWord* centreWord, bool* foundMatchingCentreWordPOSambiguityInfo, uchar* centreWordPOSindexPrediction, bool* centreWordPOSisAmbiguous, double* experienceBackPropagationPassError, int* maximumNumberOfInstances);
 	#endif
 	
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_GENERATE_DATABASE
@@ -98,27 +98,29 @@ class LRPpreprocessorPOStaggerClass
 	#endif
 	public: bool generatePOStaggerDatabaseFromWikiDumpText(const string wikiDumpFolderName, const int wikiDumpFileBatchIndex, bool useLRP);
 		#ifdef LRP_PREPROCESSOR_POS_TAGGER_GENERATE_DATABASE_WITHOUT_TARGET_CLASSES
-		private: bool addPOStaggerDatabaseEntry(vector<uint64_t>* POSambiguityInfoPermutation, ofstream* XtrainBatchFileObject);
+		private: bool addPOStaggerDatabaseEntry1(vector<uint64_t>* POSambiguityInfoPermutation, ofstream* XtrainBatchFileObject);
 		#else
 		#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL
 		#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL_MEMORY_FREE_WRITE_EXPERIENCES_DIRECTLY_TO_FILE
-		private: bool addPOStaggerDatabaseEntry(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const unsigned char centreWordUnambiguousPOSindex, ofstream* XtrainBatchFileObject, ofstream* YtrainBatchFileObject);
+		private: bool addPOStaggerDatabaseEntry2(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, ofstream* XtrainBatchFileObject, ofstream* YtrainBatchFileObject);
 		#else
-		private: bool addPOStaggerDatabaseEntry(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const unsigned char centreWordUnambiguousPOSindex, ANNexperience* currentExperienceInList);
+		private: bool addPOStaggerDatabaseEntry3(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, ANNexperience** currentExperienceInList);
 		#endif
 		#else
-		private: bool addPOStaggerDatabaseEntry(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const unsigned char centreWordUnambiguousPOSindex, int64_t* numberOfNeuralNetworkFeeds);
+		private: bool addPOStaggerDatabaseEntry4(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, int64_t* numberOfNeuralNetworkFeeds);
 		#endif
 		#endif
+			private: bool addPOStaggerDatabaseEntry(const uint64_t centreWordPOSambiguityInfo, vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, ofstream* XtrainBatchFileObject, ofstream* YtrainBatchFileObject, ANNexperience** currentExperienceInList, int64_t* numberOfNeuralNetworkFeeds);
+
 		private: string generateWikiDumpTextInputFileName(int wikiDumpFileBatchIndex);
 		private: bool generatePreprocessorSentenceObjectsFromText(const string inputFileName, LRPpreprocessorSentence* firstLRPpreprocessorSentenceInText, bool useLRP);
 			private: bool createPreprocessSentencesBasic(const string fileContents, LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, bool interpretNewLinesAsNewSentences);
 	#endif
 		#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK
-		public: bool generateANNexperienceFromPOSambiguityInfoPermutation(vector<uint64_t>* POSambiguityInfoPermutation, const unsigned char centreWordUnambiguousPOSindex, ANNexperience* currentExperience);
+		public: bool generateANNexperienceFromPOSambiguityInfoPermutation(vector<uint64_t>* POSambiguityInfoPermutation, const uchar centreWordUnambiguousPOSindex, ANNexperience* currentExperience);
 		#endif
 		public: int convertGIAPOStaggerValueToGrammaticalWordType(const int POSvalue);
-		public: bool generatePOSambiguityInfoPermutation(vector<LRPpreprocessorPlainTextWord*>* sentenceContentsLRP, int wCentre, bool* identifiedEveryWordInDatabasePOSpermutation, bool* identifiedEveryWordInDatabasePOSpermutationIsUnambiguous, vector<uint64_t>* POSambiguityInfoPermutation);
+		public: bool generatePOSambiguityInfoPermutation(vector<LRPpreprocessorPlainTextWord*>* sentenceContents, int wCentre, bool* identifiedEveryWordInDatabasePOSpermutation, bool* identifiedEveryWordInDatabasePOSpermutationIsUnambiguous, vector<uint64_t>* POSambiguityInfoPermutation);
 
 	private: string convertBoolVectorToString(vector<bool>* inputNeuronExperienceValuesContextWord);
 
@@ -128,7 +130,7 @@ class LRPpreprocessorPOStaggerClass
 	//#ifdef GIA_POS_REL_TRANSLATOR_RULES_GIA3
 	public: bool determinePOSambiguityInfoWrapper(vector<LRPpreprocessorPlainTextWord*>* sentenceContents, vector<uint64_t>* POSambiguityInfoPermutation, vector<string>* explicitWordList);
 	//#endif	
-		public: bool determinePOSambiguityInfo(LRPpreprocessorPlainTextWord* contextWord, uint64_t* contextWordPOSambiguityInfo, bool* contextWordPOSisAmbiguous, unsigned char* contextWordUnambiguousPOSindex, bool* identifiedEveryWordInDatabasePOSpermutation);
+		public: bool determinePOSambiguityInfo(LRPpreprocessorPlainTextWord* contextWord, uint64_t* contextWordPOSambiguityInfo, bool* contextWordPOSisAmbiguous, uchar* contextWordUnambiguousPOSindex, bool* identifiedEveryWordInDatabasePOSpermutation);
 			public: bool findWordInWordListAllTypesWithPOSambiguityInfo(const string word, LRPpreprocessorMultiwordReductionWord** wordFound, uint64_t* POSambiguityInfoFound);
 
 	public: bool printPOSambiguityInfoPermutation(vector<uint64_t>* POSambiguityInfoPermutation);
@@ -137,7 +139,7 @@ class LRPpreprocessorPOStaggerClass
 	#endif
 
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK
-	public: bool generateANNexperienceFromPOSambiguityInfoPermutationStandalone(vector<uint64_t>* POSambiguityInfoPermutation, const unsigned char outputNeuronExperienceValue, ANNexperience* currentExperience);
+	public: bool generateANNexperienceFromPOSambiguityInfoPermutationStandalone(vector<uint64_t>* POSambiguityInfoPermutation, const uchar outputNeuronExperienceValue, ANNexperience* currentExperience);
 	#endif
 	
 	#ifdef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START

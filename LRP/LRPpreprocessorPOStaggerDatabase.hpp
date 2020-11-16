@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStaggerDatabase.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n4a 31-October-2020
+ * Project Version: 3o2a 08-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger database
  * /
@@ -45,6 +45,7 @@
 #include "GIAglobalDefs.hpp"
 #endif
 
+#include "LRPpreprocessorWordClass.hpp"
 #ifdef USE_GIA
 //#include "GIAdatabase.hpp"	//required for checkIfFolderExistsAndIfNotMakeAndSetAsCurrent
 #endif
@@ -121,16 +122,14 @@ class LRPpreprocessorPOStaggerDatabaseClass
 	private: ANNxmlConversionClass ANNxmlConversion;	
 	#endif
 		
-	public: bool checkIfFolderExistsAndIfNotMakeAndSetAsCurrent(const string* folderName);
-
 	//#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PERSISTENT
 	public: void initialisePOStaggerDatabase(const string newLRPposTaggerDatabaseFolderName);
 	//#endif
 
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_MAP
-	private: bool findInstancePOStaggerMap(const string POSambiguityInfoPermutation, unsigned char centreWordPOSambiguityInfo, int* numberOfInstances, const bool incrementIfFound);
-	private: void insertInstanceInPOStaggerMap(const string POSambiguityInfoPermutation, const unsigned char centreWordPOSambiguityInfo, const int numberOfInstances);
-	private: multimap<string, pair<unsigned char, int>>* getPOStaggerMap();
+	private: bool findInstancePOStaggerMap(vector<uint64_t>* POSambiguityInfoPermutation, uint64_t centreWordPOSambiguityInfo, int* numberOfInstances, const bool incrementIfFound);
+	private: void insertInstanceInPOStaggerMap(vector<uint64_t>* POSambiguityInfoPermutation, const uint64_t centreWordPOSambiguityInfo, const int numberOfInstances);
+	private: multimap<string,pair<uint64_t,int>>* getPOStaggerMap();
 	#endif
 	public: string convertPOSambiguityInfoPermutationToPOSambiguityInfoPermutationIndexString(vector<uint64_t>* POSambiguityInfoPermutation);
 	
@@ -173,22 +172,22 @@ class LRPpreprocessorPOStaggerDatabaseClass
 	#endif
 	
 	public: string generateIntFormatString(int numberOfCharacters);
-	public: string DBconvertByteToBinaryString(uint64_t byte);
+	public: string DBconvertByteToBinaryString(uint64_t integer);
 	
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_PREDICTION_VERIFICATION
-	public: bool verifyPOStaggerDatabasePredictionAgainstPOSambiguityInfo(const unsigned char centreWordPOSindexPrediction, const unsigned int centreWordPOSambiguityInfo, unsigned char* centreWordPOSvalueFirstAmbiguousPrediction);
+	public: bool verifyPOStaggerDatabasePredictionAgainstPOSambiguityInfo(const uchar centreWordPOSindexPrediction, const uint32_t centreWordPOSambiguityInfo, uchar* centreWordPOSvalueFirstAmbiguousPrediction);
 	#endif
 	
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_FILESYSTEM_AND_MAP_USE_6BIT_INDICES
-	private: char DBconvertByteToBase64(unsigned char byte);
-	public: unsigned char DBconvertBase64ToByte(char base64char);
+	private: char DBconvertByteToBase64(uchar byte);
+	public: uchar DBconvertBase64ToByte(char base64char);
 	#else
-	private: string DBconvertByteToHex(const unsigned char byte);
-	public: unsigned char DBconvertHexToByte(string hexString);
+	private: string DBconvertByteToHex(const uchar byte);
+	public: uchar DBconvertHexToByte(string hexString);
 	#endif
 	
-	public: unsigned char convertPOSambiguityInfoToIndex(uint64_t POSambiguityInfo);
-		public: bool determinePOSambiguityInfoIsAmbiguous(const uint64_t POSambiguityInfo, unsigned char* unambiguousPOSinfoIndex, const bool treatWordAsAmbiguousIfNullPOSvalue);
+	public: uchar convertPOSambiguityInfoToIndex(uint64_t POSambiguityInfo);
+		public: bool determinePOSambiguityInfoIsAmbiguous(const uint64_t POSambiguityInfo, uchar* unambiguousPOSinfoIndex, const bool treatWordAsAmbiguousIfNullPOSvalue);
 
 	#ifdef LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_EXTERNAL
 	public: string externalANNgenerateExperienceInputStandalone(ANNexperience* currentExperienceInList);

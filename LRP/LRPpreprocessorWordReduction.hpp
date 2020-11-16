@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordReduction.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n4a 31-October-2020
+ * Project Version: 3o2a 08-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor Word Reduction
  * /
@@ -43,6 +43,7 @@
 #endif
 #ifdef USE_GIA
 #include "GIAglobalDefs.hpp"
+
 #endif
 
 #ifdef USE_GIA
@@ -63,12 +64,12 @@ class LRPpreprocessorWordReductionClass
 
 	#ifdef LRP_PREPROCESSOR_WORD_MULTIWORD_REDUCTION
 
-	public: bool initialiseLRPreduction(unordered_map<string, LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList);
-		private: bool loadPhrasalVerbDataAndGenerateAllTenseVariants(const string phrasalVerbDatabaseFileName, multimap<string, LRPpreprocessorMultiwordReductionPhrasalVerbSentence*>* phrasalVerbList, unordered_map<string, LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList);
+	public: bool initialiseLRPreduction(unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList);
+		private: bool loadPhrasalVerbDataAndGenerateAllTenseVariants(const string phrasalVerbDatabaseFileName, multimap<string, LRPpreprocessorMultiwordReductionPhrasalVerbSentence*>* phrasalVerbList, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList);
 	
 	/*
 	public: multimap<string, LRPpreprocessorMultiwordReductionPhrasalVerbSentence*>* getPhrasalVerbListGlobal();
-	public: unordered_map<string, multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>*>* getMultiwordListsGlobal();
+	public: unordered_map<string,multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>*>* getMultiwordListsGlobal();
 	*/
 	
 	public: LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* getActiveLRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo();
@@ -82,7 +83,7 @@ class LRPpreprocessorWordReductionClass
 		private: bool loadMultiwordWordList(const string multiwordWordListFileName, multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>* multiwordWordList);
 		private: bool searchAndReplaceMultiwordWordList(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, multimap<string, LRPpreprocessorMultiwordReductionBasicSentence*>* multiwordWordList, LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, const int wordListType);
 		#ifdef LRP_PREPROCESSOR_WORD_DYNAMIC
-		private: bool searchAndReplaceMultiwordWordListDynamic(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, unordered_map<string, LRPpreprocessorMultiwordReductionWord*>* wordList, LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, const int wordListType);
+		private: bool searchAndReplaceMultiwordWordListDynamic(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList, unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, const int wordListType);
 		#endif		
 			private: void createNewCorrespondenceInfo(LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo** currentCorrespondenceInfo, LRPpreprocessorSentence* currentLRPpreprocessorSentenceInList, LRPpreprocessorMultiwordReductionPlainTextWord* firstTagInPlainTextSentence, LRPpreprocessorMultiwordReductionPlainTextWord** currentTagInPlainTextSentence, int entityIndex, int numberWordsInMultiwordMatched);
 			private: void renumberEntityIndiciesInCorrespondenceInfo(LRPpreprocessorMultiwordReductionTagTextCorrespondenceInfo* firstLRPpreprocessorMultiwordReductiontagCorrespondenceInfo, int sentenceIndex, int entityIndex, int numberWordsInMultiwordMatched);
@@ -93,9 +94,9 @@ class LRPpreprocessorWordReductionClass
 	#endif
 	#endif
 	
-	public: bool generateIrregularTenseVariantsOfVerbBase(LRPpreprocessorMultiwordReductionWord* baseTag, unordered_map<string, LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList, bool grammaticallyStrict);	
+	public: bool generateIrregularTenseVariantsOfVerbBase(LRPpreprocessorMultiwordReductionWord* baseTag, unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* irregularVerbList, bool grammaticallyStrict);	
 	public: bool generateStandardTenseVariantsOfVerbBase(LRPpreprocessorMultiwordReductionWord* baseTag, bool irregularVerbFound, bool grammaticallyStrict);
-	public: bool findSentenceInSentenceListIrregularVerb(unordered_map<string, LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* sentenceList, const string word, LRPpreprocessorMultiwordReductionIrregularVerbSentence** sentenceFound);
+	public: bool findSentenceInSentenceListIrregularVerb(unordered_map<string,LRPpreprocessorMultiwordReductionIrregularVerbSentence*>* sentenceList, const string word, LRPpreprocessorMultiwordReductionIrregularVerbSentence** sentenceFound);
 
 	#ifdef LRP_PREPROCESSOR_WORD_COLLAPSE_NUMERICAL_WORDS_TO_NUMBERS
 	private: bool replaceAllNumericalWordsWithNumbers(LRPpreprocessorSentence* firstLRPpreprocessorSentenceInList);

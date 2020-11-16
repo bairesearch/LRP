@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessor.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3n4a 31-October-2020
+ * Project Version: 3o2a 08-November-2020
  * Requirements: requires plain text file
  * Description: Preprocessor
  * /
@@ -52,16 +52,12 @@
 #include "LRPpreprocessorWordReduction.hpp" 
 #endif
 
-#ifdef USE_GIA
-#include "GIAtranslatorOperations.hpp"
-#endif
 #include "XMLparserClass.hpp"
 #ifdef LRP_PREPROCESSOR_POS_TAGGER
 #include "LRPpreprocessorPOStagger.hpp"
 #include "LRPpreprocessorPOStaggerDatabase.hpp"
 #endif
 #ifdef GIA_POS_REL_TRANSLATOR_HYBRID
-#include "GIAposRelTranslator.hpp"
 #include "GIAposRelTranslatorHybrid.hpp"
 #endif
 
