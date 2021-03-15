@@ -24,9 +24,9 @@
 /*******************************************************************************
  *
  * File Name: LRPpreprocessorWordClass.hpp
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o3b 16-November-2020
+ * Project Version: 3p1a 04-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Class
  * /
@@ -613,11 +613,11 @@ public:
 
 	bool alreadyFoundMatch;
 	#ifdef SANI_NODES
-	#ifdef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START
+	//#ifdef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START	//also required for SANI_SEQUENCE_GRAMMAR_REFERENCE_SET_IDENTIFICATION
 	uchar unambiguousPOSindex;
-	#else
+	//#else	//also required for SANI_SEQUENCE_GRAMMAR_REFERENCE_SET_IDENTIFICATION
 	uint64_t POSambiguityInfo;
-	#endif
+	//#endif
 	int wordPOStypeInferred;
 	int translatorSentenceEntityIndex;
 	#ifdef SANI_FORWARD
@@ -631,6 +631,10 @@ public:
 	#endif
 	#endif
 	#endif
+	
+	//#ifdef SANI_SEQUENCE_GRAMMAR_REFERENCE_SET_IDENTIFICATION_VIA_DETERMINERS
+	int referenceSetStartCodonDeterminerType;
+	//#endif
 };
 
 class LRPpreprocessorMultiwordReductionPlainTextWord: public LRPpreprocessorPlainTextWord

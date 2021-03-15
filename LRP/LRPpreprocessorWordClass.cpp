@@ -24,9 +24,9 @@
 /*******************************************************************************
  *
  * File Name: LRPpreprocessorWordClass.cpp
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o3b 16-November-2020
+ * Project Version: 3p1a 04-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Class
  * /
@@ -157,11 +157,11 @@ void LRPpreprocessorPlainTextWord::initialiseLRPpreprocessorPlainTextWord()
 	
 	alreadyFoundMatch = false;	//moved LRP3m7a
 	#ifdef SANI_NODES
-	#ifdef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START
+	//#ifdef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START	//also required for SANI_SEQUENCE_GRAMMAR_REFERENCE_SET_IDENTIFICATION
 	unambiguousPOSindex = LRP_SHARED_POS_TYPE_UNDEFINED;	//LRP_PREPROCESSOR_POS_TYPE_UNDEFINED is out of scope
-	#else
+	//#else	//also required for SANI_SEQUENCE_GRAMMAR_REFERENCE_SET_IDENTIFICATION
 	POSambiguityInfo = 0;
-	#endif
+	//#endif
 	wordPOStypeInferred = LRP_SHARED_POS_TYPE_UNDEFINED;
 	translatorSentenceEntityIndex = LRP_WORD_INDEX_UNDEFINED;
 	#ifdef SANI_FORWARD
@@ -175,6 +175,10 @@ void LRPpreprocessorPlainTextWord::initialiseLRPpreprocessorPlainTextWord()
 	#endif
 	#endif
 	#endif	
+	
+	//#ifdef SANI_SEQUENCE_GRAMMAR_REFERENCE_SET_IDENTIFICATION_VIA_DETERMINERS
+	referenceSetStartCodonDeterminerType = INT_DEFAULT_VALUE;
+	//#endif
 }
 
 LRPpreprocessorMultiwordReductionPlainTextWord::LRPpreprocessorMultiwordReductionPlainTextWord(void)

@@ -24,9 +24,9 @@
 /*******************************************************************************
  *
  * File Name: LRPmain.cpp
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2020 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3o3b 16-November-2020
+ * Project Version: 3p1a 04-March-2021
  * Requirements: requires plain text file
  * Description: Main
  * /
