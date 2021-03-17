@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordIdentification.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p1a 04-March-2021
+ * Project Version: 3p2a 17-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Identification
  * /
@@ -1195,7 +1195,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIsWordType(constEffective 
 	
 	string wordLowerCase = SHAREDvars.convertStringToLowerCase(&(wordTag->tagName));
 	
-	#ifdef GIA_POS_REL_TRANSLATOR_HYBRID_PREFERENCE_NLP_PRELIM_POS_TAGS_OVER_LRP_WORD_TYPE_LISTS
+	#ifdef GIA_POS_REL_TRANSLATOR_HYBRID_PREFERENCE_NLP_PRELIM_POS_TAGS_OVER_LRP_WORD_TYPE_LISTS	//depreciated
 	if(usePOSprelim)
 	{
 		if(checkGrammaticalWordTypeFeaturePrelim(wordTag, GIAposType))		
@@ -1728,6 +1728,123 @@ bool LRPpreprocessorWordIdentificationClass::determineIsWordTypeStringBasic(cons
 	return wordTypeDetected;
 }
 #endif
+
+bool LRPpreprocessorWordIdentificationClass::determineIsPossessiveEnding(constEffective LRPpreprocessorPlainTextWord* wordTag)
+{
+	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
+	return determineIsPossessiveEnding(wordTag, usePOSprelim);
+}
+bool LRPpreprocessorWordIdentificationClass::determineIsPossessiveEnding(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
+{
+	bool wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_POSSESSIVEENDING);
+	return wordTypeDetected;
+}
+
+bool LRPpreprocessorWordIdentificationClass::determineIsPredeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag)
+{
+	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
+	return determineIsDeterminer(wordTag, usePOSprelim);
+}
+bool LRPpreprocessorWordIdentificationClass::determineIsPredeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
+{
+	bool wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_PREDETERMINER);
+	return wordTypeDetected;
+}
+
+bool LRPpreprocessorWordIdentificationClass::determineIsPropernoun(constEffective LRPpreprocessorPlainTextWord* wordTag)
+{
+	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
+	return determineIsDeterminer(wordTag, usePOSprelim);
+}
+bool LRPpreprocessorWordIdentificationClass::determineIsPropernoun(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
+{
+	bool wordTypeDetected = false;
+	if(determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_PROPERNOUN_FIRST_MALE))
+	{
+		wordTypeDetected = true;
+	}
+	if(determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_PROPERNOUN_FIRST_FEMALE))
+	{
+		wordTypeDetected = true;
+	}
+	if(determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_PROPERNOUN_FAMILY))
+	{
+		wordTypeDetected = true;
+	}
+	if(determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_PROPERNOUN_PLACE))
+	{
+		wordTypeDetected = true;
+	}
+	return wordTypeDetected;
+}
+
+
+
+bool LRPpreprocessorWordIdentificationClass::determineIsDeterminerDefinite(const string currentWordText)
+{
+	bool determinerDefiniteDetected = false;
+	if(SHAREDvars.textInTextArray(currentWordText, grammaticalDeterminerDefiniteArray, GRAMMATICAL_DETERMINER_DEFINITE_NUMBER_OF_TYPES))
+	{
+		determinerDefiniteDetected = true;
+	}
+	return determinerDefiniteDetected;
+}
+bool LRPpreprocessorWordIdentificationClass::determineIsDeterminerIndefinite(const string currentWordText)
+{
+	bool determinerIndefiniteDetected = false;
+	if(SHAREDvars.textInTextArray(currentWordText, grammaticalDeterminerIndefiniteArray, GRAMMATICAL_DETERMINER_INDEFINITE_NUMBER_OF_TYPES))
+	{
+		determinerIndefiniteDetected = true;
+	}
+	return determinerIndefiniteDetected;
+}
+
+#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES_MID_SENTENCE_CAPITALISED_WORDS_AS_PROPERNOUNS
+//preconditions: assumes LRPpreprocessorPOStagger.determinePOSambiguityInfo has already been executed (and POSambiguityInfo is available)
+bool LRPpreprocessorWordIdentificationClass::determineIsLikelyPropernoun(constEffective LRPpreprocessorPlainTextWord* contextWord)
+{
+	bool result = false;
+	
+	if(LRPpreprocessorWordClassObject.isMidSentenceUppercaseWordLikelyProperNoun(contextWord))
+	{
+		result = true;
+	}
+
+	if(determineIsPropernoun(contextWord))
+	{
+		 result = true;
+	}
+	
+	if(isFirstSentenceWordLikelyPropernoun(contextWord))
+	{
+		 result = true;
+	}
+
+	return result;
+}
+#endif
+//preconditions: assumes LRPpreprocessorPOStagger.determinePOSambiguityInfo has already been executed (and POSambiguityInfo is available)
+bool LRPpreprocessorWordIdentificationClass::isFirstSentenceWordLikelyPropernoun(constEffective LRPpreprocessorPlainTextWord* contextWord)
+{
+	bool result = false;
+	
+	int entityIndex = (static_cast<LRPpreprocessorMultiwordReductionPlainTextWord*>(contextWord))->entityIndex;
+
+	bool foundWordInLists = false;
+	if(entityIndex == LRP_NLP_START_ENTITY_INDEX)
+	{
+		if(contextWord->POSambiguityInfo == LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN)
+		{
+			result = true;
+		}
+	}
+	
+	return result;
+}
+
+
+
+
 
 
 bool LRPpreprocessorWordIdentificationClass::findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, const string word)

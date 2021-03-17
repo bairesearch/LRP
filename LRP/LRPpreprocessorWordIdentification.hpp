@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordIdentification.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p1a 04-March-2021
+ * Project Version: 3p2a 17-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Identification
  * /
@@ -178,6 +178,23 @@ class LRPpreprocessorWordIdentificationClass
 		#ifdef SANI_PARSE_SIMULTANEOUS_SET_WORD_POSTYPE_INFERRED_DYNAMIC_OLD
 		public: bool determineIsWordTypeStringBasic(const string word, const int GIAposType);
 		#endif
+	
+	public: bool determineIsPossessiveEnding(constEffective LRPpreprocessorPlainTextWord* wordTag);		
+		public: bool determineIsPossessiveEnding(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+	public: bool determineIsPredeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool determineIsPredeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+	public: bool determineIsPropernoun(constEffective LRPpreprocessorPlainTextWord* wordTag);
+		public: bool determineIsPropernoun(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+
+	
+	public: bool determineIsDeterminerDefinite(const string currentWordText);
+	public: bool determineIsDeterminerIndefinite(const string currentWordText);
+	
+	#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES_MID_SENTENCE_CAPITALISED_WORDS_AS_PROPERNOUNS
+	public: bool determineIsLikelyPropernoun(constEffective LRPpreprocessorPlainTextWord* contextWord);
+	#endif
+		public: bool isFirstSentenceWordLikelyPropernoun(constEffective LRPpreprocessorPlainTextWord* contextWord);
+
 	
 	public: bool findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, const string word);
 		public: bool findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, const string word, LRPpreprocessorMultiwordReductionWord** wordFound);
