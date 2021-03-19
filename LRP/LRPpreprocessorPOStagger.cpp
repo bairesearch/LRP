@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStagger.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p2a 17-March-2021
+ * Project Version: 3p3a 19-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger
  * /
@@ -1272,7 +1272,7 @@ bool LRPpreprocessorPOStaggerClass::generatePOSambiguityInfoPermutation(vector<L
 			#ifdef LRP_PREPROCESSOR_POS_TAGGER_INCLUDE_CENTRE_WORD_IN_POS_PERMUTATION_OLD
 			if(w == wCentre)	
 			{
-				(*POSambiguityInfoPermutation)[POSambiguityInfoPermutationIndex] = SHAREDvars.setBitValue(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_INPUT_CENTRE_WORD_NOTUSED, true);
+				(*POSambiguityInfoPermutation)[POSambiguityInfoPermutationIndex] = setPOSambiguityInfoBit(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, LRP_PREPROCESSOR_POS_TAGGER_DATABASE_NEURAL_NETWORK_INPUT_CENTRE_WORD_NOTUSED, true);
 				POSambiguityInfoPermutationIndex++;	//?
 			}
 			#else
@@ -1289,7 +1289,7 @@ bool LRPpreprocessorPOStaggerClass::generatePOSambiguityInfoPermutation(vector<L
 			*/
 			if((w < 0) || (w >= sentenceContents->size()))
 			{
-				(*POSambiguityInfoPermutation)[POSambiguityInfoPermutationIndex] = SHAREDvars.setBitValue(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, LRP_PREPROCESSOR_POS_TAGGER_DATABASE_POS_INDEX_OUT_OF_SENTENCE_BOUNDS, true);	
+				(*POSambiguityInfoPermutation)[POSambiguityInfoPermutationIndex] = setPOSambiguityInfoBit(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, LRP_PREPROCESSOR_POS_TAGGER_DATABASE_POS_INDEX_OUT_OF_SENTENCE_BOUNDS, true);	
 				POSambiguityInfoPermutationIndex++;					
 			}
 			else
@@ -1373,7 +1373,7 @@ void LRPpreprocessorPOStaggerClass::generatePOSambiguityInfoUnambiguousPermutati
 					//cout << "x = " << x << endl;
 					vector<uint64_t>* POSambiguityInfoUnambiguousPermutationNew = new vector<uint64_t>(*POSambiguityInfoUnambiguousPermutationLocal);
 					POSambiguityInfoUnambiguousPermutationArray->push_back(POSambiguityInfoUnambiguousPermutationNew);
-					(*POSambiguityInfoUnambiguousPermutationNew)[wordIndex] = SHAREDvars.setBitValue(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, x, true);	//create a new unambigious hypothetical POS value
+					(*POSambiguityInfoUnambiguousPermutationNew)[wordIndex] = setPOSambiguityInfoBit(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, x, true);	//create a new unambigious hypothetical POS value
 					generatePOSambiguityInfoUnambiguousPermutationArray(POSambiguityInfoUnambiguousPermutationArray, POSambiguityInfoPermutation, POSambiguityInfoUnambiguousPermutationNew, wordIndex+1);
 				}
 			}
@@ -1445,7 +1445,7 @@ bool LRPpreprocessorPOStaggerClass::determinePOSambiguityInfoWrapper(vector<LRPp
 		{
 			//cout << "found explicit word; wordTextLowerCase = " << wordTextLowerCase << endl;
 			//add explicit case to contextWordPOSambiguityInfo
-			contextWordPOSambiguityInfo = SHAREDvars.setBitValue(contextWordPOSambiguityInfo, LRP_PREPROCESSOR_POS_TYPE_EXPLICITWORDTEMP, true);	//set as explicitWordTemp
+			contextWordPOSambiguityInfo = setPOSambiguityInfoBit(contextWordPOSambiguityInfo, LRP_PREPROCESSOR_POS_TYPE_EXPLICITWORDTEMP, true);	//set as explicitWordTemp
 		}
 		#endif
   
@@ -1478,7 +1478,7 @@ bool LRPpreprocessorPOStaggerClass::determinePOSambiguityInfo(constEffective LRP
 	if((!foundWordInLists) && LRPpreprocessorWordClassObject.isMidSentenceUppercaseWordLikelyProperNoun(contextWord))
 	{
 		foundWordInLists = true;
-		*contextWordPOSambiguityInfo = SHAREDvars.setBitValue(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, LRP_PREPROCESSOR_POS_TYPE_PROPERNOUN_DEFAULT, true);	//set as propernoun
+		*contextWordPOSambiguityInfo = setPOSambiguityInfoBit(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, LRP_PREPROCESSOR_POS_TYPE_PROPERNOUN_DEFAULT, true);	//set as propernoun
 	}
 	else
 	{
@@ -1543,7 +1543,7 @@ bool LRPpreprocessorPOStaggerClass::determinePOSambiguityInfo(constEffective LRP
 	if((!foundWordInLists) && LRPpreprocessorWordClassObject.isMidSentenceUppercaseWordLikelyProperNoun(contextWord))
 	{
 		foundWordInLists = true;
-		*contextWordPOSambiguityInfo = SHAREDvars.setBitValue(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, LRP_PREPROCESSOR_POS_TYPE_PROPERNOUN_DEFAULT, true);	//set as propernoun
+		*contextWordPOSambiguityInfo = setPOSambiguityInfoBit(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, LRP_PREPROCESSOR_POS_TYPE_PROPERNOUN_DEFAULT, true);	//set as propernoun
 	}
 	#endif
 	#endif
@@ -1553,7 +1553,7 @@ bool LRPpreprocessorPOStaggerClass::determinePOSambiguityInfo(constEffective LRP
 	if(contextWordMultiwordReductionPlainTextWord->collapsedMultiwordWord || contextWordMultiwordReductionPlainTextWord->collapsedPhrasalVerbExactDefinedSection)
 	{
 		*contextWordUnambiguousPOSindex = contextWordMultiwordReductionPlainTextWord->collapsedMultiwordWordType;
-		*contextWordPOSambiguityInfo = SHAREDvars.setBitValue(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, *contextWordUnambiguousPOSindex, true);
+		*contextWordPOSambiguityInfo = setPOSambiguityInfoBit(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, *contextWordUnambiguousPOSindex, true);
 		*contextWordPOSisAmbiguous = false;
 		foundWordInLists = true;
 	}
@@ -1575,7 +1575,7 @@ bool LRPpreprocessorPOStaggerClass::determinePOSambiguityInfo(constEffective LRP
 		{
 			//cout << "isStringNumber" << endl;
 			*contextWordUnambiguousPOSindex = LRP_PREPROCESSOR_POS_TYPE_NUMBER;
-			*contextWordPOSambiguityInfo = SHAREDvars.setBitValue(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, *contextWordUnambiguousPOSindex, true);
+			*contextWordPOSambiguityInfo = setPOSambiguityInfoBit(LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN, *contextWordUnambiguousPOSindex, true);
 			*contextWordPOSisAmbiguous = false;	
 		}
 		#endif
@@ -1740,5 +1740,15 @@ bool LRPpreprocessorPOStaggerClass::setSentenceContentsWordsUnambiguousPOSindex(
 }
 #endif
 
-
+uint64_t LRPpreprocessorPOStaggerClass::setPOSambiguityInfoBit(uint64_t wordPOSambiguityInfo, int bitIndex, bool value)
+{
+	wordPOSambiguityInfo = SHAREDvars.setBitValue(wordPOSambiguityInfo, bitIndex, value);
+	return wordPOSambiguityInfo;
+}
+bool LRPpreprocessorPOStaggerClass::getPOSambiguityInfoBit(uint64_t wordPOSambiguityInfo, int bitIndex)
+{
+	bool bitValue = SHAREDvars.getBitValue(wordPOSambiguityInfo, bitIndex);
+	return bitValue;	
+}
+	
 

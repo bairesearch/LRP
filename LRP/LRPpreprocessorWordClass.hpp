@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordClass.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p2a 17-March-2021
+ * Project Version: 3p3a 19-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Class
  * /
@@ -634,6 +634,10 @@ public:
 	
 	//#ifdef SANI_SEQUENCE_GRAMMAR_REFERENCE_SET_IDENTIFICATION_VIA_DETERMINERS
 	int referenceSetStartCodonDeterminerType;
+	//#ifdef SANI_SEQUENCE_GRAMMAR_REFERENCE_SET_IDENTIFICATION_VIA_DETERMINERS_SUPPORT_PRONOUNS
+	bool pronounDeterminerDetected;
+	bool pronounReferenceDetected;
+	//#endif
 	//#endif
 };
 

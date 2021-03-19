@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStagger.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p2a 17-March-2021
+ * Project Version: 3p3a 19-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger
  * /
@@ -145,6 +145,9 @@ class LRPpreprocessorPOStaggerClass
 	#ifdef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START
 	public: bool setSentenceContentsWordsUnambiguousPOSindex(vector<LRPpreprocessorPlainTextWord*>* sentenceContents, const vector<uint64_t>* POSambiguityInfoPermutationTemp);
 	#endif
+	
+	public: uint64_t setPOSambiguityInfoBit(uint64_t wordPOSambiguityInfo, int bitIndex, bool value);
+	public: bool getPOSambiguityInfoBit(uint64_t wordPOSambiguityInfo, int bitIndex);
 };
 
 #endif

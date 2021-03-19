@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordIdentification.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p2a 17-March-2021
+ * Project Version: 3p3a 19-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Identification
  * /
@@ -163,12 +163,14 @@ class LRPpreprocessorWordIdentificationClass
 	public: bool determineIsDeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag);
 		public: bool determineIsDeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
 			//public: bool determineIsDeterminerString(string word);
+	
 	public: bool determineIsAuxiliaryBeing(constEffective LRPpreprocessorPlainTextWord* wordTag);
 		public: bool determineIsAuxiliaryBeing(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
 	public: bool determineIsAuxiliaryHaving(constEffective LRPpreprocessorPlainTextWord* wordTag);
 		public: bool determineIsAuxiliaryHaving(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
 	public: bool determineIsAuxiliaryDoing(constEffective LRPpreprocessorPlainTextWord* wordTag);		
 		public: bool determineIsAuxiliaryDoing(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+	
 	public: bool detectAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag);
 		public: bool detectAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
 	public: bool detectModalAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag);
@@ -179,8 +181,10 @@ class LRPpreprocessorWordIdentificationClass
 		public: bool determineIsWordTypeStringBasic(const string word, const int GIAposType);
 		#endif
 	
+	/*	
 	public: bool determineIsPossessiveEnding(constEffective LRPpreprocessorPlainTextWord* wordTag);		
 		public: bool determineIsPossessiveEnding(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
+	*/
 	public: bool determineIsPredeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag);
 		public: bool determineIsPredeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim);
 	public: bool determineIsPropernoun(constEffective LRPpreprocessorPlainTextWord* wordTag);

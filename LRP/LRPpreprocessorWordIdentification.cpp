@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordIdentification.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p2a 17-March-2021
+ * Project Version: 3p3a 19-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Identification
  * /
@@ -1579,6 +1579,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIsDeterminerString(string 
 */
 
 
+
 bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryBeing(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
@@ -1591,12 +1592,6 @@ bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryBeing(constEffe
 	wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_AUXILIARY_BEING);
 	#else
 	wordTypeDetected = determineIsWordType(wordTag->tagName, wordListRecordAuxiliaryBeing);
-	/*
-	if(SHAREDvars.textInTextArray(*relationshipName, entityAuxiliaryBeingArray, ENTITY_AUXILIARY_BEING_ARRAY_NUMBER_OF_TYPES))		
-	{
-		wordTypeDetected = true;
-	}
-	*/
 	#endif
 	return wordTypeDetected;
 }
@@ -1612,12 +1607,6 @@ bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryHaving(constEff
 	wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_AUXILIARY_HAVING);
 	#else
 	wordTypeDetected = determineIsWordType(wordTag->tagName, wordListRecordAuxiliaryHaving);
-	/*
-	if(SHAREDvars.textInTextArray(*relationshipName, entityAuxiliaryHavingArray, ENTITY_AUXILIARY_HAVING_ARRAY_NUMBER_OF_TYPES))
-	{
-		wordTypeDetected = true;
-	}
-	*/
 	#endif
 	return wordTypeDetected;
 }
@@ -1633,15 +1622,10 @@ bool LRPpreprocessorWordIdentificationClass::determineIsAuxiliaryDoing(constEffe
 	wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_AUXILIARY_DOING);
 	#else
 	wordTypeDetected = determineIsWordType(wordTag->tagName, wordListRecordAuxiliaryDoing);
-	/*
-	if(SHAREDvars.textInTextArray(*relationshipName, entityAuxiliaryDoingArray, ENTITY_AUXILIARY_DOING_ARRAY_NUMBER_OF_TYPES))
-	{
-		wordTypeDetected = true;
-	}
-	*/
 	#endif
 	return wordTypeDetected;
 }
+
 
 bool LRPpreprocessorWordIdentificationClass::detectAuxiliary(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
@@ -1729,6 +1713,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIsWordTypeStringBasic(cons
 }
 #endif
 
+/*
 bool LRPpreprocessorWordIdentificationClass::determineIsPossessiveEnding(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
@@ -1739,6 +1724,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIsPossessiveEnding(constEf
 	bool wordTypeDetected = determineIsWordType(wordTag, usePOSprelim, LRP_PREPROCESSOR_GRAMMATICALLY_STRICT_VERB_VARIANTS_ONLY_VALUE_IRRELEVANT, LRP_PREPROCESSOR_POS_TYPE_POSSESSIVEENDING);
 	return wordTypeDetected;
 }
+*/
 
 bool LRPpreprocessorWordIdentificationClass::determineIsPredeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
