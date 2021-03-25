@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordIdentification.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p3a 19-March-2021
+ * Project Version: 3p4a 24-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Identification
  * /
@@ -198,6 +198,7 @@ class LRPpreprocessorWordIdentificationClass
 	public: bool determineIsLikelyPropernoun(constEffective LRPpreprocessorPlainTextWord* contextWord);
 	#endif
 		public: bool isFirstSentenceWordLikelyPropernoun(constEffective LRPpreprocessorPlainTextWord* contextWord);
+		public: bool isNounLikelyPlural(constEffective LRPpreprocessorPlainTextWord* nounWord);
 
 	
 	public: bool findWordInWordList(unordered_map<string,LRPpreprocessorMultiwordReductionWord*>* wordList, const string word);

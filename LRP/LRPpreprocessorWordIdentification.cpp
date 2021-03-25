@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordIdentification.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p3a 19-March-2021
+ * Project Version: 3p4a 24-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Identification
  * /
@@ -1801,11 +1801,14 @@ bool LRPpreprocessorWordIdentificationClass::determineIsLikelyPropernoun(constEf
 		 result = true;
 	}
 	
-	if(isFirstSentenceWordLikelyPropernoun(contextWord))
+	if(!isNounLikelyPlural(contextWord))	//not robust inference (first word could be a noun rather than a propernoun in the case of a concept statement; eg Walufs eat pies)
 	{
-		 result = true;
+		if(isFirstSentenceWordLikelyPropernoun(contextWord))
+		{
+			 result = true;
+		}
 	}
-
+	
 	return result;
 }
 #endif
@@ -1828,6 +1831,19 @@ bool LRPpreprocessorWordIdentificationClass::isFirstSentenceWordLikelyPropernoun
 	return result;
 }
 
+bool LRPpreprocessorWordIdentificationClass::isNounLikelyPlural(constEffective LRPpreprocessorPlainTextWord* nounWord)
+{
+	bool result = false;
+	
+	//last character
+	char lastCharacter = nounWord->tagName.back();
+	if(lastCharacter == 's')
+	{
+		result = true;
+	}
+	
+	return result;
+}
 
 
 

@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStagger.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p3a 19-March-2021
+ * Project Version: 3p4a 24-March-2021
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger
  * /
@@ -1752,3 +1752,98 @@ bool LRPpreprocessorPOStaggerClass::getPOSambiguityInfoBit(uint64_t wordPOSambig
 }
 	
 
+#ifdef SANI_SEQUENCE_GRAMMAR_DETERMINE_POS_AMIGUITY_INFO_AT_START
+//preconditions: assumes LRPpreprocessorPOStaggerClass::determinePOSambiguityInfo has already been executed and currentWord->unambiguousPOSindex has been recorded
+bool LRPpreprocessorPOStaggerClass::isWordPOSambiguous(LRPpreprocessorPlainTextWord* currentWord)
+{
+	bool contextWordPOSisAmbiguous = false;
+	#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES	//required
+	if(currentWord->unambiguousPOSindex == LRP_PREPROCESSOR_POS_TYPE_UNDEFINED)	//the only words not to be assigned a specific contextWordUnambiguousPOSindex will contain ambiguous POSambiguityInfo
+	#else
+	if(LRPpreprocessorPOStaggerDatabase.determinePOSambiguityInfoIsAmbiguous(currentWord->POSambiguityInfo, currentWord->unambiguousPOSindex, false)
+	#endif
+	{
+		contextWordPOSisAmbiguous = true;
+	}
+	
+	#ifndef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES
+	cerr << "LRPpreprocessorPOStaggerClass::isWordPOSambiguous warning: GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES is currently required by !SANI_SEMANTIC_NETWORK" << endl;
+	#endif
+}
+
+bool LRPpreprocessorPOStaggerClass::recordPOSambiguityInfo(LRPpreprocessorPlainTextWord* currentWord)
+{
+	bool result = true;
+	
+	bool contextWordPOSisAmbiguous = false;
+	bool identifiedEveryWordInDatabasePOSpermutationNOTUSED = true;
+	uint64_t contextWordPOSambiguityInfo = LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN;	//default value
+	uchar contextWordUnambiguousPOSindex = INT_DEFAULT_VALUE;	//LRP_PREPROCESSOR_POS_TYPE_UNDEFINED;
+	if(!determinePOSambiguityInfo(currentWord, &contextWordPOSambiguityInfo, &contextWordPOSisAmbiguous, &contextWordUnambiguousPOSindex, &identifiedEveryWordInDatabasePOSpermutationNOTUSED))
+	{
+		result = false;
+	}
+	
+	currentWord->POSambiguityInfo = contextWordPOSambiguityInfo;		
+	if(!contextWordPOSisAmbiguous)
+	{
+		currentWord->unambiguousPOSindex = contextWordUnambiguousPOSindex;
+	}
+	
+	#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES
+	inferAndRecordWordPOStypeFromPOSunknown(currentWord);
+	#endif
+	
+	return result;
+}
+
+#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES
+void LRPpreprocessorPOStaggerClass::inferAndRecordWordPOStypeFromPOSunknown(LRPpreprocessorPlainTextWord* currentWord)
+{
+	if(currentWordPOSunknown(currentWord))
+	{
+		int wordPOStype = INT_DEFAULT_VALUE;
+		if(getWordPOStypeFromWordPOSunknown(currentWord, &wordPOStype))
+		{
+			currentWord->unambiguousPOSindex = wordPOStype;
+		}
+	}
+}
+//based on SANInodes::currentWordPOSunknown, but executed higher in execution hierarchy (independent of GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START)
+bool LRPpreprocessorPOStaggerClass::currentWordPOSunknown(const LRPpreprocessorPlainTextWord* currentWord)
+{
+	bool result = false;
+	
+	if(currentWord->POSambiguityInfo == LRP_PREPROCESSOR_POS_TAGGER_POS_AMBIGUITY_INFO_UNKNOWN)
+	{
+		result = true;
+	}
+	
+	return result;
+}
+#endif
+#endif
+	
+bool LRPpreprocessorPOStaggerClass::getWordPOStypeFromWordPOSunknown(constEffective LRPpreprocessorPlainTextWord* currentWord, int* wordPOStype)
+{
+	bool result = false;
+	
+	#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES_MID_SENTENCE_CAPITALISED_WORDS_AS_PROPERNOUNS_METHOD2
+	if(LRPpreprocessorWordClassObject.isMidSentenceUppercaseWordLikelyProperNoun(currentWord))
+	{	
+		*wordPOStype = LRP_PREPROCESSOR_POS_TYPE_PROPERNOUN_DEFAULT;
+		result = true;
+	}
+	else
+	{
+	#endif
+		#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES_AS_NOUNS
+		*wordPOStype = LRP_PREPROCESSOR_POS_TYPE_NOUN;
+		result = true;		
+		#endif
+	#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES_MID_SENTENCE_CAPITALISED_WORDS_AS_PROPERNOUNS_METHOD2
+	}
+	#endif
+	
+	return result;
+}
