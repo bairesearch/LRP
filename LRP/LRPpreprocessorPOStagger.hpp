@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStagger.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p4a 24-March-2021
+ * Project Version: 3p5a 20-May-2021
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger
  * /
@@ -142,7 +142,7 @@ class LRPpreprocessorPOStaggerClass
 	public: bool generateANNexperienceFromPOSambiguityInfoPermutationStandalone(const vector<uint64_t>* POSambiguityInfoPermutation, uchar outputNeuronExperienceValue, ANNexperience* currentExperience);
 	#endif
 	
-	#ifdef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START
+	#ifdef SANI_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START
 	public: bool setSentenceContentsWordsUnambiguousPOSindex(vector<LRPpreprocessorPlainTextWord*>* sentenceContents, const vector<uint64_t>* POSambiguityInfoPermutationTemp);
 	#endif
 	
@@ -150,7 +150,7 @@ class LRPpreprocessorPOStaggerClass
 	public: bool getPOSambiguityInfoBit(uint64_t wordPOSambiguityInfo, int bitIndex);
 	
 	#ifdef SANI_SEQUENCE_GRAMMAR_DETERMINE_POS_AMIGUITY_INFO_AT_START
-	public: bool isWordPOSambiguous(LRPpreprocessorPlainTextWord* currentWord);
+	public: bool isWordPOSambiguous(const LRPpreprocessorPlainTextWord* currentWord);
 	public: bool recordPOSambiguityInfo(LRPpreprocessorPlainTextWord* currentWord);
 		#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES
 		public: void inferAndRecordWordPOStypeFromPOSunknown(LRPpreprocessorPlainTextWord* currentWord);

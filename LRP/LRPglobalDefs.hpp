@@ -26,7 +26,7 @@
  * File Name: LRPglobalsDefs.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p4a 24-March-2021
+ * Project Version: 3p5a 20-May-2021
  * Requirements: requires plain text file
  * Description: LRP specific global definitions
  * /
@@ -105,16 +105,6 @@
 		
 			#define LRP_PREPROCESSOR_DETECT_NUMBERS	//added LRP3n2a based on GIA_POS_REL_TRANSLATOR_RULES_CODE_NUMBERS
 
-			#ifndef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START_DISABLE	//added LRP3m1a
-				#ifndef SANI_PROPAGATE_ALL_POS_VALUES_SIMULTANEOUSLY	//added LRP3m1a
-					#ifdef SANI_FORWARD
-						#define GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START		//assume mandatory (definately required for SANI_PARSE_PERFORMANCE_RECORD_PERFORMANCE)
-					#else
-						#define GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START		//disabling this is not supported due to optional components (but ideally this should be disabled to increase performance)
-					#endif
-				#endif
-			#endif
-			
 			#define GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES	//precondition: all optional strings must have a known pos type to be processed (unknown not supported)
 			#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES
 				//#define GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES_AS_WILDCARDS

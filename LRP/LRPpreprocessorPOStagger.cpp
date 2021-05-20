@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStagger.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p4a 24-March-2021
+ * Project Version: 3p5a 20-May-2021
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger
  * /
@@ -1714,7 +1714,7 @@ bool LRPpreprocessorPOStaggerClass::generateANNexperienceFromPOSambiguityInfoPer
 }
 #endif
 
-#ifdef GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START
+#ifdef SANI_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START
 bool LRPpreprocessorPOStaggerClass::setSentenceContentsWordsUnambiguousPOSindex(vector<LRPpreprocessorPlainTextWord*>* sentenceContents, const vector<uint64_t>* POSambiguityInfoPermutationTemp)
 {
 	bool result = true;
@@ -1754,7 +1754,7 @@ bool LRPpreprocessorPOStaggerClass::getPOSambiguityInfoBit(uint64_t wordPOSambig
 
 #ifdef SANI_SEQUENCE_GRAMMAR_DETERMINE_POS_AMIGUITY_INFO_AT_START
 //preconditions: assumes LRPpreprocessorPOStaggerClass::determinePOSambiguityInfo has already been executed and currentWord->unambiguousPOSindex has been recorded
-bool LRPpreprocessorPOStaggerClass::isWordPOSambiguous(LRPpreprocessorPlainTextWord* currentWord)
+bool LRPpreprocessorPOStaggerClass::isWordPOSambiguous(const LRPpreprocessorPlainTextWord* currentWord)
 {
 	bool contextWordPOSisAmbiguous = false;
 	#ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES	//required
@@ -1769,6 +1769,8 @@ bool LRPpreprocessorPOStaggerClass::isWordPOSambiguous(LRPpreprocessorPlainTextW
 	#ifndef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES
 	cerr << "LRPpreprocessorPOStaggerClass::isWordPOSambiguous warning: GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES is currently required by !SANI_SEMANTIC_NETWORK" << endl;
 	#endif
+	
+	return contextWordPOSisAmbiguous;
 }
 
 bool LRPpreprocessorPOStaggerClass::recordPOSambiguityInfo(LRPpreprocessorPlainTextWord* currentWord)
@@ -1809,7 +1811,7 @@ void LRPpreprocessorPOStaggerClass::inferAndRecordWordPOStypeFromPOSunknown(LRPp
 		}
 	}
 }
-//based on SANInodes::currentWordPOSunknown, but executed higher in execution hierarchy (independent of GIA_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START)
+//based on SANInodes::currentWordPOSunknown, but executed higher in execution hierarchy (independent of SANI_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START)
 bool LRPpreprocessorPOStaggerClass::currentWordPOSunknown(const LRPpreprocessorPlainTextWord* currentWord)
 {
 	bool result = false;
