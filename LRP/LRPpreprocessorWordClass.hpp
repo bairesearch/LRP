@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordClass.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p5a 20-May-2021
+ * Project Version: 3p6a 07-August-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Class
  * /
@@ -612,11 +612,13 @@ public:
 	#endif
 
 	bool alreadyFoundMatch;
+	#ifdef LRP_PREPROCESSOR_INITIALISE_WORD_INDEX_LIST_FROM_LRP_FILES
+	uint64_t POSambiguityInfo;
+	#endif
 	#ifdef SANI_NODES
 	//#ifdef SANI_POS_REL_TRANSLATOR_RULES_ITERATE_OVER_UNAMBIGUOUS_POS_PERMUTATIONS_AT_START	//also required for SANI_SEQUENCE_GRAMMAR_DETERMINE_POS_AMIGUITY_INFO_AT_START/SANI_SEQUENCE_GRAMMAR_REFERENCE_SET_IDENTIFICATION
 	uchar unambiguousPOSindex;
 	//#else	//also required for SANI_SEQUENCE_GRAMMAR_DETERMINE_POS_AMIGUITY_INFO_AT_START/SANI_SEQUENCE_GRAMMAR_REFERENCE_SET_IDENTIFICATION/SANI_SEQUENCE_GRAMMAR_INPUT_POS_AMBIGUOUS_PERMUTATIONS
-	uint64_t POSambiguityInfo;
 	//#endif
 	int wordPOStypeInferred;
 	int translatorSentenceEntityIndex;

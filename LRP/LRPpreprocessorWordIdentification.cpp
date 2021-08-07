@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordIdentification.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p5a 20-May-2021
+ * Project Version: 3p6a 07-August-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Identification
  * /
@@ -1785,6 +1785,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIsDeterminerIndefinite(con
 	return determinerIndefiniteDetected;
 }
 
+#ifdef LRP_PREPROCESSOR_INITIALISE_WORD_INDEX_LIST_FROM_LRP_FILES
 #ifdef GIA_POS_REL_TRANSLATOR_RULES_TREAT_UNKNOWN_POSTYPES_MID_SENTENCE_CAPITALISED_WORDS_AS_PROPERNOUNS
 //preconditions: assumes LRPpreprocessorPOStagger.determinePOSambiguityInfo has already been executed (and POSambiguityInfo is available)
 bool LRPpreprocessorWordIdentificationClass::determineIsLikelyPropernoun(constEffective LRPpreprocessorPlainTextWord* contextWord)
@@ -1844,6 +1845,7 @@ bool LRPpreprocessorWordIdentificationClass::isNounLikelyPlural(constEffective L
 	
 	return result;
 }
+#endif
 
 
 

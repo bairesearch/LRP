@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorPOStagger.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p5a 20-May-2021
+ * Project Version: 3p6a 07-August-2021
  * Requirements: requires plain text file
  * Description: Preprocessor POS tagger
  * /
@@ -52,7 +52,7 @@
 #include "LRPpreprocessorWordReduction.hpp" 
 #endif
 #ifdef USE_GIA
-#include "GIAtranslatorGrammar.hpp"
+//#include "GIAtranslatorGrammar.hpp"
 #endif
 #include "LRPpreprocessorPOStaggerDatabase.hpp"
 #ifdef LRP_PREPROCESSOR_POS_TAGGER_GENERATE_NEURAL_NETWORK_SEQUENCE_GRAMMAR
