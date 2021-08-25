@@ -26,7 +26,7 @@
  * File Name: LRPglobalsDefs.hpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p6b 07-August-2021
+ * Project Version: 3q1a 25-August-2021
  * Requirements: requires plain text file
  * Description: LRP specific global definitions
  * /
@@ -37,6 +37,13 @@
 
 #include "SHAREDglobalDefs.hpp"
 
+
+//#define LRP_DEBUG_DISABLE_3q_CODE
+#ifndef LRP_DEBUG_DISABLE_3q_CODE
+	#ifdef USE_SANI
+		#define LRP_PREPROCESSOR_WORD_CONVERT_TO_LOWERCASE
+	#endif
+#endif
 
 //#define LRP_DEBUG_DISABLE_3k_CODE
 #ifndef LRP_DEBUG_DISABLE_3k_CODE
@@ -128,7 +135,9 @@
 			#define LRP_PREPROCESSOR_INITIALISE_WORD_INDEX_LIST_FROM_LRP_FILES	//this is required to detect all possible pos types for wordList words
 			#ifdef LRP_PREPROCESSOR_INITIALISE_WORD_INDEX_LIST_FROM_LRP_FILES
 				#ifndef SANI_DEBUG_RULES_SYN_REL_TRANSLATOR_OUTPUT_BACKWARDS_COMPATIBILITY
-					#define LRP_PREPROCESSOR_INITIALISE_WORD_INDEX_LIST_FROM_LRP_FILES_SUPPORT_UPPERCASE_PROPERNOUN_WORD_LISTS	//NB this is not backwards compatible with GIAsynRelTranslator
+					#ifndef LRP_PREPROCESSOR_WORD_CONVERT_TO_LOWERCASE
+						#define LRP_PREPROCESSOR_INITIALISE_WORD_INDEX_LIST_FROM_LRP_FILES_SUPPORT_UPPERCASE_PROPERNOUN_WORD_LISTS	//NB this is not backwards compatible with GIAsynRelTranslator
+					#endif
 					#ifdef LRP_PREPROCESSOR_INITIALISE_WORD_INDEX_LIST_FROM_LRP_FILES_SUPPORT_UPPERCASE_PROPERNOUN_WORD_LISTS
 						//#define LRP_PREPROCESSOR_INITIALISE_WORD_INDEX_LIST_FROM_LRP_FILES_SUPPORT_UPPERCASE_PROPERNOUN_WORD_LISTS_IF_FIRST_WORD_OF_SENTENCE_IS_IN_PROPERNOUN_LIST_THEN_CHECK_OTHER_LISTS_ALSO	//alternate implementation (not robust either)
 					#endif
