@@ -26,7 +26,7 @@
  * File Name: LRPpreprocessorWordIdentification.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2021 Baxter AI (baxterai.com)
  * Project: Language Reduction Preprocessor
- * Project Version: 3p6a 07-August-2021
+ * Project Version: 3p6b 07-August-2021
  * Requirements: requires plain text file
  * Description: Preprocessor Word Identification
  * /
@@ -1729,7 +1729,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIsPossessiveEnding(constEf
 bool LRPpreprocessorWordIdentificationClass::determineIsPredeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
-	return determineIsDeterminer(wordTag, usePOSprelim);
+	return determineIsPredeterminer(wordTag, usePOSprelim);
 }
 bool LRPpreprocessorWordIdentificationClass::determineIsPredeterminer(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
@@ -1740,7 +1740,7 @@ bool LRPpreprocessorWordIdentificationClass::determineIsPredeterminer(constEffec
 bool LRPpreprocessorWordIdentificationClass::determineIsPropernoun(constEffective LRPpreprocessorPlainTextWord* wordTag)
 {
 	bool usePOSprelim = LRP_USE_POS_PRELIM_DEFAULT_VALUE;
-	return determineIsDeterminer(wordTag, usePOSprelim);
+	return determineIsPropernoun(wordTag, usePOSprelim);
 }
 bool LRPpreprocessorWordIdentificationClass::determineIsPropernoun(constEffective LRPpreprocessorPlainTextWord* wordTag, const bool usePOSprelim)
 {
